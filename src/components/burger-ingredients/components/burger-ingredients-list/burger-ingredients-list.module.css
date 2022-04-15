@@ -1,0 +1,7 @@
+.container {
+  max-width: 600px;
+  box-sizing: border-box;
+  width: 600px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

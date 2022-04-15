@@ -1,0 +1,4 @@
+.tab {
+  display: flex;
+  background-color: var(--background-alt);
+}

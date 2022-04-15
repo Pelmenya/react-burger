@@ -1,0 +1,16 @@
+.container {
+  width: 272px;
+  height: 216px;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+}
+
+.img {
+  height: 120px;
+  width: 240px;
+}
+
+.title {
+  text-align: center;
+}

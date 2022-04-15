@@ -1,0 +1,11 @@
+.container {
+  max-height: 715px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  max-width: 600px;
+}
+
+.container::-webkit-scrollbar-track {
+  border-radius: 6px;
+}
