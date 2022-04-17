@@ -8,6 +8,6 @@ import burgerConstructorToppngsList from './burger-constructor-toppings-list.mod
 
 export const BurgerConstructorToppngsList = ({ data = [] }) => (
   <Flex flexDirection={'column'} gap={16} className={cn('custom-scroll mt-4 mb-4',burgerConstructorToppngsList.toppings)}>
-    {data.map((topping) => <BurgerConstructorCard data={topping} />)}
+    {data.map((topping, index) => <BurgerConstructorCard key={`${index}-topping`} data={topping} />)}
   </Flex>
 );
