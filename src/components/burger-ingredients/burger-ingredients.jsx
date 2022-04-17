@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 
 import { Flex } from '../flex/flex';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,10 +9,9 @@ import { TabContainer } from '../tab-container/tab-container';
 import { BurgerIngredientsList } from './components/burger-ingredients-list/burger-ingredients-list';
 
 import burgerIngredients from './burger-ingredients.module.css';
-import { data } from '../../utils/data';
+import { dataType } from '../../utils/data-type';
 
-
-export const BurgerIngredients = () => {
+export const BurgerIngredients = ({ data }) => {
   const [
     current,
     setCurrent,
@@ -76,3 +76,5 @@ export const BurgerIngredients = () => {
     </section>
   );
 };
+
+BurgerIngredients.propsType = PropTypes.arrayOf(dataType.isRequired);

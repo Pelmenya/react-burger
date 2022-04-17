@@ -1,16 +1,17 @@
 import React from 'react';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
 
 import burgerConstructor from './burger-constructor.module.css';
 import { Flex } from '../flex/flex';
 import { BurgerConstructorCard } from './components/burger-constructor-card/burger-constructor-card';
 
-import { data } from '../../utils/data';
 import { BurgerConstructorToppngsList } from './components/burger-constructor-toppings-list/burger-constructor-toppings-list';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Spacer } from '../spacer/spacer';
+import { dataType } from '../../utils/data-type';
 
-export const BurgerConstructor = () => (
+export const BurgerConstructor = ({ data }) => (
   <section>
     <Spacer spaceHeight={100}/>
     <div className={cn('custom-scroll', burgerConstructor.constructor)}>
@@ -47,3 +48,6 @@ export const BurgerConstructor = () => (
     </div>
   </section>
 );
+
+
+BurgerConstructor.propsType = PropTypes.arrayOf(dataType.isRequired);

@@ -1,10 +1,8 @@
 import React from 'react';
-import cn from 'classnames'
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerConstructorCard from './burger-constructor-card.module.css';
-import { Flex } from '../../../flex/flex';
 import { Spacer } from '../../../spacer/spacer';
 
 export const BurgerConstructorCard = ({ data, type, isLocked = false }) => {

@@ -5,11 +5,11 @@ import { BurgerIngredients } from '../../components/burger-ingredients/burger-in
 
 import mainPage from './main-page.module.css';
 
-export const MainPage = () => (
+export const MainPage = ({data}) => (
   <main className={mainPage.main}>
     <aside className={mainPage.main__content}>
-      <BurgerIngredients />
-      <BurgerConstructor />
+      <BurgerIngredients data={data}/>
+      <BurgerConstructor data={data}/>
     </aside>
   </main>
 );
