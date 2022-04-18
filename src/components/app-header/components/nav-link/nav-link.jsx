@@ -1,12 +1,12 @@
 import React from 'react';
 import cn from 'classnames';
+import PropTypes from 'prop-types';
+
 import navLink from './nav-link.module.css';
-import { Spacer } from '../../../spacer/spacer';
 
 export const NavLink = ({ icon, text, type }) => (
   <div className={navLink.link}>
-    <div children={icon} />
-    <Spacer spaceWidth={8} />
+    <div className={'mr-2'} children={icon} />
     {type === 'primary' ? (
       <p className={cn('text text_type_main-default', navLink.link__text)}>{text}</p>
     ) : (
@@ -16,3 +16,9 @@ export const NavLink = ({ icon, text, type }) => (
     )}
   </div>
 );
+
+NavLink.propTypes = {
+  icon: PropTypes.element,
+  text: PropTypes.string,
+  type: PropTypes.string,
+};

@@ -1,29 +1,25 @@
 import React from 'react';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 
 import burgerConstructor from './burger-constructor.module.css';
 import { Flex } from '../flex/flex';
 import { BurgerConstructorCard } from './components/burger-constructor-card/burger-constructor-card';
-
-import { BurgerConstructorToppngsList } from './components/burger-constructor-toppings-list/burger-constructor-toppings-list';
+import { BurgerConstructorToppingsList } from './components/burger-constructor-toppings-list/burger-constructor-toppings-list';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { Spacer } from '../spacer/spacer';
-import { dataType } from '../../utils/data-type';
+import { dataType } from '../../utils/prop-types/data-types';
+import { Title } from '../title/title';
 
 export const BurgerConstructor = ({ data }) => (
-  <section>
-    <Spacer spaceHeight={100}/>
+  <section className={burgerConstructor.section}>
+    <Title type={'h2'} className={burgerConstructor.title}>Конструктор бургера</Title>
     <div className={cn('custom-scroll', burgerConstructor.constructor)}>
-      <Flex
-        flexDirection='column'
-        className={burgerConstructor.constructor__container}>
+      <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
         <BurgerConstructorCard
           data={data.find((item) => item.name === 'Краторная булка N-200i')}
           type={'top'}
           isLocked={true}
         />
-        <BurgerConstructorToppngsList data={data.filter((item) => item.type !== 'bun')} />
+        <BurgerConstructorToppingsList data={data.filter((item) => item.type !== 'bun')} />
         <BurgerConstructorCard
           data={data.find((item) => item.name === 'Краторная булка N-200i')}
           type={'bottom'}
@@ -32,9 +28,9 @@ export const BurgerConstructor = ({ data }) => (
       </Flex>
       <Flex
         flexDirection='column'
-        className={cn('mt-5 mb-10 mr-10', burgerConstructor.constructor__container)}>
+        className={cn('pt-5 pb-5 pr-3', burgerConstructor.constructor__container)}>
         <Flex>
-          <div className='constructor-element__price text_type_digits-medium mt-2 mb-2 mr-10'>
+          <div className='constructor-element__price text_type_digits-medium mr-10'>
             {data.reduce((acc, item) => acc + item.price, 0)}
             <div className={burgerConstructor.currency}>
               <CurrencyIcon type='primary' />
@@ -49,5 +45,4 @@ export const BurgerConstructor = ({ data }) => (
   </section>
 );
 
-
-BurgerConstructor.propsType = PropTypes.arrayOf(dataType.isRequired);
+BurgerConstructor.propTypes = dataType;

@@ -7,10 +7,16 @@
 	box-sizing: border-box;
   }
   
-  .main__content {
-	max-width: 1240px;
-	width: calc(100% - 6%);
-	display: flex;
-	justify-content: space-between;
-	box-sizing: border-box;
-  }
+.main__content {
+  max-width: 1240px;
+  width: calc(100% - 6%);
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+}
+
+.title {
+  max-width: 1240px;
+  width: calc(100% - 6%);
+  text-align: start;
+}

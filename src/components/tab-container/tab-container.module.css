@@ -1,6 +1,6 @@
 .container {
   max-width: 600px;
-  max-height: calc(100vh - 325px);
+  max-height: calc(100vh - 326px);
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
