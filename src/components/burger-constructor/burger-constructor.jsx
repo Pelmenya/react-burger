@@ -8,6 +8,7 @@ import { BurgerConstructorToppingsList } from './components/burger-constructor-t
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { dataType } from '../../utils/prop-types/data-types';
 import { Title } from '../title/title';
+import { Modal } from '../modal/modal';
 
 export const BurgerConstructor = ({ data }) => (
   <section className={burgerConstructor.section}>
@@ -42,6 +43,7 @@ export const BurgerConstructor = ({ data }) => (
         </Flex>
       </Flex>
     </div>
+    <Modal></Modal>
   </section>
 );
 

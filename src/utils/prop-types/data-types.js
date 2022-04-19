@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { data } from '../data';
 
 export const dataItemType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
@@ -17,6 +16,3 @@ export const dataItemType = PropTypes.shape({
 });
 
 export const dataType = { data: PropTypes.arrayOf(dataItemType).isRequired };
-
-const props = { data: data };
-PropTypes.checkPropTypes(dataType, props);

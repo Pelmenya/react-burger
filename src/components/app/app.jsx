@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import app from './app.module.css';
 
 import { AppHeader } from '../app-header/app-header';
 import { MainPage } from '../../pages/main-page/main-page';
-import { data } from '../../utils/data';
+import { dataAPI } from '../../api/data-api';
 
-function App() {
+export const App = () => {
+  const [
+    data,
+    setData,
+  ] = useState(null);
+
+  useEffect(() => {
+    dataAPI.getIngredients().then((res) => setData(res.data));
+  }, []);
+
   return (
     <div className={app.app}>
       <AppHeader />
-      <MainPage data={data}/>
+      {data && <MainPage data={data} />}
     </div>
   );
-}
-
-export default App;
+};
