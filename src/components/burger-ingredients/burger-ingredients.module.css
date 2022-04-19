@@ -1,0 +1,9 @@
+.tab {
+  display: flex;
+  box-sizing: border-box;
+  background-color: var(--background-alt);
+}
+
+.title {
+  display: none;
+}

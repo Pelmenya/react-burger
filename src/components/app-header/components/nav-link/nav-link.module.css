@@ -1,0 +1,22 @@
+.link {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  border-radius: 40px;
+  padding: 16px 20px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.link:last-child {
+  margin-right: 0px;
+}
+
+.link:hover{
+  border: 1px dashed #4C4CFF;
+}
+
+.link__text {
+  margin: 0;
+}

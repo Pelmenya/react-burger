@@ -1,0 +1,19 @@
+.container {
+  max-width: 600px;
+  max-height: calc(100vh - 326px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  border: none;
+}
+
+.container::-webkit-scrollbar-track {
+  border-radius: 6px;
+}
