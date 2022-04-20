@@ -15,7 +15,7 @@ export const ModalHeader = ({ title, handlerOnClose }) => (
       title ? modalHeader.wrapper : cn('pt-5 pb-5', modalHeader.wrapper, modalHeader.wrapper_end)
     }>
     {title && <Title type={'h1'}>{title}</Title>}
-    <button className={modalHeader.buttonClose} onClickCapture={handlerOnClose}>
+    <button className={modalHeader.buttonClose} onClick={handlerOnClose}>
       <CloseIcon type='primary' />
     </button>
   </Flex>

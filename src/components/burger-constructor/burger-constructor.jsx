@@ -12,12 +12,12 @@ import { Modal } from '../modal/modal';
 
 export const BurgerConstructor = ({ data }) => {
   const [
-    isOpenModalIngredient,
-    setIsOpenModalIngredient,
+    isOpenModalOrder,
+    setIsOpenModalOrder,
   ] = useState(false);
 
-  const handlerOnCloseModal = () => setIsOpenModalIngredient(false);
-  const handlerOnOpenModal =() => setIsOpenModalIngredient(true);
+  const handlerOnCloseModal = () => setIsOpenModalOrder(false);
+  const handlerOnOpenModal = () => setIsOpenModalOrder(true);
 
   return (
     <section className={burgerConstructor.section}>
@@ -54,7 +54,7 @@ export const BurgerConstructor = ({ data }) => {
           </Flex>
         </Flex>
       </div>
-      {isOpenModalIngredient && <Modal handlerOnClose={handlerOnCloseModal} />}
+      {isOpenModalOrder && <Modal handlerOnClose={handlerOnCloseModal} />}
     </section>
   );
 };
