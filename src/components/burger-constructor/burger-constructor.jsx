@@ -9,6 +9,7 @@ import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-co
 import { dataType } from '../../utils/prop-types/data-types';
 import { Title } from '../title/title';
 import { Modal } from '../modal/modal';
+import { OrderDetails } from '../../order-details/order-details';
 
 export const BurgerConstructor = ({ data }) => {
   const [
@@ -54,7 +55,11 @@ export const BurgerConstructor = ({ data }) => {
           </Flex>
         </Flex>
       </div>
-      {isOpenModalOrder && <Modal handlerOnClose={handlerOnCloseModal} />}
+      {isOpenModalOrder && (
+        <Modal handlerOnClose={handlerOnCloseModal}>
+          <OrderDetails order={'034536'}/>
+        </Modal>
+      )}
     </section>
   );
 };
