@@ -8,17 +8,17 @@ import { Flex } from '../../../flex/flex';
 
 import burgerIngredientsList from './burger-ingredients-list.module.css';
 import { BurgerIngridientsCard } from '../burger-ingredients-card/burger-ingredients-card';
-import { dataType } from '../../../../utils/prop-types/data-types';
+import { ingredientsType } from '../../../../utils/prop-types/ingredients-types';
 
-export const BurgerIngredientsList = ({ title, data = [] }) => (
+export const BurgerIngredientsList = ({ title, ingredients = [] }) => (
   <Flex flexDirection={'column'}>
     <Title type={'h3'}>{title}</Title>
     <Flex className={cn('pt-6 pl-4 pr-4 pb-10', burgerIngredientsList.container)}>
-      {data &&
-        data.map((ingredient, index) => (
+      {ingredients &&
+        ingredients.map((ingredient, index) => (
           <BurgerIngridientsCard
             key={shortId.generate()}
-            data={ingredient}
+            ingredient={ingredient}
             count={index === 1 ? index : undefined}
           />
         ))}
@@ -28,5 +28,5 @@ export const BurgerIngredientsList = ({ title, data = [] }) => (
 
 BurgerIngredientsList.propTypes = {
   title: PropTypes.string.isRequired,
-  data: dataType.data,
+  ingredients: ingredientsType.ingredients,
 };

@@ -1,11 +1,11 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { Flex } from '../components/flex/flex';
+import { Flex } from '../flex/flex';
 import { CheckMarkIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { ReactComponent as BGLarge } from '../images/order-bg-large.svg';
-import { ReactComponent as BGMedium } from '../images/order-bg-medium.svg';
-import { ReactComponent as BGSmall } from '../images/order-bg-small.svg';
+import { ReactComponent as BGLarge } from '../../images/order-bg-large.svg';
+import { ReactComponent as BGMedium } from '../../images/order-bg-medium.svg';
+import { ReactComponent as BGSmall } from '../../images/order-bg-small.svg';
 
 import done from './done.module.css';
 

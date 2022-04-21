@@ -3,16 +3,12 @@
 }
 
 .constructor {
-  height: calc(100vh - 228px);
-  min-height: calc(100vh - 228px);
-  max-height: calc(100vh - 228px);
   width: 600px;
   max-width: 600px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
   padding-left: 16px;
 }
 

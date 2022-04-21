@@ -6,12 +6,12 @@ import { Flex } from '../flex/flex';
 import { BurgerConstructorCard } from './components/burger-constructor-card/burger-constructor-card';
 import { BurgerConstructorToppingsList } from './components/burger-constructor-toppings-list/burger-constructor-toppings-list';
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { dataType } from '../../utils/prop-types/data-types';
+import { ingredientsType } from '../../utils/prop-types/ingredients-types';
 import { Title } from '../title/title';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../../order-details/order-details';
 
-export const BurgerConstructor = ({ data }) => {
+export const BurgerConstructor = ({ ingredients }) => {
   const [
     isOpenModalOrder,
     setIsOpenModalOrder,
@@ -28,23 +28,23 @@ export const BurgerConstructor = ({ data }) => {
       <div className={cn('custom-scroll', burgerConstructor.constructor)}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
           <BurgerConstructorCard
-            data={data.find((item) => item.name === 'Краторная булка N-200i')}
+            ingredient={ingredients.find((item) => item._id === '60d3b41abdacab0026a733c6')}
             type={'top'}
             isLocked={true}
           />
-          <BurgerConstructorToppingsList data={data.filter((item) => item.type !== 'bun')} />
+          <BurgerConstructorToppingsList ingredients={ingredients.filter((item) => item.type !== 'bun')} />
           <BurgerConstructorCard
-            data={data.find((item) => item.name === 'Краторная булка N-200i')}
+            ingredient={ingredients.find((item) => item._id === '60d3b41abdacab0026a733c6')}
             type={'bottom'}
             isLocked={true}
           />
         </Flex>
         <Flex
           flexDirection='column'
-          className={cn('pt-5 pb-5 pr-3', burgerConstructor.constructor__container)}>
+          className={cn('pt-10 pb-15 pr-3', burgerConstructor.constructor__container)}>
           <Flex>
             <div className='constructor-element__price text_type_digits-medium mr-10'>
-              {data.reduce((acc, item) => acc + item.price, 0)}
+              {ingredients.reduce((acc, item) => acc + item.price, 0)}
               <div className={burgerConstructor.currency}>
                 <CurrencyIcon type='primary' />
               </div>
@@ -64,4 +64,4 @@ export const BurgerConstructor = ({ data }) => {
   );
 };
 
-BurgerConstructor.propTypes = dataType;
+BurgerConstructor.propTypes = ingredientsType;

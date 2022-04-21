@@ -3,22 +3,22 @@ import app from './app.module.css';
 
 import { AppHeader } from '../app-header/app-header';
 import { MainPage } from '../../pages/main-page/main-page';
-import { dataAPI } from '../../api/data-api';
+import { ingredientsAPI } from '../../api/ingredients-api';
 
 export const App = () => {
   const [
-    data,
-    setData,
+    ingredients,
+    setIngredients,
   ] = useState(null);
 
   useEffect(() => {
-    dataAPI.getIngredients().then((res) => setData(res.data));
+    ingredientsAPI.getIngredients().then((res) => setIngredients(res.data));
   }, []);
 
   return (
     <div className={app.app}>
       <AppHeader />
-      {data && <MainPage data={data} />}
+      {ingredients && <MainPage ingredients={ingredients} />}
     </div>
   );
 };

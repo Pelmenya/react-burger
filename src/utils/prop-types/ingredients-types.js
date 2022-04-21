@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 
-export const dataItemType = PropTypes.shape({
+export const ingredientType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -15,4 +15,4 @@ export const dataItemType = PropTypes.shape({
   __v: PropTypes.number,
 });
 
-export const dataType = { data: PropTypes.arrayOf(dataItemType).isRequired };
+export const ingredientsType = { ingredients: PropTypes.arrayOf(ingredientType).isRequired };

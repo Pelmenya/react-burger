@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 
 import { Flex } from '../components/flex/flex';
-import { Done } from '../done/done';
+import { Done } from '../components/done/done';
 
 import orderDetails from './order-details.module.css';
 

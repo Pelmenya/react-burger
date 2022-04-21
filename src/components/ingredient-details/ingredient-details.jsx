@@ -5,35 +5,35 @@ import { Flex } from '../flex/flex';
 import { Title } from '../title/title';
 
 import ingredientDetails from './ingredient-details.module.css';
-import { dataItemType } from '../../utils/prop-types/data-types';
+import { ingredientType } from '../../utils/prop-types/ingredients-types';
 
 const replacePoint = (num) => String(num).split('.').join(',')
 
-export const IngredientDitails = ({ data }) => (
+export const  IngredientDetails = ({ ingredient }) => (
   <Flex flexDirection={'column'} className={ingredientDetails.wrapper}>
-    <img src={data.image} alt='data.name' className={ingredientDetails.image} />
+    <img src={ingredient.image} alt={ingredient.name} className={ingredientDetails.image} />
     <Title type={'h3'} className={'mt-4 mb-8'}>
-      {data.name}
+      {ingredient.name}
     </Title>
     <Flex className={ingredientDetails.description}>
       <Flex flexDirection={'column'} className={cn(ingredientDetails.ingredient, 'mr-5')}>
         <Title>Калории,ккал</Title>
-        <span className='text_type_digits-default'>{replacePoint(data.calories)}</span>
+        <span className='text_type_digits-default'>{replacePoint(ingredient.calories)}</span>
       </Flex>
       <Flex flexDirection={'column'} className={cn(ingredientDetails.ingredient, 'mr-5')}>
         <Title>Белки, г</Title>
-        <span className='text_type_digits-default'>{replacePoint(data.proteins)}</span>
+        <span className='text_type_digits-default'>{replacePoint(ingredient.proteins)}</span>
       </Flex>
       <Flex flexDirection={'column'} className={cn(ingredientDetails.ingredient, 'mr-5')}>
         <Title> Жиры, г</Title>
-        <span className='text_type_digits-default'>{replacePoint(data.fat)}</span>
+        <span className='text_type_digits-default'>{replacePoint(ingredient.fat)}</span>
       </Flex>
       <Flex flexDirection={'column'} className={ingredientDetails.ingredient}>
         <Title>Углеводы, г</Title>
-        <span className='text_type_digits-default'>{replacePoint(data.carbohydrates)}</span>
+        <span className='text_type_digits-default'>{replacePoint(ingredient.carbohydrates)}</span>
       </Flex>
     </Flex>
   </Flex>
 );
 
-IngredientDitails.propTypes = { data: dataItemType };
+ IngredientDetails.propTypes = { ingredients: ingredientType };
