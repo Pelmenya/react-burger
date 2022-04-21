@@ -10,7 +10,6 @@ class IngredientsAPI {
   getIngredients = () => {
     return fetch(`${this.server}${SERVER_API_END_POINTS.GET_INGREDIENTS}`)
       .then((res) => {
-        console.log(res)
         if (res.ok) {
           return res.json();
         }

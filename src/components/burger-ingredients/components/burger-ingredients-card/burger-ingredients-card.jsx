@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-import burgerIngridientsCard from './burger-ingredients-card.module.css';
+import burgerIngredientsCard from './burger-ingredients-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Title } from '../../../title/title';
 import { Modal } from '../../../modal/modal';
 import {  IngredientDetails } from '../../../ingredient-details/ingredient-details';
 import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 
-export const BurgerIngridientsCard = ({ ingredient, count }) => {
+export const BurgerIngredientsCard = ({ ingredient, count }) => {
   const [
     isOpenModal,
     setIsOpenModal,
@@ -19,14 +19,14 @@ export const BurgerIngridientsCard = ({ ingredient, count }) => {
 
   return (
     <div>
-      <div className={burgerIngridientsCard.container} onClick={handlerOnClick}>
+      <div className={burgerIngredientsCard.container} onClick={handlerOnClick}>
         {count && <Counter count={count} size='default' />}
-        <img alt={ingredient.name} src={ingredient.image} className={burgerIngridientsCard.img} />
+        <img alt={ingredient.name} src={ingredient.image} className={burgerIngredientsCard.img} />
         <div className='constructor-element__price mt-2 mb-2'>
           {ingredient.price}
           <CurrencyIcon type='primary' />
         </div>
-        <Title className={burgerIngridientsCard.title}>{ingredient.name}</Title>
+        <Title className={burgerIngredientsCard.title}>{ingredient.name}</Title>
       </div>
       {isOpenModal && (
         <Modal title={'Детали ингредиента'} handlerOnClose={handlerOnCloseModal}>
