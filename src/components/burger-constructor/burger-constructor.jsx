@@ -41,7 +41,7 @@ export const BurgerConstructor = ({ ingredients }) => {
         </Flex>
         <Flex
           flexDirection='column'
-          className={cn('pt-10 pb-15 pr-3', burgerConstructor.constructor__container)}>
+          className={cn('pt-10 pr-3', burgerConstructor.constructor__container)}>
           <Flex>
             <div className='constructor-element__price text_type_digits-medium mr-10'>
               {ingredients.reduce((acc, item) => acc + item.price, 0)}
