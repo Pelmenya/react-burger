@@ -6,7 +6,7 @@ import { Flex } from '../flex/flex';
 import tabContainer from './tab-container.module.css';
 
 export const TabContainer = ({ children }) => (
-  <Flex flexDirection={'column'} className={cn('custom-scroll', tabContainer.container)}>
+  <Flex flexDirection={'column'} className={cn('body', tabContainer.container)}>
     {children}
   </Flex>
 );

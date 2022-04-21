@@ -25,7 +25,7 @@ export const BurgerConstructor = ({ ingredients }) => {
       <Title type={'h2'} className={burgerConstructor.title}>
         Конструктор бургера
       </Title>
-      <div className={cn('custom-scroll', burgerConstructor.constructor)}>
+      <div className={burgerConstructor.constructor}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
           <BurgerConstructorCard
             ingredient={ingredients.find((item) => item._id === '60d3b41abdacab0026a733c6')}

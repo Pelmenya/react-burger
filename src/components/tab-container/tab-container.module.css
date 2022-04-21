@@ -5,15 +5,3 @@
   overflow-x: hidden;
   box-sizing: border-box;
 }
-
-.container::-webkit-scrollbar {
-  width: 8px;
-}
-
-.container::-webkit-scrollbar-thumb {
-  border: none;
-}
-
-.container::-webkit-scrollbar-track {
-  border-radius: 6px;
-}
