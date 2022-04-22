@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import app from './app.module.css';
 
 import { AppHeader } from '../app-header/app-header';
 import { MainPage } from '../../pages/main-page/main-page';
-import { data } from '../../utils/data';
+import { ingredientsAPI } from '../../api/ingredients-api';
 
-function App() {
+export const App = () => {
+  const [
+    ingredients,
+    setIngredients,
+  ] = useState(null);
+
+  useEffect(() => {
+    ingredientsAPI.getIngredients().then((res) => setIngredients(res.data));
+  }, []);
+
   return (
     <div className={app.app}>
       <AppHeader />
-      <MainPage data={data}/>
+      {ingredients && <MainPage ingredients={ingredients} />}
     </div>
   );
-}
-
-export default App;
+};

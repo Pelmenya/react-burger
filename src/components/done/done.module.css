@@ -1,0 +1,55 @@
+@keyframes vertex {
+  from {
+    transform: rotate(0);
+  }
+
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes vertex-back {
+  from {
+    transform: rotate(1turn);
+  }
+
+  to {
+    transform: rotate(0);
+  }
+}
+
+
+.wrapper {
+  align-items: center;
+  height: 120px;
+  position: relative;
+}
+
+.icon {
+  animation-duration: 10s;
+  animation-name: vertex;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  margin: auto;
+}
+
+.icon_back {
+  animation-name: vertex-back;
+}
+
+.icon_none {
+  animation-name: none;
+}
+
+.check {
+  margin: auto;
+	padding: 0;
+  height: 24px;
+  width: 24px;
+}

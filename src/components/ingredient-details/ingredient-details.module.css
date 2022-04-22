@@ -1,0 +1,21 @@
+.wrapper {
+  align-items: center;
+  width: 100%;
+}
+
+.image {
+  width: 480px;
+  height: 240px;
+}
+
+.description {
+  box-sizing: border-box;
+}
+
+.ingredient {
+  width: 120px;
+  height: 56px;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-inactive-color);
+}

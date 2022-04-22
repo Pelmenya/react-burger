@@ -1,19 +1,7 @@
 .toppings {
-	max-height: 465px;
-	overflow-y: auto;
-	overflow-x: hidden;
-	box-sizing: border-box;
-	width: 100%;
-  }
-  
-.toppings::-webkit-scrollbar {
-  width: 8px;
-}
-  
-.toppings::-webkit-scrollbar-thumb {
-  border: none;
-}
-  
-.toppings::-webkit-scrollbar-track {
-  border-radius: 6px;
+  max-height: 368px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  width: 100%;
 }

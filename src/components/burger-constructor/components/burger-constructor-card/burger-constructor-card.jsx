@@ -5,7 +5,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 
 import burgerConstructorCard from './burger-constructor-card.module.css';
 import { Spacer } from '../../../spacer/spacer';
-import { dataItemType } from '../../../../utils/prop-types/data-types';
+import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 
 const getNameCard = (type, name) => {
   switch (type) {
@@ -18,16 +18,16 @@ const getNameCard = (type, name) => {
   }
 };
 
-export const BurgerConstructorCard = ({ data, type, isLocked = false }) => {
+export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) => {
   return (
     <div className={burgerConstructorCard.card}>
       {!!!type ? <DragIcon type='primary' /> : <Spacer spaceWidth={22} />}
       <ConstructorElement
         type={type}
         isLocked={isLocked}
-        text={getNameCard(type, data.name)}
-        price={data.price}
-        thumbnail={data.image}
+        text={getNameCard(type, ingredient.name)}
+        price={ingredient.price}
+        thumbnail={ingredient.image}
       />
       <Spacer spaceWidth={0} />
     </div>
@@ -35,7 +35,7 @@ export const BurgerConstructorCard = ({ data, type, isLocked = false }) => {
 };
 
 BurgerConstructorCard.propTypes = {
-  data: dataItemType.isRequired,
+  ingredient: ingredientType.isRequired,
   type: PropTypes.oneOf([
     'top',
     'bottom',

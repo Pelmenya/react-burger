@@ -7,9 +7,9 @@ import { TabContainer } from '../tab-container/tab-container';
 import { BurgerIngredientsList } from './components/burger-ingredients-list/burger-ingredients-list';
 
 import burgerIngredients from './burger-ingredients.module.css';
-import { dataType } from '../../utils/prop-types/data-types';
+import { ingredientsType } from '../../utils/prop-types/ingredients-types';
 
-export const BurgerIngredients = ({ data }) => {
+export const BurgerIngredients = ({ ingredients }) => {
   const [
     current,
     setCurrent,
@@ -34,15 +34,15 @@ export const BurgerIngredients = ({ data }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Булки'}
-              data={data.filter((item) => item.type === 'bun')}
+              ingredients={ingredients.filter((item) => item.type === 'bun')}
             />
             <BurgerIngredientsList
               title={'Соусы'}
-              data={data.filter((item) => item.type === 'sauce')}
+              ingredients={ingredients.filter((item) => item.type === 'sauce')}
             />
             <BurgerIngredientsList
               title={'Начинки'}
-              data={data.filter((item) => item.type === 'main')}
+              ingredients={ingredients.filter((item) => item.type === 'main')}
             />
           </TabContainer>
         )}
@@ -50,7 +50,7 @@ export const BurgerIngredients = ({ data }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Булки'}
-              data={data.filter((item) => item.type === 'bun')}
+              ingredients={ingredients.filter((item) => item.type === 'bun')}
             />
           </TabContainer>
         )}
@@ -58,7 +58,7 @@ export const BurgerIngredients = ({ data }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Соусы'}
-              data={data.filter((item) => item.type === 'sauce')}
+              ingredients={ingredients.filter((item) => item.type === 'sauce')}
             />
           </TabContainer>
         )}
@@ -66,7 +66,7 @@ export const BurgerIngredients = ({ data }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Начинки'}
-              data={data.filter((item) => item.type === 'main')}
+              ingredients={ingredients.filter((item) => item.type === 'main')}
             />
           </TabContainer>
         )}
@@ -75,4 +75,4 @@ export const BurgerIngredients = ({ data }) => {
   );
 };
 
-BurgerIngredients.propTypes = dataType;
+BurgerIngredients.propTypes = ingredientsType;
