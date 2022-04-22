@@ -1,6 +1,5 @@
 import React from 'react';
 import cn from 'classnames';
-import shortId from 'shortid';
 
 import { Flex } from '../../../flex/flex';
 import { BurgerConstructorCard } from '../burger-constructor-card/burger-constructor-card';
@@ -12,8 +11,8 @@ export const BurgerConstructorToppingsList = ({ ingredients = [] }) => (
   <Flex
     flexDirection={'column'}
     gap={16}
-    className={cn('body mt-4 mb-4', burgerConstructorToppngsList.toppings)}>
-    {ingredients.map((topping) => <BurgerConstructorCard key={shortId.generate()} ingredient={topping} />)}
+    className={cn('mt-4 mb-4', burgerConstructorToppngsList.toppings)}>
+    {ingredients.map((topping) => <BurgerConstructorCard key={topping._id} ingredient={topping} />)}
   </Flex>
 );
 

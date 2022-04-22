@@ -1,7 +1,6 @@
 import React from 'react';
 import cn from 'classnames';
 import PropTypes from 'prop-types';
-import shortId from 'shortid';
 
 import { Title } from '../../../title/title';
 import { Flex } from '../../../flex/flex';
@@ -17,7 +16,7 @@ export const BurgerIngredientsList = ({ title, ingredients = [] }) => (
       {ingredients &&
         ingredients.map((ingredient, index) => (
           <BurgerIngredientsCard
-            key={shortId.generate()}
+            key={ingredient._id}
             ingredient={ingredient}
             count={index === 1 ? index : undefined}
           />
