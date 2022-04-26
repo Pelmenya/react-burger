@@ -49,7 +49,7 @@ export const MainPage = ({ ingredients }) => {
         </Title>
         <aside className={mainPage.main__content}>
           <BurgerIngredients ingredients={ingredients} />
-          <BurgerConstructor ingredients={ingredients} />
+          <BurgerConstructor />
         </aside>
       </BurgerConstructorContext.Provider>
     </main>
