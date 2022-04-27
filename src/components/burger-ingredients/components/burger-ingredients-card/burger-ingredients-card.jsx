@@ -8,11 +8,11 @@ import { Title } from '../../../title/title';
 import { Modal } from '../../../modal/modal';
 import { IngredientDetails } from '../../../ingredient-details/ingredient-details';
 import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
-import { BurgerConstructorContext } from '../../../../services/burger-constructor-context';
+import { BurgerContext } from '../../../../services/burger-context';
 
 export const BurgerIngredientsCard = ({ ingredient, count }) => {
-  const { burgerConstructorState, burgerConstructorDispatcher } = useContext(
-    BurgerConstructorContext,
+  const { burgerState, burgerDispatcher } = useContext(
+    BurgerContext,
   );
 
   const [
@@ -25,27 +25,27 @@ export const BurgerIngredientsCard = ({ ingredient, count }) => {
 
   const handleOnDragEnd = () => {
     if (ingredient.type === 'bun') {
-      if (!burgerConstructorState.bun) {
-        burgerConstructorDispatcher({
+      if (!burgerState.bun) {
+        burgerDispatcher({
           type: 'SET_BUN',
           payload: { ...ingredient, innerId: shortid.generate() },
         });
-        burgerConstructorDispatcher({
+        burgerDispatcher({
           type: 'SET_TOTAL',
-          payload: burgerConstructorState.total + ingredient.price * 2,
+          payload: burgerState.total + ingredient.price * 2,
         });
       }
     } else {
-      burgerConstructorDispatcher({
+      burgerDispatcher({
         type: 'SET_TOPPINGS',
         payload: [
-          ...burgerConstructorState.toppings,
+          ...burgerState.toppings,
           { ...ingredient, innerId: shortid.generate() },
         ],
       });
-      burgerConstructorDispatcher({
+      burgerDispatcher({
         type: 'SET_TOTAL',
-        payload: burgerConstructorState.total + ingredient.price,
+        payload: burgerState.total + ingredient.price,
       });
     }
   };

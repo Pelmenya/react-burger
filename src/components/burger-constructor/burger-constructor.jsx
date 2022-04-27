@@ -8,15 +8,13 @@ import { BurgerConstructorToppingsList } from './components/burger-constructor-t
 import { Title } from '../title/title';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { BurgerConstructorContext } from '../../services/burger-constructor-context';
+import { BurgerContext } from '../../services/burger-context';
 import { ordersAPI } from '../../api/orders-api';
 
 import burgerConstructor from './burger-constructor.module.css';
 
 export const BurgerConstructor = () => {
-  const { burgerConstructorState, burgerConstructorDispatcher } = useContext(
-    BurgerConstructorContext,
-  );
+  const { burgerState, burgerDispatcher } = useContext(BurgerContext);
 
   const [
     isOpenModalOrder,
@@ -26,28 +24,28 @@ export const BurgerConstructor = () => {
   const getBody = useMemo(
     () => {
       let body = { ingredients: [] };
-      if (burgerConstructorState.bun) {
-        body.ingredients.push(burgerConstructorState.bun._id);
-        if (burgerConstructorState.toppings.length) {
+      if (burgerState.bun) {
+        body.ingredients.push(burgerState.bun._id);
+        if (burgerState.toppings.length) {
           body.ingredients = [
             ...body.ingredients,
-            ...burgerConstructorState.toppings.map((topping) => topping._id),
+            ...burgerState.toppings.map((topping) => topping._id),
           ];
         }
-        body.ingredients.push(burgerConstructorState.bun._id);
+        body.ingredients.push(burgerState.bun._id);
       } else {
-        if (burgerConstructorState.toppings.length) {
+        if (burgerState.toppings.length) {
           body.ingredients = [
             ...body.ingredients,
-            ...burgerConstructorState.toppings.map((topping) => topping._id),
+            ...burgerState.toppings.map((topping) => topping._id),
           ];
         }
       }
       return body;
     },
     [
-      burgerConstructorState.bun,
-      burgerConstructorState.toppings,
+      burgerState.bun,
+      burgerState.toppings,
     ],
   );
 
@@ -56,14 +54,12 @@ export const BurgerConstructor = () => {
     () => {
       ordersAPI
         .postOrders(getBody)
-        .then((data) =>
-          burgerConstructorDispatcher({ type: 'SET_ORDER', payload: data.order.number }),
-        )
+        .then((data) => burgerDispatcher({ type: 'SET_ORDER', payload: data.order.number }))
         .then(() => setIsOpenModalOrder(true));
     },
     [
       getBody,
-      burgerConstructorDispatcher,
+      burgerDispatcher,
     ],
   );
 
@@ -74,20 +70,12 @@ export const BurgerConstructor = () => {
       </Title>
       <div className={burgerConstructor.constructor}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
-          {burgerConstructorState.bun && (
-            <BurgerConstructorCard
-              ingredient={burgerConstructorState.bun}
-              type='top'
-              isLocked={true}
-            />
+          {burgerState.bun && (
+            <BurgerConstructorCard ingredient={burgerState.bun} type='top' isLocked={true} />
           )}
-          <BurgerConstructorToppingsList ingredients={burgerConstructorState.toppings} />
-          {burgerConstructorState.bun && (
-            <BurgerConstructorCard
-              ingredient={burgerConstructorState.bun}
-              type='bottom'
-              isLocked={true}
-            />
+          <BurgerConstructorToppingsList ingredients={burgerState.toppings} />
+          {burgerState.bun && (
+            <BurgerConstructorCard ingredient={burgerState.bun} type='bottom' isLocked={true} />
           )}
         </Flex>
         <Flex
@@ -95,7 +83,7 @@ export const BurgerConstructor = () => {
           className={cn('pt-10 pr-3', burgerConstructor.constructor__container)}>
           <Flex>
             <div className='constructor-element__price text_type_digits-medium mr-10'>
-              {burgerConstructorState.total}
+              {burgerState.total}
               <div className={burgerConstructor.currency}>
                 <CurrencyIcon type='primary' />
               </div>
@@ -104,7 +92,7 @@ export const BurgerConstructor = () => {
               type='primary'
               size='large'
               onClick={handlerOnOpenModal}
-              disabled={!burgerConstructorState.bun && !burgerConstructorState.toppings.length}>
+              disabled={!burgerState.bun && !burgerState.toppings.length}>
               Оформить заказ
             </Button>
           </Flex>

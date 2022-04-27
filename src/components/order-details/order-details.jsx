@@ -5,7 +5,7 @@ import { Flex } from '../flex/flex';
 import { Done } from '../done/done';
 
 import orderDetails from './order-details.module.css';
-import { BurgerConstructorContext } from '../../services/burger-constructor-context';
+import { BurgerContext } from '../../services/burger-context';
 
 const formatOrderNumber = (num) => {
   let arrNumbers = num.split('');
@@ -16,11 +16,11 @@ const formatOrderNumber = (num) => {
 }
 
 export const OrderDetails = () => {
-  const { burgerConstructorState } = useContext(BurgerConstructorContext);
+  const { burgerState } = useContext(BurgerContext);
   return (
     <Flex flexDirection={'column'} className={orderDetails.wrapper}>
       <p className={cn('text text_type_digits-large', orderDetails.order)}>
-        {formatOrderNumber(String(burgerConstructorState.order))}
+        {formatOrderNumber(String(burgerState.order))}
       </p>
       <p className={cn('text text_type_main-medium mt-8 mb-15', orderDetails.order)}>
         идентификатор заказа
