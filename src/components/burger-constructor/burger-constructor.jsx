@@ -55,7 +55,8 @@ export const BurgerConstructor = () => {
       ordersAPI
         .postOrders(getBody)
         .then((data) => burgerDispatcher({ type: 'SET_ORDER', payload: data.order.number }))
-        .then(() => setIsOpenModalOrder(true));
+        .then(() => setIsOpenModalOrder(true))
+        .catch((err) => console.log(err));
     },
     [
       getBody,

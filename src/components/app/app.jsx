@@ -40,7 +40,8 @@ export const App = () => {
   useEffect(() => {
     ingredientsAPI
       .getIngredients()
-      .then((res) => burgerDispatcher({ type: 'SET_INGREDIENTS', payload: res.data }));
+      .then((res) => burgerDispatcher({ type: 'SET_INGREDIENTS', payload: res.data }))
+      .catch((err) => console.log(err));
   }, []);
 
   return (

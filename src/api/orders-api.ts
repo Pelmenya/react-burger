@@ -1,4 +1,5 @@
 import { SERVER, ORDERS_END_POINTS } from '../utils/api-constants/server';
+import { checkResponse } from '../utils/functions/checkResponse';
 
 interface IngredientsId {
   ingredients: string[];
@@ -19,14 +20,7 @@ class OrdersAPI {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(ingredientsId),
-    })
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error('Ingredients request error');
-      })
-      .catch((err) => console.log(err));
+    }).then(checkResponse);
   };
 }
 
