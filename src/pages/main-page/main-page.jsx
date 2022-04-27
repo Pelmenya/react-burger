@@ -6,16 +6,17 @@ import { BurgerIngredients } from '../../components/burger-ingredients/burger-in
 import { Title } from '../../components/title/title';
 
 import mainPage from './main-page.module.css';
-import { ingredientsType } from '../../utils/prop-types/ingredients-types';
 
-export const MainPage = ({ ingredients }) => (
-  <main className={mainPage.main}>
-    <Title type={'h1'} className={cn('pt-10', mainPage.title)}>Соберите бургер</Title>
-    <aside className={mainPage.main__content}>
-      <BurgerIngredients ingredients={ingredients}/>
-      <BurgerConstructor ingredients={ingredients}/>
-    </aside>
-  </main>
-);
-
-MainPage.propTypes = ingredientsType;
+export const MainPage = () => {
+  return (
+    <main className={mainPage.main}>
+      <Title type={'h1'} className={cn('pt-10', mainPage.title)}>
+        Соберите бургер
+      </Title>
+      <aside className={mainPage.main__content}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </aside>
+    </main>
+  );
+};

@@ -1,4 +1,5 @@
-import { SERVER, SERVER_API_END_POINTS } from '../utils/api-constants/server';
+import { SERVER, INGREDIENTS_END_POINTS } from '../utils/api-constants/server';
+import { checkResponse } from '../utils/functions/checkResponse';
 
 class IngredientsAPI {
   server: string;
@@ -7,15 +8,9 @@ class IngredientsAPI {
     this.server = server;
   }
 
-  getIngredients = () => {
-    return fetch(`${this.server}${SERVER_API_END_POINTS.GET_INGREDIENTS}`)
-      .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        throw new Error('Ingredients request error');
-      })
-      .catch((err) => console.log(err));
+  getIngredients = async () => {
+    return fetch(`${this.server}${INGREDIENTS_END_POINTS.GET_INGREDIENTS}`)
+      .then(checkResponse)
   };
 }
 

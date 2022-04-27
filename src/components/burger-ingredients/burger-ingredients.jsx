@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Flex } from '../flex/flex';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -7,9 +7,10 @@ import { TabContainer } from '../tab-container/tab-container';
 import { BurgerIngredientsList } from './components/burger-ingredients-list/burger-ingredients-list';
 
 import burgerIngredients from './burger-ingredients.module.css';
-import { ingredientsType } from '../../utils/prop-types/ingredients-types';
+import { BurgerContext } from '../../services/burger-context';
 
-export const BurgerIngredients = ({ ingredients }) => {
+export const BurgerIngredients = () => {
+  const { burgerState } = useContext(BurgerContext);
   const [
     current,
     setCurrent,
@@ -18,7 +19,9 @@ export const BurgerIngredients = ({ ingredients }) => {
   return (
     <section className={burgerIngredients.tab}>
       <Flex flexDirection='column'>
-        <Title type={'h2'} className={burgerIngredients.title}>Ингредиенты бургера</Title>
+        <Title type={'h2'} className={burgerIngredients.title}>
+          Ингредиенты бургера
+        </Title>
         <Flex className={'pt-5 pb-10'}>
           <Tab value={'buns'} active={current === 'buns'} onClick={setCurrent}>
             Булки
@@ -34,23 +37,23 @@ export const BurgerIngredients = ({ ingredients }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Булки'}
-              ingredients={ingredients.filter((item) => item.type === 'bun')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'bun')}
             />
             <BurgerIngredientsList
               title={'Соусы'}
-              ingredients={ingredients.filter((item) => item.type === 'sauce')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'sauce')}
             />
             <BurgerIngredientsList
               title={'Начинки'}
-              ingredients={ingredients.filter((item) => item.type === 'main')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'main')}
             />
           </TabContainer>
         )}
-         {current === 'buns' && (
+        {current === 'buns' && (
           <TabContainer>
             <BurgerIngredientsList
               title={'Булки'}
-              ingredients={ingredients.filter((item) => item.type === 'bun')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'bun')}
             />
           </TabContainer>
         )}
@@ -58,7 +61,7 @@ export const BurgerIngredients = ({ ingredients }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Соусы'}
-              ingredients={ingredients.filter((item) => item.type === 'sauce')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'sauce')}
             />
           </TabContainer>
         )}
@@ -66,7 +69,7 @@ export const BurgerIngredients = ({ ingredients }) => {
           <TabContainer>
             <BurgerIngredientsList
               title={'Начинки'}
-              ingredients={ingredients.filter((item) => item.type === 'main')}
+              ingredients={burgerState.ingredients.filter((item) => item.type === 'main')}
             />
           </TabContainer>
         )}
@@ -74,5 +77,3 @@ export const BurgerIngredients = ({ ingredients }) => {
     </section>
   );
 };
-
-BurgerIngredients.propTypes = ingredientsType;

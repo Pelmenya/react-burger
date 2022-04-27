@@ -29,7 +29,7 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
         price={ingredient.price}
         thumbnail={ingredient.image}
       />
-      <Spacer spaceWidth={0} />
+      <Spacer spaceWidth={8} />
     </div>
   );
 };
