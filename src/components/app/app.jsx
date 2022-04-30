@@ -3,8 +3,9 @@ import app from './app.module.css';
 
 import { AppHeader } from '../app-header/app-header';
 import { MainPage } from '../../pages/main-page/main-page';
-import { ingredientsAPI } from '../../api/ingredients-api';
 import { BurgerContext } from '../../services/burger-context';
+import { useDispatch } from 'react-redux';
+import { fetchIngredients } from '../../services/redux/slices/burger-ingredients';
 
 const initialState = {
   ingredients: null,
@@ -32,17 +33,16 @@ const reducer = (state, action) => {
 };
 
 export const App = () => {
+  const dispatch = useDispatch();
+
   const [
     burgerState,
     burgerDispatcher,
   ] = useReducer(reducer, initialState, undefined);
 
   useEffect(() => {
-    ingredientsAPI
-      .getIngredients()
-      .then((res) => burgerDispatcher({ type: 'SET_INGREDIENTS', payload: res.data }))
-      .catch((err) => console.log(err));
-  }, []);
+    dispatch(fetchIngredients());
+  }, [dispatch]);
 
   return (
     <div className={app.app}>
@@ -52,7 +52,7 @@ export const App = () => {
           burgerDispatcher,
         }}>
         <AppHeader />
-        {burgerState.ingredients && <MainPage />}
+        <MainPage />
       </BurgerContext.Provider>
     </div>
   );

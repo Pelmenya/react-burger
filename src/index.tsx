@@ -5,11 +5,15 @@ import reportWebVitals from './reportWebVitals';
 
 import '@ya.praktikum/react-developer-burger-ui-components';
 import './index.css';
+import { Provider as ReduxProvider } from 'react-redux';
+import { store } from './services/redux/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
-    <App />
+    <ReduxProvider store={store}>
+      <App />
+    </ReduxProvider>
   </React.StrictMode>,
 );
 

@@ -9,8 +9,8 @@ import burgerIngredientsList from './burger-ingredients-list.module.css';
 import { BurgerIngredientsCard } from '../burger-ingredients-card/burger-ingredients-card';
 import { ingredientsType } from '../../../../utils/prop-types/ingredients-types';
 
-export const BurgerIngredientsList = ({ title, ingredients = [] }) => (
-  <Flex flexDirection={'column'}>
+export const BurgerIngredientsList = ({ title, ingredients, reference}) => (
+  <div ref={reference}>
     <Title type={'h3'}>{title}</Title>
     <Flex className={cn('pt-6 pl-4 pr-4 pb-10', burgerIngredientsList.container)}>
       {ingredients &&
@@ -22,7 +22,7 @@ export const BurgerIngredientsList = ({ title, ingredients = [] }) => (
           />
         ))}
     </Flex>
-  </Flex>
+  </div>
 );
 
 BurgerIngredientsList.propTypes = {
