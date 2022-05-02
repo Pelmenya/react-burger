@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import { useDrag } from 'react-dnd';
@@ -9,11 +9,9 @@ import { Title } from '../../../title/title';
 import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 import { useDispatch } from 'react-redux';
 import { setCurrentIngredient } from '../../../../services/redux/slices/current-ingredient';
-import { BurgerContext } from '../../../../services/burger-context';
 
 export const BurgerIngredientsCard = ({ ingredient, count }) => {
   const dispatch = useDispatch();
-  const {burgerState, burgerDispatcher } =useContext(BurgerContext);
 
   const [
     { isDrag },
@@ -36,7 +34,7 @@ export const BurgerIngredientsCard = ({ ingredient, count }) => {
     ],
   );
 
-  const handleOnDragEnd = () => {
+  /*   const handleOnDragEnd = () => {
     if (ingredient.type === 'bun') {
       if (!burgerState.bun) {
         burgerDispatcher({
@@ -63,13 +61,10 @@ export const BurgerIngredientsCard = ({ ingredient, count }) => {
     }
   };
 
-  return (
+ */ return (
     <div className={burgerIngredientsCard.wrapper}>
       {count && <Counter count={count} size='default' />}
-      <div
-        className={burgerIngredientsCard.container}
-        onClick={handlerOnClick}
-        onDragEnd={handleOnDragEnd}>
+      <div className={burgerIngredientsCard.container} onClick={handlerOnClick}>
         <img
           ref={dragRef}
           style={{ cursor: isDrag ? 'move' : 'pointer' }}

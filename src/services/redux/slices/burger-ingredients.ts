@@ -1,9 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ingredientsAPI } from '../../../api/ingredients-api';
 import { BurgerIngredientsType } from '../../../utils/types/burger-ingredients';
-export interface BurgerIngredientsStateType extends BurgerIngredientsType {
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-  error?: string;
+import { LoadingType } from '../../../utils/types/loading';
+export interface BurgerIngredientsStateType extends BurgerIngredientsType, LoadingType {
   currentTab: 'buns' | 'sauses' | 'toppings';
 }
 

@@ -14,6 +14,7 @@ import { ordersAPI } from '../../api/orders-api';
 import burgerConstructor from './burger-constructor.module.css';
 import { Question } from './components/burger-constructor-empty/burger-constructor-empty';
 import { useDrop } from 'react-dnd';
+import shortid from 'shortid';
 
 export const BurgerConstructor = () => {
   const { burgerState, burgerDispatcher } = useContext(BurgerContext);
@@ -22,8 +23,31 @@ export const BurgerConstructor = () => {
     dropRef,
   ] = useDrop({
     accept: 'ingredient',
-    drop ({_id}) {
-      console.log(_id);
+    drop (ingredient) {
+      if (ingredient.type === 'bun') {
+        if (!burgerState.bun) {
+          burgerDispatcher({
+            type: 'SET_BUN',
+            payload: { ...ingredient, innerId: shortid.generate() },
+          });
+          burgerDispatcher({
+            type: 'SET_TOTAL',
+            payload: burgerState.total + ingredient.price * 2,
+          });
+        }
+      } else {
+        burgerDispatcher({
+          type: 'SET_TOPPINGS',
+          payload: [
+            ...burgerState.toppings,
+            { ...ingredient, innerId: shortid.generate() },
+          ],
+        });
+        burgerDispatcher({
+          type: 'SET_TOTAL',
+          payload: burgerState.total + ingredient.price,
+        });
+      }
     },
     collect: (monitor) => ({
       isHover: monitor.isOver(),
@@ -93,7 +117,7 @@ export const BurgerConstructor = () => {
         }
         ref={dropRef}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
-          {(!burgerState.bun && !!!burgerState.toppings.length) && <Question />}
+          {!burgerState.bun && !!!burgerState.toppings.length && <Question />}
           {burgerState.bun && (
             <BurgerConstructorCard ingredient={burgerState.bun} type='top' isLocked={true} />
           )}
