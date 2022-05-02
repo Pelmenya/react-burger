@@ -1,7 +1,7 @@
 import { SERVER, ORDERS_END_POINTS } from '../utils/api-constants/server';
 import { checkResponse } from '../utils/functions/checkResponse';
 
-interface IngredientsId {
+interface IngredientsIdPropsType {
   ingredients: string[];
 }
 
@@ -12,7 +12,7 @@ class OrdersAPI {
     this.server = server;
   }
 
-  postOrders = async (ingredientsId: IngredientsId) => {
+  postOrders = async (ingredientsId: IngredientsIdPropsType) => {
     return fetch(`${this.server}${ORDERS_END_POINTS.POST_ORDERS}`, {
       method: 'POST',
       headers: {

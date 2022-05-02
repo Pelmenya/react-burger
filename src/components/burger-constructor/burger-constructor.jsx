@@ -12,9 +12,23 @@ import { BurgerContext } from '../../services/burger-context';
 import { ordersAPI } from '../../api/orders-api';
 
 import burgerConstructor from './burger-constructor.module.css';
+import { Question } from './components/burger-constructor-empty/burger-constructor-empty';
+import { useDrop } from 'react-dnd';
 
 export const BurgerConstructor = () => {
   const { burgerState, burgerDispatcher } = useContext(BurgerContext);
+  const [
+    { isHover },
+    dropRef,
+  ] = useDrop({
+    accept: 'ingredient',
+    drop ({_id}) {
+      console.log(_id);
+    },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
+  });
 
   const [
     isOpenModalOrder,
@@ -69,8 +83,17 @@ export const BurgerConstructor = () => {
       <Title type='h2' className={burgerConstructor.title}>
         Конструктор бургера
       </Title>
-      <div className={burgerConstructor.constructor}>
+      <div
+        className={
+          isHover ? (
+            cn(burgerConstructor.constructor, burgerConstructor.constructor_hover)
+          ) : (
+            burgerConstructor.constructor
+          )
+        }
+        ref={dropRef}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
+          {(!burgerState.bun && !!!burgerState.toppings.length) && <Question />}
           {burgerState.bun && (
             <BurgerConstructorCard ingredient={burgerState.bun} type='top' isLocked={true} />
           )}

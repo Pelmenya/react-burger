@@ -1,5 +1,4 @@
 import { BurgerIngredientsStateType } from '../slices/burger-ingredients';
-
 interface State {
   burgerIngredients: BurgerIngredientsStateType;
 }

@@ -6,6 +6,8 @@ import { BurgerIngredients } from '../../components/burger-ingredients/burger-in
 import { Title } from '../../components/title/title';
 
 import mainPage from './main-page.module.css';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 export const MainPage = () => {
   return (
@@ -13,10 +15,12 @@ export const MainPage = () => {
       <Title type={'h1'} className={cn('pt-10', mainPage.title)}>
         Соберите бургер
       </Title>
-      <aside className={mainPage.main__content}>
-        <BurgerIngredients />
-        <BurgerConstructor />
-      </aside>
+      <DndProvider backend={HTML5Backend}>
+        <aside className={mainPage.main__content}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </aside>
+      </DndProvider>
     </main>
   );
 };

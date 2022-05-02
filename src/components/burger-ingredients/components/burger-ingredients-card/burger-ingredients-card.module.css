@@ -1,3 +1,8 @@
+.wrapper {
+  position: relative;
+  z-index: 0;
+}
+
 .container {
   width: 272px;
   height: 216px;
@@ -6,6 +11,7 @@
   position: relative;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 .img {

@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ingredientsAPI } from '../../../api/ingredients-api';
 import { BurgerIngredientsType } from '../../../utils/types/burger-ingredients';
-
 export interface BurgerIngredientsStateType extends BurgerIngredientsType {
   loading: 'idle' | 'pending' | 'succeeded' | 'failed';
+  error?: string;
   currentTab: 'buns' | 'sauses' | 'toppings';
-  bunsRef: null | JSX.Element
 }
 
 const initialIngredientsState = {
@@ -15,8 +14,12 @@ const initialIngredientsState = {
 } as BurgerIngredientsStateType;
 
 export const fetchIngredients = createAsyncThunk('burgerIngredients/fetchIngredients', async () => {
-  const response = await ingredientsAPI.getIngredients();
-  return response.data;
+  try {
+    const response = await ingredientsAPI.getIngredients();
+    return response.data;
+  } catch (err) {
+    return Promise.reject(err);
+  }
 });
 
 const burgerIngredientsSlice = createSlice({
@@ -25,6 +28,9 @@ const burgerIngredientsSlice = createSlice({
   reducers: {
     setCurrentTab: (state, action) => {
       state.currentTab = action.payload;
+    },
+    setError: (state, action) => {
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -35,11 +41,12 @@ const burgerIngredientsSlice = createSlice({
       state.ingredients = action.payload;
       state.loading = 'succeeded';
     });
-    builder.addCase(fetchIngredients.rejected, (state) => {
+    builder.addCase(fetchIngredients.rejected, (state, action) => {
       state.loading = 'failed';
+      state.error = action.error.message;
     });
   },
 });
 
-export const { setCurrentTab } = burgerIngredientsSlice.actions;
+export const { setCurrentTab, setError } = burgerIngredientsSlice.actions;
 export const burgerIngredientsReducer = burgerIngredientsSlice.reducer;

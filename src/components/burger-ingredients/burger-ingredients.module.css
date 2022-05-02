@@ -4,6 +4,10 @@
   background-color: var(--background-alt);
 }
 
+.tab_hover {
+  border: 2px dashed var(--colors-interface-accent);
+}
+
 .title {
   display: none;
 }

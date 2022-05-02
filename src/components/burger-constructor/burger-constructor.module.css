@@ -10,18 +10,12 @@
   flex-direction: column;
   align-items: center;
   padding-left: 16px;
+  box-sizing: border-box;
+  border: 2px solid transparent;
 }
 
-.constructor::-webkit-scrollbar {
-  width: 8px;
-}
-
-.constructor::-webkit-scrollbar-thumb {
-  border: none;
-}
-
-.constructor::-webkit-scrollbar-track {
-  border-radius: 6px;
+.constructor_hover {
+  border: 2px dashed var(--colors-interface-accent);
 }
 
 .constructor__container {
