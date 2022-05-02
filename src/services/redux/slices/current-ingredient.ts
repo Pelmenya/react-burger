@@ -7,14 +7,14 @@ export interface CurrentIngredientStateType {
   ingredient: Nullable<BurgerIngredientType>;
 }
 
-const initialIngredientsState = {
+const initialCurrentIngredientState = {
   isOpen: false,
   ingredient: null,
 } as CurrentIngredientStateType;
 
 const currentIngredientSlice = createSlice({
   name: 'currentIngredient',
-  initialState: initialIngredientsState,
+  initialState: initialCurrentIngredientState,
   reducers: {
     setCurrentIngredient: (state, action) => {
       state.ingredient = action.payload;

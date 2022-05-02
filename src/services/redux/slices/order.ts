@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { LoadingType } from '../../../utils/types/loading';
 import { Nullable } from '../../../utils/types/nullable';
-
-export interface OrderStateType extends LoadingType{
+export interface OrderStateType extends LoadingType {
   isOpen: boolean;
   num: Nullable<string>;
   ingredientsIds: string[];
@@ -12,12 +11,11 @@ export interface OrderStateType extends LoadingType{
 
 const initialIngredientsState = {
   isOpen: false,
-  loading:'idle',
+  loading: 'idle',
   num: null,
   total: 0,
   ingredientsIds: [],
 } as OrderStateType;
-
 
 const orderSlice = createSlice({
   name: 'currentIngredient',

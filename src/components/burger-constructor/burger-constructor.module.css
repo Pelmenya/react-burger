@@ -1,5 +1,5 @@
 .section {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .constructor {
@@ -11,11 +11,15 @@
   align-items: center;
   padding-left: 16px;
   box-sizing: border-box;
-  border: 2px solid transparent;
+  padding-top: 20px;
 }
 
 .constructor_hover {
-  border: 2px dashed var(--colors-interface-accent);
+  -webkit-box-shadow: 0px 0px 40px 0px rgba(227, 60, 213, 1);
+  -moz-box-shadow: 0px 0px 40px 0px rgba(227, 60, 213, 1);
+  box-shadow: 0px 0px 40px 0px rgba(227, 60, 213, 1);
+  border-radius: var(--common-border-radius);
+  padding-bottom: 20px;
 }
 
 .constructor__container {

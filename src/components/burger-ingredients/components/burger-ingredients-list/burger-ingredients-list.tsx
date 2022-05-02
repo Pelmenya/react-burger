@@ -20,11 +20,10 @@ export const BurgerIngredientsList = (props: BurgerIngredientsListPropsType) => 
       <Title type={'h3'}>{title}</Title>
       <Flex className={cn('pt-6 pl-4 pr-4 pb-10', burgerIngredientsList.container)}>
         {ingredients &&
-          ingredients.map((ingredient, index) => (
+          ingredients.map((ingredient) => (
             <BurgerIngredientsCard
               key={ingredient._id}
               ingredient={ingredient}
-              count={index === 1 ? index : undefined}
             />
           ))}
       </Flex>

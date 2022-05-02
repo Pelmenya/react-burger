@@ -1,5 +1,7 @@
 export interface BurgerIngredientType {
   _id: string;
+  innerId?:string;
+  count?: number;
   name: string;
   type: string;
   proteins: number;

@@ -1,27 +1,27 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { BurgerIngredientType } from '../../../utils/types/burger-ingredient';
-import { Nullable } from '../../../utils/types/nullable';
 
 export interface BurgerConstructorStateType {
-  bun: Nullable<BurgerIngredientType>;
-  toppings: Nullable<BurgerIngredientType[]>
+  bun?:BurgerIngredientType;
+  toppings: BurgerIngredientType[];
 }
 
-const initialIngredientsState = {
+const initialBurgerConstructorState = {
+  toppings: [],
 } as BurgerConstructorStateType;
 
 const burgerConstractorSlice = createSlice({
   name: 'currentIngredient',
-  initialState: initialIngredientsState,
+  initialState: initialBurgerConstructorState,
   reducers: {
     setBun: (state, action) => {
       state.bun = action.payload;
     },
     setToppings: (state, action) => {
-      state.toppings = action.payload
+      state.toppings = action.payload;
     },
   },
 });
 
-export const { setBun } = burgerConstractorSlice.actions;
-export const burgerConstractorReducer = burgerConstractorSlice.reducer;
+export const { setBun, setToppings } = burgerConstractorSlice.actions;
+export const burgerConstructorReducer = burgerConstractorSlice.reducer;

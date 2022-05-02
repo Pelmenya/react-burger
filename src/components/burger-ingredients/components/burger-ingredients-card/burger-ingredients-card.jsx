@@ -10,7 +10,7 @@ import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 import { useDispatch } from 'react-redux';
 import { setCurrentIngredient } from '../../../../services/redux/slices/current-ingredient';
 
-export const BurgerIngredientsCard = ({ ingredient, count }) => {
+export const BurgerIngredientsCard = ({ ingredient }) => {
   const dispatch = useDispatch();
 
   const [
@@ -34,36 +34,9 @@ export const BurgerIngredientsCard = ({ ingredient, count }) => {
     ],
   );
 
-  /*   const handleOnDragEnd = () => {
-    if (ingredient.type === 'bun') {
-      if (!burgerState.bun) {
-        burgerDispatcher({
-          type: 'SET_BUN',
-          payload: { ...ingredient, innerId: shortid.generate() },
-        });
-        burgerDispatcher({
-          type: 'SET_TOTAL',
-          payload: burgerState.total + ingredient.price * 2,
-        });
-      }
-    } else {
-      burgerDispatcher({
-        type: 'SET_TOPPINGS',
-        payload: [
-          ...burgerState.toppings,
-          { ...ingredient, innerId: shortid.generate() },
-        ],
-      });
-      burgerDispatcher({
-        type: 'SET_TOTAL',
-        payload: burgerState.total + ingredient.price,
-      });
-    }
-  };
-
- */ return (
+  return (
     <div className={burgerIngredientsCard.wrapper}>
-      {count && <Counter count={count} size='default' />}
+      {!!ingredient.count && <Counter count={ingredient.count} size='default' />}
       <div className={burgerIngredientsCard.container} onClick={handlerOnClick}>
         <img
           ref={dragRef}

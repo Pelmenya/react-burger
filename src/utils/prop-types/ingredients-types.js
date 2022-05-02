@@ -13,6 +13,7 @@ export const ingredientType = PropTypes.shape({
   image_mobile: PropTypes.string,
   image_large: PropTypes.string,
   __v: PropTypes.number,
+  innerId: PropTypes.string,
 });
 
 export const ingredientsType = { ingredients: PropTypes.arrayOf(ingredientType).isRequired };
