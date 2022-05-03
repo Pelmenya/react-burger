@@ -17,6 +17,7 @@
 .img {
   height: 120px;
   width: 240px;
+  cursor: move;
 }
 
 .title {

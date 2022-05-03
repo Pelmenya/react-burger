@@ -2,6 +2,8 @@ import PropTypes from 'prop-types';
 
 export const ingredientType = PropTypes.shape({
   _id: PropTypes.string.isRequired,
+  innerId: PropTypes.string,
+  count: PropTypes.number,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   proteins: PropTypes.number.isRequired,
@@ -13,7 +15,6 @@ export const ingredientType = PropTypes.shape({
   image_mobile: PropTypes.string,
   image_large: PropTypes.string,
   __v: PropTypes.number,
-  innerId: PropTypes.string,
 });
 
 export const ingredientsType = { ingredients: PropTypes.arrayOf(ingredientType).isRequired };

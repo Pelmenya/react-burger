@@ -1,5 +1,4 @@
 import React, { useCallback } from 'react';
-import PropTypes from 'prop-types';
 import shortid from 'shortid';
 import { useDrag } from 'react-dnd';
 
@@ -55,4 +54,4 @@ export const BurgerIngredientsCard = ({ ingredient }) => {
   );
 };
 
-BurgerIngredientsCard.propTypes = { ingredient: ingredientType, count: PropTypes.number };
+BurgerIngredientsCard.propTypes = { ingredient: ingredientType };

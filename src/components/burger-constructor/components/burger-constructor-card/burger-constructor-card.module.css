@@ -6,3 +6,17 @@
   justify-content: space-between;
   box-sizing: border-box;
 }
+
+.card_topping {
+  cursor: move;
+}
+
+.card_hover {
+  -webkit-box-shadow: 0px 0px 10px 0px rgba(227, 60, 213, 1);
+  -moz-box-shadow: 0px 0px 10px 0px rgba(227, 60, 213, 1);
+  box-shadow: 0px 0px 10px 0px rgba(227, 60, 213, 1);
+}
+
+.card_draggible div {
+  background-color: #fff;
+}
