@@ -15,7 +15,7 @@ export const BurgerConstructorToppingsList = () => {
     <Flex
       flexDirection={'column'}
       gap={16}
-      className={cn('pt-4 pb-4', burgerConstructorToppngsList.toppings)}>
+      className={cn('mt-4 mb-4', burgerConstructorToppngsList.toppings)}>
       {toppings.map((topping) => (
         <BurgerConstructorCard key={topping.innerId} ingredient={topping} />
       ))}

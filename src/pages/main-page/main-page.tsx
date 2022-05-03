@@ -13,13 +13,27 @@ import { getCurrentIngredientState } from '../../services/redux/selectors/curren
 import { resetCurrentIngredient } from '../../services/redux/slices/current-ingredient';
 import { Modal } from '../../components/modal/modal';
 import { IngredientDetails } from '../../components/ingredient-details/ingredient-details';
+import { getOrderState } from '../../services/redux/selectors/order';
+import { OrderDetails } from '../../components/order-details/order-details';
+import { setOpenOrderModal } from '../../services/redux/slices/order';
 
 export const MainPage = () => {
   const dispatch = useDispatch();
   const { isOpen: isOpenCurrentIngredientModal } = useSelector(getCurrentIngredientState);
+  const { isOpen: isOpenOrderModal } = useSelector(getOrderState);
+
   const handlerOnCloseCurrentIngredientModal = useCallback(
     () => {
       dispatch(resetCurrentIngredient());
+    },
+    [
+      dispatch,
+    ],
+  );
+
+  const handlerOnCloseOrderModal = useCallback(
+    () => {
+      dispatch(setOpenOrderModal(false));
     },
     [
       dispatch,
@@ -40,6 +54,11 @@ export const MainPage = () => {
       {isOpenCurrentIngredientModal && (
         <Modal title={'Детали ингредиента'} handlerOnClose={handlerOnCloseCurrentIngredientModal}>
           <IngredientDetails />
+        </Modal>
+      )}
+      {isOpenOrderModal && (
+        <Modal title={undefined} handlerOnClose={handlerOnCloseOrderModal}>
+          <OrderDetails />
         </Modal>
       )}
     </main>

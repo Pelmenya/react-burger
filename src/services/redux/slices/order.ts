@@ -1,4 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { IngredientsIdsPropsType, ordersAPI } from '../../../api/orders-api';
 import { LoadingType } from '../../../utils/types/loading';
 import { Nullable } from '../../../utils/types/nullable';
 export interface OrderStateType extends LoadingType {
@@ -17,6 +18,18 @@ const initialIngredientsState = {
   ingredientsIds: [],
 } as OrderStateType;
 
+export const postOrders = createAsyncThunk(
+  'currentIngredient/postOrders',
+  async (body: IngredientsIdsPropsType) => {
+    try {
+      const response = await ordersAPI.postOrders(body);
+      return response.data;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
+
 const orderSlice = createSlice({
   name: 'currentIngredient',
   initialState: initialIngredientsState,
@@ -27,12 +40,33 @@ const orderSlice = createSlice({
     setOrderTotal: (state, action) => {
       state.total = action.payload;
     },
+    setOpenOrderModal: (state, action) => {
+      state.isOpen = action.payload;
+    },
     resetOrder: (state) => {
       state.isOpen = false;
       state.num = null;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(postOrders.pending, (state) => {
+      state.loading = 'pending';
+    });
+    builder.addCase(postOrders.fulfilled, (state, action) => {
+      state.num = action.payload;
+      state.loading = 'succeeded';
+    });
+    builder.addCase(postOrders.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+  },
 });
 
-export const { setIngredientsIds, setOrderTotal, resetOrder } = orderSlice.actions;
+export const {
+  setIngredientsIds,
+  setOrderTotal,
+  setOpenOrderModal,
+  resetOrder,
+} = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;

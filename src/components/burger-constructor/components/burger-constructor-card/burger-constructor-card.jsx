@@ -26,13 +26,10 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
   ]);
 
   const handlerDrop = (dropIngredient) => {
-    console.log(ingredient);
-    console.log(dropIngredient);
     const indexIngredient = toppings.findIndex((item) => item.innerId === ingredient.innerId);
     const indexDropIngredient = toppings.findIndex(
       (item) => item.innerId === dropIngredient.innerId,
     );
-
     let arrDisposition = [
       ...toppings,
     ];
@@ -48,24 +45,23 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
 
   const [
     { opacity },
-    dragRef,
+    drag,
   ] = useDrag({
     item: ingredient,
     type: 'ingredient-constructor',
     collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.5 : 1,
+      opacity: monitor.isDragging() ? 0 : 1,
     }),
   });
 
   const [
-    { isHover },
-    dropRef,
+    ,
+    drop,
   ] = useDrop({
     accept: 'ingredient-constructor',
-    drop: handlerDrop,
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
+    hover: (dropIngredient, monitor) => {
+      !monitor.isOver() && handlerDrop(dropIngredient);
+    },
   });
 
   const getNameCard = useCallback((type, name) => {
@@ -113,17 +109,8 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
           cn(burgerConstructorCard.card, burgerConstructorCard.card_topping)
         )
       }
-      ref={isBun ? null : dropRef}>
-      <div
-        style={{opacity}}
-        ref={isBun ? null : dragRef}
-        className={
-          isHover ? (
-            cn(burgerConstructorCard.card, burgerConstructorCard.card_hover)
-          ) : (
-            burgerConstructorCard.card
-          )
-        }>
+      ref={isBun ? null : drop}>
+      <div style={{ opacity }} ref={isBun ? null : drag} className={burgerConstructorCard.card}>
         {!!!type ? <DragIcon type='primary' /> : <Spacer spaceWidth={22} />}
         <ConstructorElement
           type={type}

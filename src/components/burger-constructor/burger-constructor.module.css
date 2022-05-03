@@ -28,8 +28,9 @@
   align-items: flex-end;
 }
 
-.currency {
+.currency svg {
   transform: scale(1.5);
+  margin-left: 12px;
 }
 
 .title {

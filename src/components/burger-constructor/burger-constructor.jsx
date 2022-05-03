@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useMemo, useState } from 'react';
+import React from 'react';
 import cn from 'classnames';
 
 import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -8,8 +8,6 @@ import { BurgerConstructorToppingsList } from './components/burger-constructor-t
 import { Title } from '../title/title';
 import { Modal } from '../modal/modal';
 import { OrderDetails } from '../order-details/order-details';
-import { BurgerContext } from '../../services/burger-context';
-import { ordersAPI } from '../../api/orders-api';
 
 import burgerConstructor from './burger-constructor.module.css';
 import { BurgerConstructorEmpty } from './components/burger-constructor-empty/burger-constructor-empty';
@@ -18,7 +16,7 @@ import shortid from 'shortid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../services/redux/selectors/burger-constructor';
 import { setBun, setToppings } from '../../services/redux/slices/burger-constructor';
-import { setIngredientsIds, setOrderTotal } from '../../services/redux/slices/order';
+import { setIngredientsIds, setOpenOrderModal, setOrderTotal } from '../../services/redux/slices/order';
 import { updateCountIngredient } from '../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { maxCountBuns } from '../../utils/constants';
@@ -29,8 +27,6 @@ export const BurgerConstructor = () => {
   const { ingredients } = useSelector(getBurgerIngredientsState);
   const { bun, toppings } = useSelector(getBurgerConstructorState);
   const { total } = useSelector(getOrderState);
-
-  const { burgerState, burgerDispatcher } = useContext(BurgerContext);
 
   const dropIngredient = (ingredient) => {
     if (ingredient.type === 'bun') {
@@ -71,8 +67,8 @@ export const BurgerConstructor = () => {
     } else {
       dispatch(
         setToppings([
-          ...toppings,
           { ...ingredient, innerId: shortid.generate() },
+          ...toppings,
         ]),
       );
       dispatch(
@@ -119,53 +115,7 @@ export const BurgerConstructor = () => {
     }),
   });
 
-  const [
-    isOpenModalOrder,
-    setIsOpenModalOrder,
-  ] = useState(false);
-
-  const getBody = useMemo(
-    () => {
-      let body = { ingredients: [] };
-      if (burgerState.bun) {
-        body.ingredients.push(burgerState.bun._id);
-        if (burgerState.toppings.length) {
-          body.ingredients = [
-            ...body.ingredients,
-            ...burgerState.toppings.map((topping) => topping._id),
-          ];
-        }
-        body.ingredients.push(burgerState.bun._id);
-      } else {
-        if (burgerState.toppings.length) {
-          body.ingredients = [
-            ...body.ingredients,
-            ...burgerState.toppings.map((topping) => topping._id),
-          ];
-        }
-      }
-      return body;
-    },
-    [
-      burgerState.bun,
-      burgerState.toppings,
-    ],
-  );
-
-  const handlerOnCloseModal = () => setIsOpenModalOrder(false);
-  const handlerOnOpenModal = useCallback(
-    () => {
-      ordersAPI
-        .postOrders(getBody)
-        .then((data) => burgerDispatcher({ type: 'SET_ORDER', payload: data.order.number }))
-        .then(() => setIsOpenModalOrder(true))
-        .catch((err) => console.log(err));
-    },
-    [
-      getBody,
-      burgerDispatcher,
-    ],
-  );
+  const handlerOnOpenModal = () => {dispatch(setOpenOrderModal(true))};
 
   return (
     <section className={burgerConstructor.section}>
@@ -207,11 +157,6 @@ export const BurgerConstructor = () => {
           </Flex>
         </Flex>
       </div>
-      {isOpenModalOrder && (
-        <Modal handlerOnClose={handlerOnCloseModal}>
-          <OrderDetails />
-        </Modal>
-      )}
     </section>
   );
 };
