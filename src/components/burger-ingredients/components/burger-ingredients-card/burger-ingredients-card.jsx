@@ -14,13 +14,13 @@ export const BurgerIngredientsCard = ({ ingredient }) => {
   const dispatch = useDispatch();
 
   const [
-    { isDrag },
+    { opacity },
     dragRef,
   ] = useDrag({
     item: { ...ingredient, innerId: shortid.generate() },
     type: 'ingredient',
     collect: (monitor) => ({
-      isDrag: monitor.isDragging(),
+      opacity: monitor.isDragging() ? 0.5 : 1
     }),
   });
 
@@ -40,7 +40,7 @@ export const BurgerIngredientsCard = ({ ingredient }) => {
       <div className={burgerIngredientsCard.container} onClick={handlerOnClick}>
         <img
           ref={dragRef}
-          style={{ cursor: isDrag ? 'move' : 'pointer' }}
+          style={{ opacity }}
           alt={ingredient.name}
           src={ingredient.image}
           className={burgerIngredientsCard.img}

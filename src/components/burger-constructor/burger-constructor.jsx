@@ -184,7 +184,7 @@ export const BurgerConstructor = () => {
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
           {!bun && !toppings.length && <BurgerConstructorEmpty />}
           {bun && <BurgerConstructorCard ingredient={bun} type='top' isLocked={true} />}
-          {toppings && <BurgerConstructorToppingsList ingredients={toppings} />}
+          {toppings && <BurgerConstructorToppingsList />}
           {bun && <BurgerConstructorCard ingredient={bun} type='bottom' isLocked={true} />}
         </Flex>
         <Flex
