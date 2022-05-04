@@ -28,11 +28,6 @@
   align-items: flex-end;
 }
 
-.currency svg {
-  transform: scale(1.5);
-  margin-left: 12px;
-}
-
 .title {
   color: transparent;
   box-sizing: border-box;

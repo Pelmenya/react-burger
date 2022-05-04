@@ -1,0 +1,10 @@
+.container {
+  box-sizing: border-box;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.currency svg {
+  transform: scale(1.5);
+  margin-left: 12px;
+}

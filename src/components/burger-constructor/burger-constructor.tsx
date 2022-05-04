@@ -1,13 +1,10 @@
 import React from 'react';
 import cn from 'classnames';
 
-import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Flex } from '../flex/flex';
 import { BurgerConstructorCard } from './components/burger-constructor-card/burger-constructor-card';
 import { BurgerConstructorToppingsList } from './components/burger-constructor-toppings-list/burger-constructor-toppings-list';
 import { Title } from '../title/title';
-import { Modal } from '../modal/modal';
-import { OrderDetails } from '../order-details/order-details';
 
 import burgerConstructor from './burger-constructor.module.css';
 import { BurgerConstructorEmpty } from './components/burger-constructor-empty/burger-constructor-empty';
@@ -16,19 +13,18 @@ import shortid from 'shortid';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../services/redux/selectors/burger-constructor';
 import { setBun, setToppings } from '../../services/redux/slices/burger-constructor';
-import { setIngredientsIds, setOpenOrderModal, setOrderTotal } from '../../services/redux/slices/order';
 import { updateCountIngredient } from '../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { maxCountBuns } from '../../utils/constants';
-import { getOrderState } from '../../services/redux/selectors/order';
+import { BurgerConstructorTotal } from './components/burger-constructor-total/burger-constructor-total';
+import { BurgerIngredientType } from '../../utils/types/burger-ingredient';
 
 export const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsState);
   const { bun, toppings } = useSelector(getBurgerConstructorState);
-  const { total } = useSelector(getOrderState);
 
-  const dropIngredient = (ingredient) => {
+  const dropIngredient = (ingredient: BurgerIngredientType) => {
     if (ingredient.type === 'bun') {
       if (ingredient._id !== bun?._id) {
         dispatch(setBun({ ...ingredient, innerId: shortid.generate() }));
@@ -45,24 +41,6 @@ export const BurgerConstructor = () => {
             }),
           ),
         );
-        let idsArr = [
-          ingredient._id,
-        ];
-        let totalCost = maxCountBuns * ingredient.price;
-        if (toppings.length)
-          idsArr = [
-            ...idsArr,
-            ...toppings.map((item) => {
-              totalCost = totalCost + item.price;
-              return item._id;
-            }),
-          ];
-        idsArr = [
-          ...idsArr,
-          ingredient._id,
-        ];
-        dispatch(setIngredientsIds(idsArr));
-        dispatch(setOrderTotal(totalCost));
       }
     } else {
       dispatch(
@@ -84,29 +62,12 @@ export const BurgerConstructor = () => {
           }),
         ),
       );
-      let idsArr = [];
-      let totalCost = ingredient.price;
-      if (toppings.length)
-        idsArr = [
-          ...idsArr,
-          ...toppings.map((item) => {
-            totalCost = totalCost + item.price;
-            return item._id;
-          }),
-        ];
-      if (bun) {
-        idsArr.unshift(bun._id);
-        idsArr.push(bun._id);
-        totalCost = totalCost + maxCountBuns * bun.price;
-      }
-      dispatch(setIngredientsIds(idsArr));
-      dispatch(setOrderTotal(totalCost));
     }
   };
 
   const [
     { isHover },
-    dropRef,
+    drop,
   ] = useDrop({
     accept: 'ingredient',
     drop: dropIngredient,
@@ -115,8 +76,6 @@ export const BurgerConstructor = () => {
     }),
   });
 
-  const handlerOnOpenModal = () => {dispatch(setOpenOrderModal(true))};
-
   return (
     <section className={burgerConstructor.section}>
       <Title type='h2' className={burgerConstructor.title}>
@@ -124,37 +83,19 @@ export const BurgerConstructor = () => {
       </Title>
       <div
         className={
-          isHover ? (
+          (isHover ? (
             cn(burgerConstructor.constructor, burgerConstructor.constructor_hover)
           ) : (
             burgerConstructor.constructor
-          )
+          )) as string
         }
-        ref={dropRef}>
+        ref={drop}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
           {!bun && !toppings.length && <BurgerConstructorEmpty />}
           {bun && <BurgerConstructorCard ingredient={bun} type='top' isLocked={true} />}
           {toppings && <BurgerConstructorToppingsList />}
           {bun && <BurgerConstructorCard ingredient={bun} type='bottom' isLocked={true} />}
-        </Flex>
-        <Flex
-          flexDirection='column'
-          className={cn('pt-10 pr-3', burgerConstructor.constructor__container)}>
-          <Flex>
-            <div className='constructor-element__price text_type_digits-medium mr-10'>
-              {total}
-              <div className={burgerConstructor.currency}>
-                <CurrencyIcon type='primary' />
-              </div>
-            </div>
-            <Button
-              type='primary'
-              size='large'
-              onClick={handlerOnOpenModal}
-              disabled={!bun && !toppings.length}>
-              Оформить заказ
-            </Button>
-          </Flex>
+          <BurgerConstructorTotal />
         </Flex>
       </div>
     </section>

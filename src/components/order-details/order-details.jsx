@@ -1,27 +1,35 @@
-import React, { useContext } from 'react';
+import React, { useCallback } from 'react';
+import { useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { Flex } from '../flex/flex';
 import { Done } from '../done/done';
 
 import orderDetails from './order-details.module.css';
-import { BurgerContext } from '../../services/burger-context';
-
-const formatOrderNumber = (num) => {
-  let arrNumbers = num.split('');
-  while (arrNumbers.length < 6) {
-    arrNumbers.unshift('0')
-  }
-  return arrNumbers.join('');  
-}
+import { getOrderState } from '../../services/redux/selectors/order';
+import { Loader } from '../loader/loader';
+import { BadRequest } from '../bad-request/bad-request';
 
 export const OrderDetails = () => {
-  const { burgerState } = useContext(BurgerContext);
+  const { num, error, loading } = useSelector(getOrderState);
+
+  const formatOrderNumber = useCallback((num) => {
+    let arrNumbers = num.split('');
+    while (arrNumbers.length < 6) {
+      arrNumbers.unshift('0');
+    }
+    return arrNumbers.join('');
+  }, []);
+
   return (
     <Flex flexDirection={'column'} className={orderDetails.wrapper}>
-      <p className={cn('text text_type_digits-large', orderDetails.order)}>
-        {formatOrderNumber(String(burgerState.order))}
-      </p>
+      {loading === 'pending' && <Loader />}
+      {loading === 'succeeded' && (
+        <p className={cn('text text_type_digits-large', orderDetails.order)}>
+          {formatOrderNumber(String(num))}
+        </p>
+      )}
+      {loading === 'failed' && <BadRequest error={error} />}
       <p className={cn('text text_type_main-medium mt-8 mb-15', orderDetails.order)}>
         идентификатор заказа
       </p>

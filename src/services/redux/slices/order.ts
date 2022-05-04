@@ -23,7 +23,7 @@ export const postOrders = createAsyncThunk(
   async (body: IngredientsIdsPropsType) => {
     try {
       const response = await ordersAPI.postOrders(body);
-      return response.data;
+      return response.order.number;
     } catch (err) {
       return Promise.reject(err);
     }
