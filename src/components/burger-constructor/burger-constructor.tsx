@@ -23,7 +23,6 @@ export const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsState);
   const { bun, toppings } = useSelector(getBurgerConstructorState);
-
   const dropIngredient = (ingredient: BurgerIngredientType) => {
     if (ingredient.type === 'bun') {
       if (ingredient._id !== bun?._id) {

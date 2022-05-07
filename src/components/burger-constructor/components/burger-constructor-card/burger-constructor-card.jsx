@@ -10,16 +10,17 @@ import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../../../services/redux/selectors/burger-constructor';
 import { setToppings } from '../../../../services/redux/slices/burger-constructor';
-import { maxCountBuns } from '../../../../utils/constants';
 import { setOrderTotal } from '../../../../services/redux/slices/order';
 import { updateCountIngredient } from '../../../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
 import { useDrag, useDrop } from 'react-dnd';
+import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
 
 export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsState);
-  const { bun, toppings } = useSelector(getBurgerConstructorState);
+  const { toppings } = useSelector(getBurgerConstructorState);
+  const { totalCost } = useTotalCostOrder();
 
   const isBun = useMemo(() => ingredient.type === 'bun', [
     ingredient,
@@ -76,14 +77,7 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
   }, []);
 
   const handlerOnClose = () => {
-    let totalCost = -ingredient.price;
-    if (toppings.length) {
-      totalCost = toppings.reduce((acc, item) => acc + item.price, 0) + totalCost;
-    }
-    if (bun) {
-      totalCost = totalCost + maxCountBuns * bun.price;
-    }
-    dispatch(setOrderTotal(totalCost));
+    dispatch(setOrderTotal(totalCost - ingredient.price));
     dispatch(setToppings(toppings.filter((item) => item.innerId !== ingredient.innerId)));
     dispatch(
       updateCountIngredient(

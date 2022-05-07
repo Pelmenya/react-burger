@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import cn from 'classnames';
 import { BurgerConstructor } from '../../components/burger-constructor/burger-constructor';
 
@@ -16,8 +16,10 @@ import { IngredientDetails } from '../../components/ingredient-details/ingredien
 import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
 import { setOpenOrderModal } from '../../services/redux/slices/order';
+import { useNavHeader } from '../../hooks/useNavHeader';
 
 export const MainPage = () => {
+  const { setActive } = useNavHeader();
   const dispatch = useDispatch();
   const { isOpen: isOpenCurrentIngredientModal } = useSelector(getCurrentIngredientState);
   const { isOpen: isOpenOrderModal } = useSelector(getOrderState);
@@ -39,6 +41,10 @@ export const MainPage = () => {
       dispatch,
     ],
   );
+
+  useEffect(() => {
+    setActive('main');
+  });
 
   return (
     <main className={mainPage.main}>
