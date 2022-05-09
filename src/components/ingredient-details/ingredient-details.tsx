@@ -11,7 +11,7 @@ import { getCurrentIngredientState } from '../../services/redux/selectors/curren
 export const IngredientDetails = () => {
   const { ingredient }  = useSelector(getCurrentIngredientState);
   
-  const replacePoint = useCallback((num) => String(num).split('.').join(','), []);
+  const replacePoint = useCallback((num?: number) => String(num).split('.').join(','), []);
   const calories = useMemo(() => replacePoint(ingredient?.calories), [
     ingredient,
     replacePoint,

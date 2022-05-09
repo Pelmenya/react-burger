@@ -2,11 +2,11 @@ import React from 'react';
 import { Flex } from '../flex/flex';
 import { InfoIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
-interface BadRequestType {
+interface BadRequestPropsType {
   error?: string;
 }
 
-export const BadRequest = (props: BadRequestType) => {
+export const BadRequest = (props: BadRequestPropsType) => {
   const { error } = props;
   return (
     <Flex flexDirection='column'>

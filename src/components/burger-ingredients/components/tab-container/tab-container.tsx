@@ -7,6 +7,9 @@ import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredie
 import { Flex } from '../../../flex/flex';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
+import { withTab } from '../../../../hocks/withTab';
+
+const TabWithChildren = withTab(Tab);
 
 export const TabContainer = () => {
   const dispatch = useDispatch();
@@ -120,15 +123,21 @@ export const TabContainer = () => {
   return (
     <div>
       <Flex className={'pt-5 pb-10'}>
-        <Tab value='buns' active={currentTab === 'buns'} onClick={handlerOnClickBuns}>
-          Булки
-        </Tab>
-        <Tab value='sauces' active={currentTab === 'sauces'} onClick={handlerOnClickSauces}>
-          Соусы
-        </Tab>
-        <Tab value='toppings' active={currentTab === 'toppings'} onClick={handlerOnClickToppings}>
-          Начинки
-        </Tab>
+        <TabWithChildren value='buns' active={currentTab === 'buns'} onClick={handlerOnClickBuns}>
+          <span>Булки</span>
+        </TabWithChildren>
+        <TabWithChildren
+          value='sauces'
+          active={currentTab === 'sauces'}
+          onClick={handlerOnClickSauces}>
+          <span>Соусы</span>
+        </TabWithChildren>
+        <TabWithChildren
+          value='toppings'
+          active={currentTab === 'toppings'}
+          onClick={handlerOnClickToppings}>
+          <span>Начинки</span>
+        </TabWithChildren>
       </Flex>
       <div className={tabContainer.container} ref={tabContainerRef}>
         <BurgerIngredientsList reference={bunsRef} title='Булки' ingredients={buns} />

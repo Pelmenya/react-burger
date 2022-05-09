@@ -70,14 +70,14 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false } : B
     },
   });
 
-  const getNameCard = useCallback((type, name) => {
+  const getNameCard = useCallback((type?:'top'|'bottom', name?: string): string => {
     switch (type) {
       case 'top':
         return `${name} (верх)`;
       case 'bottom':
         return `${name} (низ)`;
       default:
-        return name;
+        return name || '';
     }
   }, []);
 

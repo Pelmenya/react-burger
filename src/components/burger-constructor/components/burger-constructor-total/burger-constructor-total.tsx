@@ -15,6 +15,10 @@ import { getOrderState } from '../../../../services/redux/selectors/order';
 import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
 import { useIngredientsIds } from '../../../../hooks/useIngredientsIds';
 import { DispatchType } from '../../../../utils/types/dispatch-type';
+import { withButton } from '../../../../hocks/withButton';
+
+
+const ButtonWithChildren = withButton(Button);
 
 export const BurgerConstructorTotal = () => {
   const dispatch = useDispatch<DispatchType>();
@@ -35,7 +39,7 @@ export const BurgerConstructorTotal = () => {
     ],
   );
 
-	useEffect(
+  useEffect(
     () => {
       dispatch(setOrderTotal(totalCost));
     },
@@ -56,9 +60,9 @@ export const BurgerConstructorTotal = () => {
             <CurrencyIcon type='primary' />
           </div>
         </div>
-        <Button type='primary' size='large' onClick={handlerOnOpenModal} disabled={!total}>
-          Оформить заказ
-        </Button>
+        <ButtonWithChildren type='primary' size='large' onClick={handlerOnOpenModal} disabled={!total}>
+          <span>Оформить заказ</span>
+        </ButtonWithChildren>
       </Flex>
     </Flex>
   );

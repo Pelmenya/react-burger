@@ -15,7 +15,7 @@ export interface ModalPropsType {
 
 export const Modal = ({ children, title, handlerOnClose }: ModalPropsType) => {
   const handlerKeyPress = useCallback(
-    (e) => {
+    (e: KeyboardEvent) => {
       if (e.key === 'Escape') handlerOnClose();
     },
     [

@@ -13,8 +13,8 @@ import { BadRequest } from '../bad-request/bad-request';
 export const OrderDetails = () => {
   const { num, error, loading } = useSelector(getOrderState);
 
-  const formatOrderNumber = useCallback((num) => {
-    let arrNumbers = num.split('');
+  const formatOrderNumber = useCallback((numOrder: string) => {
+    let arrNumbers = numOrder.split('');
     while (arrNumbers.length < 6) {
       arrNumbers.unshift('0');
     }
