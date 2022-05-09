@@ -5,11 +5,15 @@ import { useDrag } from 'react-dnd';
 import burgerIngredientsCard from './burger-ingredients-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Title } from '../../../title/title';
-import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 import { useDispatch } from 'react-redux';
 import { setCurrentIngredient } from '../../../../services/redux/slices/current-ingredient';
+import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 
-export const BurgerIngredientsCard = ({ ingredient }) => {
+export interface BurgerIngredientsCardPropsType {
+  ingredient: BurgerIngredientType;
+}
+
+export const BurgerIngredientsCard = ({ ingredient }: BurgerIngredientsCardPropsType) => {
   const dispatch = useDispatch();
 
   const [
@@ -19,7 +23,7 @@ export const BurgerIngredientsCard = ({ ingredient }) => {
     item: { ...ingredient, innerId: shortid.generate() },
     type: 'ingredient',
     collect: (monitor) => ({
-      opacity: monitor.isDragging() ? 0.5 : 1
+      opacity: monitor.isDragging() ? 0.5 : 1,
     }),
   });
 
@@ -53,5 +57,3 @@ export const BurgerIngredientsCard = ({ ingredient }) => {
     </div>
   );
 };
-
-BurgerIngredientsCard.propTypes = { ingredient: ingredientType };

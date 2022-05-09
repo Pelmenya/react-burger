@@ -31,31 +31,35 @@ export const TabContainer = () => {
 
   const handlerScrollTabContainer = useCallback(
     () => {
-      const topArr = [
-        {
-          type: 'buns',
-          value: Math.abs(
-            bunsRef.current.getBoundingClientRect().top -
-              tabContainerRef.current.getBoundingClientRect().top,
-          ),
-        },
-        {
-          type: 'sauces',
-          value: Math.abs(
-            saucesRef.current.getBoundingClientRect().top -
-              tabContainerRef.current.getBoundingClientRect().top,
-          ),
-        },
-        {
-          type: 'toppings',
-          value: Math.abs(
-            toppingsRef.current.getBoundingClientRect().top -
-              tabContainerRef.current.getBoundingClientRect().top,
-          ),
-        },
-      ];
-      const sortTopArr = topArr.sort((a, b) => a.value - b.value);
-      dispatch(setCurrentTab(sortTopArr[0].type));
+      if (bunsRef.current && tabContainerRef.current && saucesRef.current && toppingsRef.current) {
+        const tabContainer = tabContainerRef.current as HTMLDivElement;
+        const buns = bunsRef.current as HTMLDivElement;
+        const sauces = saucesRef.current as HTMLDivElement;
+        const toppings = toppingsRef.current as HTMLDivElement;
+
+        const topArr = [
+          {
+            type: 'buns',
+            value: Math.abs(
+              buns.getBoundingClientRect().top - tabContainer.getBoundingClientRect().top,
+            ),
+          },
+          {
+            type: 'sauces',
+            value: Math.abs(
+              sauces.getBoundingClientRect().top - tabContainer.getBoundingClientRect().top,
+            ),
+          },
+          {
+            type: 'toppings',
+            value: Math.abs(
+              toppings.getBoundingClientRect().top - tabContainer.getBoundingClientRect().top,
+            ),
+          },
+        ];
+        const sortTopArr = topArr.sort((a, b) => a.value - b.value);
+        dispatch(setCurrentTab(sortTopArr[0].type));
+      }
     },
     [
       tabContainerRef,
@@ -68,8 +72,11 @@ export const TabContainer = () => {
 
   const handlerOnClickBuns = useCallback(
     () => {
-      tabContainerRef.current.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-      dispatch(setCurrentTab('buns'));
+      if (bunsRef.current) {
+        const buns = bunsRef.current as HTMLDivElement;
+        buns.scrollIntoView({ behavior: 'smooth' });
+        dispatch(setCurrentTab('buns'));
+      }
     },
     [
       dispatch,
@@ -78,14 +85,11 @@ export const TabContainer = () => {
 
   const handlerOnClickToppings = useCallback(
     () => {
-      tabContainerRef.current.scrollTo({
-        left: 0,
-        top:
-          bunsRef.current.getBoundingClientRect().height +
-          saucesRef.current.getBoundingClientRect().height,
-        behavior: 'smooth',
-      });
-      dispatch(setCurrentTab('toppings'));
+      if (toppingsRef.current) {
+        const toppings = toppingsRef.current as HTMLDivElement;
+        toppings.scrollIntoView({ behavior: 'smooth' });
+        dispatch(setCurrentTab('toppings'));
+      }
     },
     [
       dispatch,
@@ -94,12 +98,11 @@ export const TabContainer = () => {
 
   const handlerOnClickSauces = useCallback(
     () => {
-      tabContainerRef.current.scrollTo({
-        left: 0,
-        top: bunsRef.current.getBoundingClientRect().height,
-        behavior: 'smooth',
-      });
-      dispatch(setCurrentTab('sauces'));
+      if (saucesRef.current) {
+        const sauces = saucesRef.current as HTMLDivElement;
+        sauces.scrollIntoView({ behavior: 'smooth' });
+        dispatch(setCurrentTab('sauces'));
+      }
     },
     [
       dispatch,
@@ -107,9 +110,11 @@ export const TabContainer = () => {
   );
 
   useEffect(() => {
-    const element = tabContainerRef.current;
-    element.addEventListener('scroll', handlerScrollTabContainer);
-    return () => element.removeEventListener('scroll', handlerScrollTabContainer);
+    if (tabContainerRef.current) {
+      const element = tabContainerRef.current as HTMLDivElement;
+      element.addEventListener('scroll', handlerScrollTabContainer);
+      return () => element.removeEventListener('scroll', handlerScrollTabContainer);
+    }
   });
 
   return (

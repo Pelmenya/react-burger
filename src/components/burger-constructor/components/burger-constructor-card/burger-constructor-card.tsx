@@ -1,12 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 
 import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 
 import burgerConstructorCard from './burger-constructor-card.module.css';
 import { Spacer } from '../../../spacer/spacer';
-import { ingredientType } from '../../../../utils/prop-types/ingredients-types';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../../../services/redux/selectors/burger-constructor';
 import { setToppings } from '../../../../services/redux/slices/burger-constructor';
@@ -15,8 +13,15 @@ import { updateCountIngredient } from '../../../../services/redux/slices/burger-
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
 import { useDrag, useDrop } from 'react-dnd';
 import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
+import { BurgerIngredientsCardPropsType } from '../../../burger-ingredients/components/burger-ingredients-card/burger-ingredients-card';
+import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 
-export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) => {
+export interface BurgerConstructorCardPropsType extends BurgerIngredientsCardPropsType {
+  type?: 'top' | 'bottom',
+  isLocked?: boolean;
+}
+
+export const BurgerConstructorCard = ({ ingredient, type, isLocked = false } : BurgerConstructorCardPropsType) => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsState);
   const { toppings } = useSelector(getBurgerConstructorState);
@@ -26,7 +31,7 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
     ingredient,
   ]);
 
-  const handlerDrop = (dropIngredient) => {
+  const handlerDrop = (dropIngredient: BurgerIngredientType) => {
     const indexIngredient = toppings.findIndex((item) => item.innerId === ingredient.innerId);
     const indexDropIngredient = toppings.findIndex(
       (item) => item.innerId === dropIngredient.innerId,
@@ -61,7 +66,7 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
   ] = useDrop({
     accept: 'ingredient-constructor',
     hover: (dropIngredient, monitor) => {
-      !monitor.isOver() && handlerDrop(dropIngredient);
+      !monitor.isOver() && handlerDrop(dropIngredient as BurgerIngredientType);
     },
   });
 
@@ -118,14 +123,4 @@ export const BurgerConstructorCard = ({ ingredient, type, isLocked = false }) =>
       </div>
     </div>
   );
-};
-
-BurgerConstructorCard.propTypes = {
-  ingredient: ingredientType.isRequired,
-  type: PropTypes.oneOf([
-    'top',
-    'bottom',
-    undefined,
-  ]),
-  isLocked: PropTypes.bool,
 };

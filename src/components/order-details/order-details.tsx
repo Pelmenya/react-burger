@@ -23,13 +23,15 @@ export const OrderDetails = () => {
 
   return (
     <Flex flexDirection={'column'} className={orderDetails.wrapper}>
-      {loading === 'pending' && <Loader />}
-      {loading === 'succeeded' && (
-        <p className={cn('text text_type_digits-large', orderDetails.order)}>
-          {formatOrderNumber(String(num))}
-        </p>
-      )}
-      {loading === 'failed' && <BadRequest error={error} />}
+      <>
+        {loading === 'pending' && <Loader />}
+        {loading === 'succeeded' && (
+          <p className={cn('text text_type_digits-large', orderDetails.order)}>
+            {formatOrderNumber(String(num))}
+          </p>
+        )}
+        {loading === 'failed' && <BadRequest error={error} />}
+      </>
       <p className={cn('text text_type_main-medium mt-8 mb-15', orderDetails.order)}>
         идентификатор заказа
       </p>

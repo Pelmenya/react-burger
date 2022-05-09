@@ -3,7 +3,7 @@ import { ingredientsAPI } from '../../../api/ingredients-api';
 import { BurgerIngredientsType } from '../../../utils/types/burger-ingredients';
 import { LoadingType } from '../../../utils/types/loading';
 export interface BurgerIngredientsStateType extends BurgerIngredientsType, LoadingType {
-  currentTab: 'buns' | 'sauses' | 'toppings';
+  currentTab: 'buns' | 'sauces' | 'toppings';
 }
 
 const initialIngredientsState = {

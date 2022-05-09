@@ -12,7 +12,6 @@ export interface RedirectLinkType {
 
 export interface ProfileFormContainerPropsType {
   title?: string;
-  name: string;
   children?: JSX.Element;
   redirectLinks?: RedirectLinkType[];
 }
@@ -20,9 +19,11 @@ export interface ProfileFormContainerPropsType {
 export const ProfileFormContainer = ({ title, children, redirectLinks }: ProfileFormContainerPropsType) => {
   return (
     <Flex flexDirection='column' gap={24} className={profileForm.container}>
-    {title && <Title type='h2'>{title}</Title>}
-      {children && children}
-    {redirectLinks && redirectLinks.map((item) => <div />)}
+      <>
+        {title && <Title type='h2'>{title}</Title>}
+        {children && children}
+        {redirectLinks && redirectLinks.map((item) => <div />)}
+      </>
     </Flex>
   );
 };

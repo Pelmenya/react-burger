@@ -9,31 +9,31 @@ import { useSelector } from 'react-redux';
 import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
 
 export const IngredientDetails = () => {
-  const { ingredient } = useSelector(getCurrentIngredientState);
-
+  const { ingredient }  = useSelector(getCurrentIngredientState);
+  
   const replacePoint = useCallback((num) => String(num).split('.').join(','), []);
-  const calories = useMemo(() => replacePoint(ingredient.calories), [
+  const calories = useMemo(() => replacePoint(ingredient?.calories), [
     ingredient,
     replacePoint,
   ]);
-  const proteins = useMemo(() => replacePoint(ingredient.proteins), [
+  const proteins = useMemo(() => replacePoint(ingredient?.proteins), [
     ingredient,
     replacePoint,
   ]);
-  const fat = useMemo(() => replacePoint(ingredient.fat), [
+  const fat = useMemo(() => replacePoint(ingredient?.fat), [
     ingredient,
     replacePoint,
   ]);
-  const carbohydrates = useMemo(() => replacePoint(ingredient.carbohydrates), [
+  const carbohydrates = useMemo(() => replacePoint(ingredient?.carbohydrates), [
     ingredient,
     replacePoint,
   ]);
 
   return (
     <Flex flexDirection={'column'} className={ingredientDetails.wrapper}>
-      <img src={ingredient.image} alt={ingredient.name} className={ingredientDetails.image} />
+      <img src={ingredient?.image} alt={ingredient?.name} className={ingredientDetails.image} />
       <Title type={'h3'} className={'mt-4 mb-8'}>
-        {ingredient.name}
+        {ingredient?.name}
       </Title>
       <Flex className={ingredientDetails.description}>
         <Flex flexDirection={'column'} className={cn(ingredientDetails.ingredient, 'mr-5')}>

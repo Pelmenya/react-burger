@@ -1,22 +1,37 @@
 import React, { useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import cn from 'classnames';
-import PropTypes from 'prop-types';
 
 import modal from './modal.module.css';
 import { ModalOverlay } from './components/modal-overlay/modal-overlay';
 import { Flex } from '../flex/flex';
 import { ModalHeader } from './components/modal-header/modal-header';
 
-export const Modal = ({ children, title, handlerOnClose }) => {
-  const handlerKeyPress = useCallback((e) => {
-    if (e.key === 'Escape') handlerOnClose();
-  }, [handlerOnClose]);
+export interface ModalPropsType {
+  children?: JSX.Element;
+  title?: string;
+  handlerOnClose: () => void;
+}
 
-  useEffect(() => {
-    document.addEventListener('keydown', handlerKeyPress);
-    return () => document.removeEventListener('keydown', handlerKeyPress);
-  }, [handlerKeyPress]);
+export const Modal = ({ children, title, handlerOnClose }: ModalPropsType) => {
+  const handlerKeyPress = useCallback(
+    (e) => {
+      if (e.key === 'Escape') handlerOnClose();
+    },
+    [
+      handlerOnClose,
+    ],
+  );
+
+  useEffect(
+    () => {
+      document.addEventListener('keydown', handlerKeyPress);
+      return () => document.removeEventListener('keydown', handlerKeyPress);
+    },
+    [
+      handlerKeyPress,
+    ],
+  );
 
   return createPortal(
     <Flex className={modal.wrapper}>
@@ -26,12 +41,6 @@ export const Modal = ({ children, title, handlerOnClose }) => {
         {children}
       </div>
     </Flex>,
-    document.getElementById('react-modals'),
+    document.getElementById('react-modals') as Element,
   );
-};
-
-Modal.propTytpes = {
-  children: PropTypes.node,
-  title: PropTypes.string,
-  handlerOnClose: PropTypes.func.isRequired,
 };

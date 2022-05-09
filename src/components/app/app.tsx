@@ -5,9 +5,10 @@ import { AppHeader } from '../app-header/app-header';
 import { useDispatch } from 'react-redux';
 import { fetchIngredients } from '../../services/redux/slices/burger-ingredients';
 import { ROUTES } from '../../utils/routes/routes';
+import { DispatchType } from '../../utils/types/dispatch-type';
 
 export const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<DispatchType>();
 
   useEffect(
     () => {

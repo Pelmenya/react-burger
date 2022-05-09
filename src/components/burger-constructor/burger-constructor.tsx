@@ -90,10 +90,12 @@ export const BurgerConstructor = () => {
         }
         ref={drop}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
+          <>
           {!bun && !toppings.length && <BurgerConstructorEmpty />}
           {bun && <BurgerConstructorCard ingredient={bun} type='top' isLocked={true} />}
           {toppings && <BurgerConstructorToppingsList />}
           {bun && <BurgerConstructorCard ingredient={bun} type='bottom' isLocked={true} />}
+          </>
           <BurgerConstructorTotal />
         </Flex>
       </div>

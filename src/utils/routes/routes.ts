@@ -1,6 +1,6 @@
 import { ForgotPasswordPage } from '../../pages/forgot-password/forgot-password';
 import { MainPage } from '../../pages/main-page/main-page';
-import { ProfilePage } from '../../pages/profile-page/profile-page';
+//import { ProfilePage } from '../../pages/profile-page/profile-page';
 
 export interface Route {
   name: string;

@@ -14,9 +14,10 @@ import {
 import { getOrderState } from '../../../../services/redux/selectors/order';
 import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
 import { useIngredientsIds } from '../../../../hooks/useIngredientsIds';
+import { DispatchType } from '../../../../utils/types/dispatch-type';
 
 export const BurgerConstructorTotal = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<DispatchType>();
   const { total } = useSelector(getOrderState);
 
   const { totalCost } = useTotalCostOrder();

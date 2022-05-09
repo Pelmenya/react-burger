@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-export const Spacer = ({ spaceHeight = false, spaceWidth = false }) => (
+export interface SpacerPropsType {
+  spaceHeight?: number;
+  spaceWidth?: number;
+}
+
+export const Spacer = ({ spaceHeight, spaceWidth }: SpacerPropsType) => (
   <div style={{ width: spaceWidth ? spaceWidth : '', height: spaceHeight ? spaceHeight : '' }} />
 );
 
