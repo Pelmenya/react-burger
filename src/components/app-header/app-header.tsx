@@ -17,7 +17,7 @@ export const AppHeader = () => {
   const main = useMemo(() => (activeLink === 'main' ? 'primary' : 'secondary'), [
     activeLink,
   ]);
-  const ordersFlow = useMemo(() => (activeLink === 'orders-flow' ? 'primary' : 'secondary'), [
+  const feed = useMemo(() => (activeLink === 'feed' ? 'primary' : 'secondary'), [
     activeLink,
   ]);
   const profile = useMemo(() => (activeLink === 'profile' ? 'primary' : 'secondary'), [
@@ -33,8 +33,8 @@ export const AppHeader = () => {
           </Link>
           <Link to='/profile' className={appHeader.header__link}>
             <NavLink
-              icon={<ListIcon type={ordersFlow} />}
-              type={ordersFlow}
+              icon={<ListIcon type={feed} />}
+              type={feed}
               text={'Лента заказов'}
             />
           </Link>
@@ -44,7 +44,7 @@ export const AppHeader = () => {
             <Logo />
           </Link>
         </div>
-        <Link to='/profile' className={appHeader.header__link}>
+        <Link to='/login' className={appHeader.header__link}>
           <NavLink icon={<ProfileIcon type={profile} />} type={profile} text={'Личный кабинет'} />
         </Link>
       </nav>

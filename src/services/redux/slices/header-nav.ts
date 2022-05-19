@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface HeaderNavStateType {
-  activeLink: 'main' | 'profile' | 'orders-flow';
+  activeLink: 'main' | 'profile' | 'feed';
 }
 
 const initialHeaderNavState = {

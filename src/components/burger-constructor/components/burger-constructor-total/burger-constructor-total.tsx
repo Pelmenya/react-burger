@@ -3,7 +3,7 @@ import cn from 'classnames';
 
 import burgerConstructorTotal from './burger-constructor-total.module.css';
 import { Flex } from '../../../flex/flex';
-import { Button, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   postOrders,
@@ -15,10 +15,7 @@ import { getOrderState } from '../../../../services/redux/selectors/order';
 import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
 import { useIngredientsIds } from '../../../../hooks/useIngredientsIds';
 import { DispatchType } from '../../../../utils/types/dispatch-type';
-import { withButton } from '../../../../hocks/withButton';
-
-
-const ButtonWithChildren = withButton(Button);
+import { ButtonWithChildren } from '../../../button-with-children/button-with-children';
 
 export const BurgerConstructorTotal = () => {
   const dispatch = useDispatch<DispatchType>();
