@@ -9,6 +9,10 @@ import { ButtonWithChildren } from '../../components/button-with-children/button
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { InputName } from '../../components/profile-form-container/components/input-name/input-name';
+import { authAPI, UserData } from '../../api/auth-api';
+import { useDispatch } from 'react-redux';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { setError } from '../../services/redux/slices/error-request';
 
 const schema = yup
   .object({
@@ -27,6 +31,8 @@ const links = [
 ];
 
 export const RegisterPage = () => {
+  const dispatch = useDispatch<DispatchType>();
+
   const { setActive } = useNavHeader();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
@@ -34,9 +40,11 @@ export const RegisterPage = () => {
     mode: 'all',
   });
 
-  const onSubmit = (data: FieldValues) => {
-    console.log(errors.email);
-    console.log(data);
+  const onSubmit = async (data: FieldValues) => {
+    authAPI
+      .postRegiter(data as UserData)
+      .then((data) => console.log(data))
+      .catch((err) => dispatch(setError(err)));
   };
 
   useEffect(
