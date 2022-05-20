@@ -7,6 +7,9 @@ import { ProfileFormContainer } from '../../components/profile-form-container/pr
 import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
+import { TForgotPassword, userAPI } from '../../api/user-api';
+import { useDispatch } from 'react-redux';
+import { setError } from '../../services/redux/slices/error-request';
 
 const schema = yup
   .object({
@@ -24,6 +27,7 @@ const links = [
 
 export const ForgotPasswordPage = () => {
   const { setActive } = useNavHeader();
+  const dispatch = useDispatch();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -31,7 +35,11 @@ export const ForgotPasswordPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    console.log(errors.email);
+    userAPI
+      .postForgotPassword(data as TForgotPassword)
+      .then((data) => console.log(data))
+      .catch((err) => dispatch(setError(err)));
+
     console.log(data);
   };
 
@@ -48,7 +56,7 @@ export const ForgotPasswordPage = () => {
     <main className='notAuth-container'>
       <ProfileFormContainer title='Восстановление пароля' links={links}>
         <form name='forgotPassword' className='form' onSubmit={handleSubmit(onSubmit)}>
-          <InputEmail error={!!errors.email} control={control} placeholder='Укажите e-mail'/>
+          <InputEmail error={!!errors.email} control={control} placeholder='Укажите e-mail' />
           <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
             <span>Восстановить</span>
           </ButtonWithChildren>

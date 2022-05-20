@@ -31,7 +31,7 @@ export const AppHeader = () => {
           <Link to='/' className={appHeader.header__link}>
             <NavLink icon={<BurgerIcon type={main} />} type={main} text={'Конструктор'} />
           </Link>
-          <Link to='/profile' className={appHeader.header__link}>
+          <Link to='/login' className={appHeader.header__link}>
             <NavLink
               icon={<ListIcon type={feed} />}
               type={feed}
@@ -44,7 +44,7 @@ export const AppHeader = () => {
             <Logo />
           </Link>
         </div>
-        <Link to='/login' className={appHeader.header__link}>
+        <Link to='/profile' className={appHeader.header__link}>
           <NavLink icon={<ProfileIcon type={profile} />} type={profile} text={'Личный кабинет'} />
         </Link>
       </nav>

@@ -3,9 +3,18 @@ import { Controller } from 'react-hook-form';
 import { ERRORS } from '../../../../utils/constants';
 import { InputPropsType } from '../../../../utils/types/input-props-type';
 
-export const InputName = ({ error, control, placeholder = 'Имя' }: InputPropsType) => (
+export interface InputTextPropsType extends InputPropsType {
+  type?: 'name' | 'token';
+}
+
+export const InputText = ({
+  error,
+  control,
+  placeholder = 'Имя',
+  type = 'name',
+}: InputTextPropsType) => (
   <Controller
-    name='name'
+    name={type}
     control={control}
     render={({ field: { onChange, onBlur, value, ref } }) => (
       <Input
@@ -16,7 +25,17 @@ export const InputName = ({ error, control, placeholder = 'Имя' }: InputProps
         onBlur={onBlur}
         onChange={onChange}
         error={error}
-        errorText={value ? ERRORS.ERROR_NAME : ERRORS.ERROR_REQUIRED_FIELD}
+        errorText={
+          value ? type === 'name' ? (
+            ERRORS.ERROR_NAME
+          ) : type === 'token' ? (
+            ERRORS.ERROR_CODE
+          ) : (
+            ''
+          ) : (
+            ERRORS.ERROR_REQUIRED_FIELD
+          )
+        }
       />
     )}
   />

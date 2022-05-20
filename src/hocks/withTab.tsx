@@ -9,3 +9,5 @@ export interface TabType {
 }
 
 export const withTab = (Element: typeof Tab) => (props: TabType) => <Element {...props} />;
+
+export const TabWithChildren = withTab(Tab);

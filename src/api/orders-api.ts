@@ -17,7 +17,7 @@ class OrdersAPI {
     return fetch(`${this.server}${ORDERS_END_POINTS.POST_ORDERS}`, {
       method: 'POST',
       ...headers,
-      body: JSON.stringify({}),
+      body: JSON.stringify(ingredientsIds),
     }).then(checkResponse);
   };
 }

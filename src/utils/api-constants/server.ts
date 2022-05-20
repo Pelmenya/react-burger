@@ -12,12 +12,12 @@ export const AUTH_END_POINTS = {
   POST_REGISTER: '/api/auth/register',
   POST_LOGIN: '/api/auth/login',
   POST_LOGOUT: '/api/auth/logout',
-  POST_TOCKEN: '/api/auth/tocken',
+  POST_TOCKEN: '/api/auth/token',
 };
 
 export const USER_END_POINTS = {
-  POST_FORGOT_PASSWORD: '/api/reset-password',
-  POST_RESET_PASSWORD: '/api/reset-password/reset',
+  POST_FORGOT_PASSWORD: '/api/password-reset',
+  POST_RESET_PASSWORD: '/api/password-reset/reset',
   GET_USER: '/api/auth/user',
   PATCH_USER: '/api/auth/user',
 };

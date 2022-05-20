@@ -8,7 +8,7 @@ import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { InputName } from '../../components/profile-form-container/components/input-name/input-name';
+import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { authAPI, UserData } from '../../api/auth-api';
 import { useDispatch } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
@@ -60,7 +60,7 @@ export const RegisterPage = () => {
     <main className='notAuth-container'>
       <ProfileFormContainer title='Вход' links={links}>
         <form name='register' className='form' onSubmit={handleSubmit(onSubmit)}>
-          <InputName error={!!errors.name} control={control} />
+          <InputText error={!!errors.name} control={control} />
           <InputEmail error={!!errors.email} control={control} />
           <InputPassword error={!!errors.password} control={control} />
           <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>

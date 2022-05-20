@@ -2,7 +2,8 @@ import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-pass
 import { LoginPage } from '../../pages/login-page/login-page';
 import { MainPage } from '../../pages/main-page/main-page';
 import { RegisterPage } from '../../pages/register-page/register-page';
-//import { ProfilePage } from '../../pages/profile-page/profile-page';
+import { ResetPasswordPage } from '../../pages/reset-password-page/reset-password-page';
+import { ProfilePage } from '../../pages/profile-page/profile-page';
 
 export interface Route {
   name: string;
@@ -18,6 +19,11 @@ export const ROUTES = [
     element: ForgotPasswordPage,
   },
   {
+    name: 'reset-password',
+    path: '/reset-password',
+    element: ResetPasswordPage,
+  },
+  {
     name: 'login',
     path: '/login',
     element: LoginPage,
@@ -28,8 +34,13 @@ export const ROUTES = [
     element: RegisterPage,
   },
   {
+    name: 'profile',
+    path: '/profile',
+    element: ProfilePage,
+  },
+  {
     name: 'main',
     path: '/',
     element: MainPage,
   },
- ];
+];

@@ -5,11 +5,9 @@ import { BurgerIngredientsList } from '../burger-ingredients-list/burger-ingredi
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredients';
 import { Flex } from '../../../flex/flex';
-import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
-import { withTab } from '../../../../hocks/withTab';
+import { TabWithChildren } from '../../../../hocks/withTab';
 
-const TabWithChildren = withTab(Tab);
 
 export const TabContainer = () => {
   const dispatch = useDispatch();

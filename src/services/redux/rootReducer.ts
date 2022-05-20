@@ -4,6 +4,7 @@ import { burgerIngredientsReducer } from './slices/burger-ingredients';
 import { currentIngredientReducer } from './slices/current-ingredient';
 import { errorRequestReducer } from './slices/error-request';
 import { headerNavReducer } from './slices/header-nav';
+import { menuProfileReducer } from './slices/menu-profile';
 import { orderReducer } from './slices/order';
 
 export const rootReducer = combineReducers({
@@ -12,5 +13,6 @@ export const rootReducer = combineReducers({
   burgerIngredients: burgerIngredientsReducer,
   burgerConstructor: burgerConstructorReducer,
   currentIngredient: currentIngredientReducer,
+  menuProfile: menuProfileReducer,
   order: orderReducer,
 });

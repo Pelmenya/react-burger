@@ -1,0 +1,27 @@
+.list {
+  list-style-type: none;
+  margin-top: 120px;
+  margin-bottom: 80px;
+  margin-right: 60px;
+  color: var(--text-inactive-color);
+}
+
+.item {
+  width: 320px;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.item:hover {
+  color: var(--text-primary-color);
+}
+
+.item_active {
+  color: var(--text-primary-color);
+}
+
+.tip {
+  max-width: 320px;
+  color: var(--text-inactive-color);
+  opacity: .4;
+}
