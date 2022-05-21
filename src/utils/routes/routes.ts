@@ -34,11 +34,6 @@ export const ROUTES = [
     element: RegisterPage,
   },
   {
-    name: 'profile',
-    path: '/profile',
-    element: ProfilePage,
-  },
-  {
     name: 'main',
     path: '/',
     element: MainPage,

@@ -10,6 +10,7 @@ import { Modal } from '../modal/modal';
 import { clearError } from '../../services/redux/slices/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
+import { ProfilePage } from '../../pages/profile-page/profile-page';
 
 export const App = () => {
   const { isError, message } = useSelector(getErrorRequestState);
@@ -36,6 +37,9 @@ export const App = () => {
         {ROUTES.map((route) => (
           <Route key={route.name} path={route.path} element={<route.element />} />
         ))}
+        <Route key={'profile'} path={'/profile'} element={<ProfilePage />}>
+          <Route path='orders' element={<div>dasdasd</div>} />
+        </Route>
       </Routes>
       {isError && (
         <Modal title='Ошибка' handlerOnClose={handlerOnCloseErrorModal}>
