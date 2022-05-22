@@ -4,32 +4,47 @@ import { ERRORS } from '../../../../utils/constants';
 import { InputPropsType } from '../../../../utils/types/input-props-type';
 
 export interface InputTextPropsType extends InputPropsType {
-  type?: 'name' | 'token';
+  name?: 'name' | 'token' | 'password' | 'email';
+  disabled?: boolean;
+  defaultValue?: string;
+  onIconClick?: () => void;
+  type?: 'text' | 'password' | 'email'
 }
 
 export const InputText = ({
   error,
   control,
   placeholder = 'Имя',
-  type = 'name',
+  name = 'name',
+  icon,
+  disabled,
+  onIconClick,
+  type = 'text',
 }: InputTextPropsType) => (
   <Controller
-    name={type}
+    name={name}
     control={control}
     render={({ field: { onChange, onBlur, value, ref } }) => (
       <Input
         placeholder={placeholder}
-        type='text'
+        type={type}
         value={value || ''}
         ref={ref}
+        disabled={disabled}
         onBlur={onBlur}
         onChange={onChange}
         error={error}
+        icon={icon}
+        onIconClick={onIconClick}
         errorText={
-          value ? type === 'name' ? (
+          value ? name === 'name' ? (
             ERRORS.ERROR_NAME
-          ) : type === 'token' ? (
+          ) : name === 'token' ? (
             ERRORS.ERROR_CODE
+          ) : name === 'email' ? (
+            ERRORS.ERROR_EMAIL
+          ) : name === 'password' ? (
+            ERRORS.ERROR_PASSWORD
           ) : (
             ''
           ) : (

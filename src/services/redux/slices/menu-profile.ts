@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface MenuProfileStateType {
-  activeItem: 'logout' | 'profile' | 'feed';
+  activeItem: 'logout' | 'profile' | 'orders';
 }
 
 const initialMenuProfileState = {
@@ -12,11 +12,11 @@ const menuProfileSlice = createSlice({
   name: 'menuProfile',
   initialState: initialMenuProfileState,
   reducers: {
-    setActiveItem: (state, action) => {
+    setActiveMenuProfileItem: (state, action) => {
       state.activeItem = action.payload;
     },
   },
 });
 
-export const { setActiveItem } = menuProfileSlice.actions;
+export const { setActiveMenuProfileItem } = menuProfileSlice.actions;
 export const menuProfileReducer = menuProfileSlice.reducer;

@@ -53,7 +53,7 @@ export const ForgotPasswordPage = () => {
   );
 
   return (
-    <main className='notAuth-container'>
+    <main className='center-container'>
       <ProfileFormContainer title='Восстановление пароля' links={links}>
         <form name='forgotPassword' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputEmail error={!!errors.email} control={control} placeholder='Укажите e-mail' />

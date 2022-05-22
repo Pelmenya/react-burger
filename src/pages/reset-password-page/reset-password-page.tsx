@@ -53,7 +53,7 @@ export const ResetPasswordPage = () => {
   );
 
   return (
-    <main className='notAuth-container'>
+    <main className='center-container'>
       <ProfileFormContainer title='Восстановление пароля' links={links}>
         <form name='forgotPassword' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputPassword
@@ -65,7 +65,7 @@ export const ResetPasswordPage = () => {
             error={!!errors.token}
             control={control}
             placeholder='Введите код из письма'
-            type='token'
+            name='token'
           />
           <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
             <span>Сохранить</span>

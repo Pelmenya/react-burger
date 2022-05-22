@@ -52,7 +52,7 @@ export const LoginPage = () => {
   );
 
   return (
-    <main className='notAuth-container'>
+    <main className='center-container'>
       <ProfileFormContainer title='Вход' links={links}>
         <form name='login' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputEmail error={!!errors.email} control={control} />

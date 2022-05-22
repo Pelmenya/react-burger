@@ -1,9 +1,8 @@
 import cn from 'classnames';
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { getMenuProfileState } from '../../services/redux/selectors/menu-profile';
-import { setActiveItem } from '../../services/redux/slices/menu-profile';
+import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile';
 
 import menu from './menu-profile.module.css';
 
@@ -40,7 +39,7 @@ export const MenuProfile = () => {
             key={item.id}
             className={cn(menu.item, 'pt-4 pb-4', activeItem === item.id && menu.item_active)}
             onClick={() =>
-              activeItem !== item.id && dispatch(setActiveItem(item.id)) && navigate(item.linkTo, {replace: true})}>
+              activeItem !== item.id && dispatch(setActiveMenuProfileItem(item.id)) && navigate(item.linkTo, {replace: true})}>
             {item.text}
           </li>
         ))}

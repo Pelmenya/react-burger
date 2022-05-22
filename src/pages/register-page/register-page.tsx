@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import * as yup from 'yup';
 import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
@@ -13,14 +12,7 @@ import { authAPI, UserData } from '../../api/auth-api';
 import { useDispatch } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { setError } from '../../services/redux/slices/error-request';
-
-const schema = yup
-  .object({
-    name: yup.string().min(2).required().matches(/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]*)?$/),
-    email: yup.string().email().required(),
-    password: yup.string().min(6).required(),
-  })
-  .required();
+import { schemaProfileForm } from '../../utils/constants';
 
 const links = [
   {
@@ -36,7 +28,7 @@ export const RegisterPage = () => {
   const { setActive } = useNavHeader();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schemaProfileForm),
     mode: 'all',
   });
 
@@ -57,7 +49,7 @@ export const RegisterPage = () => {
   );
 
   return (
-    <main className='notAuth-container'>
+    <main className='center-container'>
       <ProfileFormContainer title='Вход' links={links}>
         <form name='register' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputText error={!!errors.name} control={control} />

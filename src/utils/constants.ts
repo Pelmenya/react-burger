@@ -1,3 +1,4 @@
+import * as yup from 'yup';
 export const maxCountBuns = 2;
 
 export const ERRORS = {
@@ -7,3 +8,11 @@ export const ERRORS = {
   ERROR_PASSWORD: 'Пароль должен быть не меньше 6 символов',
   ERROR_REQUIRED_FIELD: 'Это обязательное поле',
 };
+
+export const schemaProfileForm = yup
+  .object({
+    name: yup.string().min(2).required().matches(/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]*)?$/),
+    email: yup.string().email().required(),
+    password: yup.string().min(6).required(),
+  })
+  .required();

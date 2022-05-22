@@ -11,6 +11,7 @@ import { clearError } from '../../services/redux/slices/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
+import { ProfileEdit } from '../profile-edit/profile-edit';
 
 export const App = () => {
   const { isError, message } = useSelector(getErrorRequestState);
@@ -38,7 +39,9 @@ export const App = () => {
           <Route key={route.name} path={route.path} element={<route.element />} />
         ))}
         <Route key={'profile'} path={'/profile'} element={<ProfilePage />}>
-          <Route path='orders' element={<div>dasdasd</div>} />
+          <Route path='' element={<ProfileEdit />} />
+          <Route path='orders' element={<div>История заказов</div>} />
+          <Route path='orders/:id' element={<div>Заказ</div>} />
         </Route>
       </Routes>
       {isError && (

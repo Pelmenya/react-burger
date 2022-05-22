@@ -1,5 +1,6 @@
-.tabContainer div{
-  display: block;
-  width: 100%;
-	text-align: left;
+.container {
+  height: 100%;
+  max-width: 1272px;
+  width: calc(100% - 6%);
+  display: flex;
 }
