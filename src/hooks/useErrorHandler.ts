@@ -8,13 +8,15 @@ import { useRequestError } from './useRequestError';
 
 export const useErrorHandler = () => {
   const dispatch = useDispatch<DispatchType>();
-	const refreshToken = localStorage.getItem('refreshToken')
+  const refreshToken = localStorage.getItem('refreshToken');
   const { error: errorProfile } = useSelector(getProfileState);
   const { error: errorAuth } = useSelector(getAuthState);
   const { setRequestError } = useRequestError();
 
   const callErrorHandler = () => {
-		errorProfile === 'jwt expired' && dispatch(clearProfileError()) && dispatch(postToken(refreshToken)); 
+    errorProfile === 'Bad request: 403 : jwt expired' &&
+      dispatch(clearProfileError()) &&
+      dispatch(postToken(refreshToken));
     errorProfile && setRequestError(errorProfile) && dispatch(clearProfileError());
     errorAuth && setRequestError(errorAuth) && dispatch(clearAuthError());
   };
