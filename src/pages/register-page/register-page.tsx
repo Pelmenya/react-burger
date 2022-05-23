@@ -9,10 +9,8 @@ import { InputEmail } from '../../components/profile-form-container/components/i
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { authAPI, UserData } from '../../api/auth-api';
-import { useDispatch } from 'react-redux';
-import { DispatchType } from '../../utils/types/dispatch-type';
-import { setError } from '../../services/redux/slices/error-request';
 import { schemaProfileForm } from '../../utils/constants';
+import { useRequestError } from '../../hooks/useRequestError';
 
 const links = [
   {
@@ -23,7 +21,8 @@ const links = [
 ];
 
 export const RegisterPage = () => {
-  const dispatch = useDispatch<DispatchType>();
+
+  const { setRequestError } = useRequestError();
 
   const { setActive } = useNavHeader();
 
@@ -36,7 +35,7 @@ export const RegisterPage = () => {
     authAPI
       .postRegiter(data as UserData)
       .then((data) => console.log(data))
-      .catch((err) => dispatch(setError(err)));
+      .catch((err) => setRequestError(err));
   };
 
   useEffect(

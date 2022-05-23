@@ -15,7 +15,7 @@ export const AUTH_END_POINTS = {
   POST_TOCKEN: '/api/auth/token',
 };
 
-export const USER_END_POINTS = {
+export const PROFILE_END_POINTS = {
   POST_FORGOT_PASSWORD: '/api/password-reset',
   POST_RESET_PASSWORD: '/api/password-reset/reset',
   GET_USER: '/api/auth/user',

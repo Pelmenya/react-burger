@@ -12,9 +12,16 @@ import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { ProfileEdit } from '../profile-edit/profile-edit';
+import { useErrorHandler } from '../../hooks/useErrorHandler';
+import { getUser } from '../../services/redux/slices/profile';
 
 export const App = () => {
+
+  const accessToken = localStorage.getItem('accessToken');
+
   const { isError, message } = useSelector(getErrorRequestState);
+
+  const { callErrorHandler } = useErrorHandler();
 
   const dispatch = useDispatch<DispatchType>();
 
@@ -28,6 +35,25 @@ export const App = () => {
     },
     [
       dispatch,
+    ],
+  );
+
+  useEffect(
+    () => {
+      accessToken && dispatch(getUser(accessToken));
+    },
+    [
+      dispatch,
+      accessToken,
+    ],
+  );
+
+  useEffect(
+    () => {
+      callErrorHandler();
+    },
+    [
+      callErrorHandler,
     ],
   );
 

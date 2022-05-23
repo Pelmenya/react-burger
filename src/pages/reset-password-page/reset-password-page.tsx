@@ -8,9 +8,8 @@ import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { TResetPassword, userAPI } from '../../api/user-api';
-import { useDispatch } from 'react-redux';
-import { setError } from '../../services/redux/slices/error-request';
+import { TResetPassword, profileAPI } from '../../api/profile-api';
+import { useRequestError } from '../../hooks/useRequestError';
 
 const schema = yup
   .object({
@@ -29,7 +28,7 @@ const links = [
 
 export const ResetPasswordPage = () => {
   const { setActive } = useNavHeader();
-  const dispatch = useDispatch();
+  const { setRequestError } = useRequestError();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -37,10 +36,10 @@ export const ResetPasswordPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    userAPI
+    profileAPI
       .postResetPassword(data as TResetPassword)
       .then((data) => console.log(data))
-      .catch((err) => dispatch(setError(err)));
+      .catch((err) => setRequestError(err));
   };
 
   useEffect(

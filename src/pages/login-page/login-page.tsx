@@ -8,6 +8,10 @@ import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
+import { useDispatch } from 'react-redux';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { postLogin } from '../../services/redux/slices/auth';
+import { UserData } from '../../api/auth-api';
 
 const schema = yup
   .object({
@@ -31,6 +35,7 @@ const links = [
 
 export const LoginPage = () => {
   const { setActive } = useNavHeader();
+  const dispatch = useDispatch<DispatchType>();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -38,8 +43,7 @@ export const LoginPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    console.log(errors.email);
-    console.log(data);
+    dispatch(postLogin(data as Omit<UserData, 'name'>))
   };
 
   useEffect(

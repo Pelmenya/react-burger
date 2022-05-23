@@ -7,9 +7,8 @@ import { ProfileFormContainer } from '../../components/profile-form-container/pr
 import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
-import { TForgotPassword, userAPI } from '../../api/user-api';
-import { useDispatch } from 'react-redux';
-import { setError } from '../../services/redux/slices/error-request';
+import { TForgotPassword, profileAPI } from '../../api/profile-api';
+import { useRequestError } from '../../hooks/useRequestError';
 
 const schema = yup
   .object({
@@ -27,7 +26,7 @@ const links = [
 
 export const ForgotPasswordPage = () => {
   const { setActive } = useNavHeader();
-  const dispatch = useDispatch();
+  const { setRequestError } = useRequestError();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -35,10 +34,10 @@ export const ForgotPasswordPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    userAPI
+    profileAPI
       .postForgotPassword(data as TForgotPassword)
       .then((data) => console.log(data))
-      .catch((err) => dispatch(setError(err)));
+      .catch((err) => setRequestError(err));
 
     console.log(data);
   };

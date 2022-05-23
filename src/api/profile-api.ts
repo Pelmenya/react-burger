@@ -1,5 +1,5 @@
 import { headers } from '../utils/api-constants/headers';
-import { SERVER, USER_END_POINTS } from '../utils/api-constants/server';
+import { SERVER, PROFILE_END_POINTS } from '../utils/api-constants/server';
 import { checkResponse } from '../utils/functions/checkResponse';
 
 export type TForgotPassword = {
@@ -10,15 +10,25 @@ export type TResetPassword = TForgotPassword & {
   token: string;
 };
 
-class UserAPI {
+class ProfileAPI {
   server: string;
 
   constructor (server: string) {
     this.server = server;
   }
 
+  getUser = async (token: string) => {
+    const reqHeaders = {
+      ...headers.headers,
+      authorization: token,
+    };
+    return fetch(`${this.server}${PROFILE_END_POINTS.GET_USER}`, {
+      headers: { ...reqHeaders },
+    }).then(checkResponse);
+  };
+
   postForgotPassword = async (data: TForgotPassword) => {
-    return fetch(`${this.server}${USER_END_POINTS.POST_FORGOT_PASSWORD}`, {
+    return fetch(`${this.server}${PROFILE_END_POINTS.POST_FORGOT_PASSWORD}`, {
       method: 'POST',
       ...headers,
       body: JSON.stringify(data),
@@ -26,7 +36,7 @@ class UserAPI {
   };
 
   postResetPassword = async (data: TResetPassword) => {
-    return fetch(`${this.server}${USER_END_POINTS.POST_RESET_PASSWORD}`, {
+    return fetch(`${this.server}${PROFILE_END_POINTS.POST_RESET_PASSWORD}`, {
       method: 'POST',
       ...headers,
       body: JSON.stringify(data),
@@ -34,4 +44,4 @@ class UserAPI {
   };
 }
 
-export const userAPI = new UserAPI(SERVER);
+export const profileAPI = new ProfileAPI(SERVER);
