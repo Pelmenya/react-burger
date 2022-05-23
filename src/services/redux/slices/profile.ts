@@ -17,31 +17,31 @@ const initialProfileState = {
   user: null,
 } as ProfileStateType;
 
-export const getUser = createAsyncThunk(
-  'profile/getUser',
-  async (token: string) => {
-    try {
-      const response = await profileAPI.getUser(token);
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
-);
+export const getUser = createAsyncThunk('profile/getUser', async (token: string) => {
+  try {
+    const response = await profileAPI.getUser(token);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
 
 const profileSlice = createSlice({
   name: 'profile',
   initialState: initialProfileState,
   reducers: {
-		clearProfileError: (state) => {
-			state.error = undefined;
-		}
+    clearProfileError: (state) => {
+      state.error = undefined;
+    },
+    resetUser: (state) => {
+      state.user = null;
+    },
   },
 
-	extraReducers: (builder) => {
+  extraReducers: (builder) => {
     builder.addCase(getUser.pending, (state) => {
       state.loading = 'pending';
-			state.error = undefined;
+      state.error = undefined;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
       state.user = action.payload.user;
@@ -54,5 +54,5 @@ const profileSlice = createSlice({
   },
 });
 
-export const { clearProfileError } = profileSlice.actions;
+export const { clearProfileError, resetUser } = profileSlice.actions;
 export const profileReducer = profileSlice.reducer;

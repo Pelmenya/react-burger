@@ -9,6 +9,8 @@ export const ERRORS = {
   ERROR_REQUIRED_FIELD: 'Это обязательное поле',
 };
 
+export const JWT_EXPIRED = 'Bad request: 403 : jwt expired'
+
 export const schemaProfileForm = yup
   .object({
     name: yup.string().min(2).required().matches(/^[А-ЯЁ][а-яё]+(-[А-ЯЁ][а-яё]*)?$/),

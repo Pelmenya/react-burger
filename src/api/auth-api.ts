@@ -38,6 +38,16 @@ class AuthAPI {
       body: JSON.stringify(refreshTokenData),
     }).then(checkResponse);
   };
+
+  postLogout = async (refreshTokenData: { token: string | null }) => {
+    return fetch(`${this.server}${AUTH_END_POINTS.POST_LOGOUT}`, {
+      method: 'POST',
+      ...headers,
+      body: JSON.stringify(refreshTokenData),
+    }).then(checkResponse);
+  };
+
+  
 }
 
 export const authAPI = new AuthAPI(SERVER);

@@ -13,12 +13,14 @@ import { getErrorRequestState } from '../../services/redux/selectors/error-reque
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { ProfileEdit } from '../profile-edit/profile-edit';
 import { useErrorHandler } from '../../hooks/useErrorHandler';
-import { getUser } from '../../services/redux/slices/profile';
+import { getUser, resetUser } from '../../services/redux/slices/profile';
+import { getProfileState } from '../../services/redux/selectors/profile';
 
 export const App = () => {
-
   const accessToken = localStorage.getItem('accessToken');
-
+  const refreshToken = localStorage.getItem('refreshToken');
+  
+  const { user } = useSelector(getProfileState);
   const { isError, message } = useSelector(getErrorRequestState);
 
   const { callErrorHandler } = useErrorHandler();
@@ -54,6 +56,18 @@ export const App = () => {
     },
     [
       callErrorHandler,
+    ],
+  );
+
+  useEffect(
+    () => {
+      !refreshToken && !accessToken && user && dispatch(resetUser());
+    },
+    [
+      refreshToken,
+      accessToken,
+      user,
+      dispatch,
     ],
   );
 
