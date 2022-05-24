@@ -8,13 +8,7 @@ import { withUserAuth } from '../../hocks/withUserAuth';
 import { withProtectedAuth } from '../../hocks/withProtectedAuth';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { ProfileEdit } from '../profile-edit/profile-edit';
-
-export interface Route {
-  name: string;
-  path: string;
-  exact: boolean;
-  component: JSX.Element;
-}
+import { OrdersPage } from '../../pages/orders-page/orders-page';
 
 export const Routes = () => {
   const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
@@ -23,7 +17,8 @@ export const Routes = () => {
   const Register = withUserAuth('/profile', RegisterPage);
   const Profile = withProtectedAuth('/login', ProfilePage);
   const Edit = withProtectedAuth('/login', ProfileEdit);
-  
+  const Orders = withProtectedAuth('/login', OrdersPage);
+
   let element = useRoutes([
     {
       path: '/',
@@ -55,7 +50,7 @@ export const Routes = () => {
         },
         {
           path: 'orders',
-          element: <div>История заказов</div>,
+          element: <Orders />,
         },
       ],
     },
