@@ -5,6 +5,5 @@ import { Navigate } from 'react-router';
 
 export const withProtectedAuth = (redirect: string, Component: React.FC): any => () => {
   const { user } = useSelector(getProfileState);
-  console.log(user)
   return user ? <Component /> : <Navigate to={redirect} replace />;
 };

@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import shortid from 'shortid';
+import { useNavigate, NavigateOptions } from 'react-router-dom';
+
 import { useDrag } from 'react-dnd';
 
 import burgerIngredientsCard from './burger-ingredients-card.module.css';
@@ -15,6 +17,7 @@ export interface BurgerIngredientsCardPropsType {
 
 export const BurgerIngredientsCard = ({ ingredient }: BurgerIngredientsCardPropsType) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [
     { opacity },
@@ -29,9 +32,11 @@ export const BurgerIngredientsCard = ({ ingredient }: BurgerIngredientsCardProps
 
   const handlerOnClick = useCallback(
     () => {
+      navigate(`/ingredients/${ingredient._id}`);
       dispatch(setCurrentIngredient(ingredient));
     },
     [
+      navigate,
       dispatch,
       ingredient,
     ],

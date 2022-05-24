@@ -17,19 +17,24 @@ import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
 import { setOpenOrderModal } from '../../services/redux/slices/order';
 import { useNavHeader } from '../../hooks/useNavHeader';
+import { useNavigate } from 'react-router';
 
 export const MainPage = () => {
   const { setActive } = useNavHeader();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { isOpen: isOpenCurrentIngredientModal } = useSelector(getCurrentIngredientState);
   const { isOpen: isOpenOrderModal } = useSelector(getOrderState);
 
   const handlerOnCloseCurrentIngredientModal = useCallback(
     () => {
+      navigate('/');
       dispatch(resetCurrentIngredient());
     },
     [
       dispatch,
+      navigate,
     ],
   );
 

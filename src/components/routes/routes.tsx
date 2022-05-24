@@ -1,16 +1,21 @@
-import { useRoutes } from 'react-router-dom';
+import { useRoutes, Outlet } from 'react-router-dom';
 import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-password-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { MainPage } from '../../pages/main-page/main-page';
 import { RegisterPage } from '../../pages/register-page/register-page';
 import { ResetPasswordPage } from '../../pages/reset-password-page/reset-password-page';
-import { withUserAuth } from '../../hocks/withUserAuth';
-import { withProtectedAuth } from '../../hocks/withProtectedAuth';
+import { withUserAuth } from '../../hocs/withUserAuth';
+import { withProtectedAuth } from '../../hocs/withProtectedAuth';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { ProfileEdit } from '../profile-edit/profile-edit';
 import { OrdersPage } from '../../pages/orders-page/orders-page';
+import { useSelector } from 'react-redux';
+import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
+import { IngredientDetails } from '../ingredient-details/ingredient-details';
 
 export const Routes = () => {
+  const { ingredient } = useSelector(getCurrentIngredientState);
+
   const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
   const ResetPassword = withUserAuth('/profile', ResetPasswordPage);
   const Login = withUserAuth('/profile', LoginPage);
@@ -23,6 +28,21 @@ export const Routes = () => {
     {
       path: '/',
       element: <MainPage />,
+    },
+    {
+      path: 'ingredients',
+      element: (
+        <>
+          {ingredient && <MainPage />}
+          <Outlet />
+        </>
+      ),
+      children: [
+        {
+          path: ':id',
+          element: !ingredient ? <IngredientDetails /> : null,
+        },
+      ],
     },
     {
       path: 'forgot-password',
