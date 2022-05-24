@@ -13,7 +13,6 @@ import { schemaProfileForm } from '../../utils/constants';
 import { postRegister } from '../../services/redux/slices/auth';
 import { useDispatch } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
-import { useRedirect } from '../../hooks/useRedirect';
 
 const links = [
   {
@@ -24,8 +23,6 @@ const links = [
 ];
 
 export const RegisterPage = () => {
-  const { isAuth } = useRedirect('/profile');
-
   const dispatch = useDispatch<DispatchType>();
 
   const { setActive } = useNavHeader();
@@ -48,8 +45,6 @@ export const RegisterPage = () => {
     ],
   );
 
-  if(isAuth) return null;
-  
   return (
     <main className='center-container'>
       <ProfileFormContainer title='Вход' links={links}>

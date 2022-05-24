@@ -1,20 +1,19 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
 import app from './app.module.css';
 import { AppHeader } from '../app-header/app-header';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchIngredients } from '../../services/redux/slices/burger-ingredients';
-import { ROUTES } from '../../utils/routes/routes';
+import { Routes } from '../routes/routes';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { Modal } from '../modal/modal';
 import { clearError } from '../../services/redux/slices/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
-import { ProfilePage } from '../../pages/profile-page/profile-page';
-import { ProfileEdit } from '../profile-edit/profile-edit';
 import { useErrorHandler } from '../../hooks/useErrorHandler';
 import { getUser, resetUser } from '../../services/redux/slices/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
+
+
 
 export const App = () => {
   const accessToken = localStorage.getItem('accessToken');
@@ -74,16 +73,7 @@ export const App = () => {
   return (
     <div className={app.app}>
       <AppHeader />
-      <Routes>
-        {ROUTES.map((route) => (
-          <Route key={route.name} path={route.path} element={<route.element />} />
-        ))}
-        <Route key={'profile'} path={'/profile'} element={<ProfilePage />}>
-          <Route path='' element={<ProfileEdit />} />
-          <Route path='orders' element={<div>История заказов</div>} />
-          <Route path='orders/:id' element={<div>Заказ</div>} />
-        </Route>
-      </Routes>
+      <Routes />
       {isError && (
         <Modal title='Ошибка' handlerOnClose={handlerOnCloseErrorModal}>
           <BadRequest error={message} />

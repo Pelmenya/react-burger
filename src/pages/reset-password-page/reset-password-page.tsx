@@ -8,9 +8,7 @@ import { useNavHeader } from '../../hooks/useNavHeader';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { TResetPassword, profileAPI } from '../../api/profile-api';
-import { useRequestError } from '../../hooks/useRequestError';
-import { useRedirect } from '../../hooks/useRedirect';
+import { TResetPassword } from '../../api/profile-api';
 import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { postResetPassword } from '../../services/redux/slices/profile';
@@ -33,8 +31,6 @@ const links = [
 ];
 
 export const ResetPasswordPage = () => {
-  const { isAuth } = useRedirect('/profile');
-
   const { passwordIsSend } = useSelector(getProfileState);
   const navigate = useNavigate();
 
@@ -69,8 +65,6 @@ export const ResetPasswordPage = () => {
       setActive,
     ],
   );
-
-  if (isAuth) return null;
 
   return (
     <main className='center-container'>

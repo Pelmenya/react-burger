@@ -12,7 +12,6 @@ import { useDispatch } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { postLogin } from '../../services/redux/slices/auth';
 import { UserData } from '../../api/auth-api';
-import { useRedirect } from '../../hooks/useRedirect';
 
 const schema = yup
   .object({
@@ -37,8 +36,6 @@ const links = [
 export const LoginPage = () => {
   const { setActive } = useNavHeader();
 
-  const { isAuth } = useRedirect('/profile');
-
   const dispatch = useDispatch<DispatchType>();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
@@ -59,7 +56,6 @@ export const LoginPage = () => {
     ],
   );
 
-  if (isAuth) return null;
   return (
     <main className='center-container'>
       <ProfileFormContainer title='Вход' links={links}>
