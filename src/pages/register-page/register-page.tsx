@@ -8,9 +8,12 @@ import { ButtonWithChildren } from '../../components/button-with-children/button
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
-import { authAPI, UserData } from '../../api/auth-api';
+import { UserData } from '../../api/auth-api';
 import { schemaProfileForm } from '../../utils/constants';
-import { useRequestError } from '../../hooks/useRequestError';
+import { postRegister } from '../../services/redux/slices/auth';
+import { useDispatch } from 'react-redux';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { useRedirect } from '../../hooks/useRedirect';
 
 const links = [
   {
@@ -21,8 +24,9 @@ const links = [
 ];
 
 export const RegisterPage = () => {
+  const { isAuth } = useRedirect('/profile');
 
-  const { setRequestError } = useRequestError();
+  const dispatch = useDispatch<DispatchType>();
 
   const { setActive } = useNavHeader();
 
@@ -32,10 +36,7 @@ export const RegisterPage = () => {
   });
 
   const onSubmit = async (data: FieldValues) => {
-    authAPI
-      .postRegiter(data as UserData)
-      .then((data) => console.log(data))
-      .catch((err) => setRequestError(err));
+    dispatch(postRegister(data as UserData));
   };
 
   useEffect(
@@ -47,6 +48,8 @@ export const RegisterPage = () => {
     ],
   );
 
+  if(isAuth) return null;
+  
   return (
     <main className='center-container'>
       <ProfileFormContainer title='Вход' links={links}>

@@ -10,6 +10,12 @@ import { InputText } from '../../components/profile-form-container/components/in
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { TResetPassword, profileAPI } from '../../api/profile-api';
 import { useRequestError } from '../../hooks/useRequestError';
+import { useRedirect } from '../../hooks/useRedirect';
+import { useDispatch, useSelector } from 'react-redux';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { postResetPassword } from '../../services/redux/slices/profile';
+import { getProfileState } from '../../services/redux/selectors/profile';
+import { useNavigate } from 'react-router';
 
 const schema = yup
   .object({
@@ -27,8 +33,14 @@ const links = [
 ];
 
 export const ResetPasswordPage = () => {
+  const { isAuth } = useRedirect('/profile');
+
+  const { passwordIsSend } = useSelector(getProfileState);
+  const navigate = useNavigate();
+
+  const dispatch = useDispatch<DispatchType>();
+
   const { setActive } = useNavHeader();
-  const { setRequestError } = useRequestError();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -36,11 +48,18 @@ export const ResetPasswordPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    profileAPI
-      .postResetPassword(data as TResetPassword)
-      .then((data) => console.log(data))
-      .catch((err) => setRequestError(err));
+    dispatch(postResetPassword(data as TResetPassword));
   };
+
+  useEffect(
+    () => {
+      !passwordIsSend && navigate('/login', { replace: true });
+    },
+    [
+      passwordIsSend,
+      navigate,
+    ],
+  );
 
   useEffect(
     () => {
@@ -50,6 +69,8 @@ export const ResetPasswordPage = () => {
       setActive,
     ],
   );
+
+  if (isAuth) return null;
 
   return (
     <main className='center-container'>

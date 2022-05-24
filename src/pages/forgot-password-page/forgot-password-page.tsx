@@ -9,6 +9,12 @@ import { ButtonWithChildren } from '../../components/button-with-children/button
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { TForgotPassword, profileAPI } from '../../api/profile-api';
 import { useRequestError } from '../../hooks/useRequestError';
+import { useRedirect } from '../../hooks/useRedirect';
+import { useDispatch, useSelector } from 'react-redux';
+import { postForgotPassword } from '../../services/redux/slices/profile';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { getProfileState } from '../../services/redux/selectors/profile';
+import { useNavigate } from 'react-router';
 
 const schema = yup
   .object({
@@ -25,8 +31,15 @@ const links = [
 ];
 
 export const ForgotPasswordPage = () => {
+  const { isAuth } = useRedirect('/profile');
+
+  const { passwordIsSend } = useSelector(getProfileState);
+  const navigate = useNavigate();
+
+
+  const dispatch = useDispatch<DispatchType>();
+
   const { setActive } = useNavHeader();
-  const { setRequestError } = useRequestError();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -34,14 +47,18 @@ export const ForgotPasswordPage = () => {
   });
 
   const onSubmit = (data: FieldValues) => {
-    profileAPI
-      .postForgotPassword(data as TForgotPassword)
-      .then((data) => console.log(data))
-      .catch((err) => setRequestError(err));
-
-    console.log(data);
+    dispatch(postForgotPassword(data as TForgotPassword));
   };
 
+  useEffect(
+    () => {
+      passwordIsSend && navigate('/reset-password', { replace: true });
+    },
+    [
+      passwordIsSend,
+      navigate,
+    ],
+  );
   useEffect(
     () => {
       setActive('profile');
@@ -50,6 +67,8 @@ export const ForgotPasswordPage = () => {
       setActive,
     ],
   );
+
+  if (isAuth) return null;
 
   return (
     <main className='center-container'>

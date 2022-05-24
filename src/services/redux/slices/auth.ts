@@ -8,6 +8,19 @@ export interface AuthStateType extends LoadingType {
 
 const initialAuthState = {} as AuthStateType;
 
+export const postRegister = createAsyncThunk(
+  'auth/postRegister',
+  async (userData: UserData) => {
+    try {
+      const response = await authAPI.postRegiter(userData);
+      return response;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
+
+
 export const postLogin = createAsyncThunk(
   'auth/postLogin',
   async (userData: Omit<UserData, 'name'>) => {
@@ -32,6 +45,18 @@ export const postToken = createAsyncThunk(
   },
 );
 
+export const postLogout = createAsyncThunk(
+  'auth/postLogout',
+  async (token: string | null) => {
+    try {
+      const response = await authAPI.postLogout({token: token});
+      return response;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState: initialAuthState,
@@ -42,6 +67,20 @@ const authSlice = createSlice({
   },
 
   extraReducers: (builder) => {
+    builder.addCase(postRegister.pending, (state) => {
+      state.loading = 'pending';
+      state.error = undefined;
+    });
+    builder.addCase(postRegister.fulfilled, (state, action) => {
+      localStorage.setItem('refreshToken', action.payload.refreshToken);
+			localStorage.setItem('accessToken', action.payload.accessToken);
+      state.loading = 'succeeded';
+    });
+    builder.addCase(postRegister.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+
     builder.addCase(postLogin.pending, (state) => {
       state.loading = 'pending';
       state.error = undefined;
@@ -66,6 +105,20 @@ const authSlice = createSlice({
       state.loading = 'succeeded';
     });
     builder.addCase(postToken.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+
+    builder.addCase(postLogout.pending, (state) => {
+      state.loading = 'pending';
+      state.error = undefined;
+    });
+    builder.addCase(postLogout.fulfilled, (state, action) => {
+			localStorage.removeItem('refreshToken');
+			localStorage.removeItem('accessToken');
+      state.loading = 'succeeded';
+    });
+    builder.addCase(postLogout.rejected, (state, action) => {
       state.loading = 'failed';
       state.error = action.error.message;
     });

@@ -2,7 +2,9 @@ import cn from 'classnames';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { getMenuProfileState } from '../../services/redux/selectors/menu-profile';
+import { postLogout } from '../../services/redux/slices/auth';
 import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile';
+import { DispatchType } from '../../utils/types/dispatch-type';
 
 import menu from './menu-profile.module.css';
 
@@ -28,8 +30,9 @@ const menuList = [
 ];
 
 export const MenuProfile = () => {
+  const refreshToken = localStorage.getItem('refreshToken');
   const { activeItem } = useSelector(getMenuProfileState);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<DispatchType>();
   let navigate = useNavigate();
   return (
     <div>
@@ -38,8 +41,12 @@ export const MenuProfile = () => {
           <li
             key={item.id}
             className={cn(menu.item, 'pt-4 pb-4', activeItem === item.id && menu.item_active)}
-            onClick={() =>
-              activeItem !== item.id && dispatch(setActiveMenuProfileItem(item.id)) && navigate(item.linkTo, {replace: true})}>
+            onClick={() => {
+              activeItem !== item.id &&
+                dispatch(setActiveMenuProfileItem(item.id)) &&
+                navigate(item.linkTo, { replace: true });
+              item.id === 'logout' && dispatch(postLogout(refreshToken));
+            }}>
             {item.text}
           </li>
         ))}

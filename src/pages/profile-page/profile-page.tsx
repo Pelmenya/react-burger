@@ -7,6 +7,7 @@ import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/useMenuProfile';
 
 export const ProfilePage = () => {
+
   const { setActive } = useNavHeader();
   const { setActiveMenuProfile } = useMenuProfile();
 
@@ -49,7 +50,6 @@ export const ProfilePage = () => {
       setActiveMenuProfile,
     ],
   );
-
   return (
     <main className={isOrderPage ? 'center-container' : profilePage.container}>
       {!isOrderPage && <MenuProfile />}

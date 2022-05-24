@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { profileAPI } from '../../../api/profile-api';
+import { profileAPI, TForgotPassword, TResetPassword } from '../../../api/profile-api';
 import { LoadingType } from '../../../utils/types/loading';
 import { Nullable } from '../../../utils/types/nullable';
 
@@ -9,12 +9,14 @@ export interface UserType {
 }
 
 export interface ProfileStateType extends LoadingType {
+  passwordIsSend: boolean;
   user: Nullable<UserType>;
   error?: string;
 }
 
 const initialProfileState = {
   user: null,
+  passwordIsSend: false,
 } as ProfileStateType;
 
 export const getUser = createAsyncThunk('profile/getUser', async (token: string) => {
@@ -25,6 +27,30 @@ export const getUser = createAsyncThunk('profile/getUser', async (token: string)
     return Promise.reject(err);
   }
 });
+
+export const postForgotPassword = createAsyncThunk(
+  'profile/postForgotPassword',
+  async (body: TForgotPassword) => {
+    try {
+      const response = await profileAPI.postForgotPassword(body);
+      return response;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
+
+export const postResetPassword = createAsyncThunk(
+  'profile/postResetPassword',
+  async (body: TResetPassword) => {
+    try {
+      const response = await profileAPI.postForgotPassword(body);
+      return response;
+    } catch (err) {
+      return Promise.reject(err);
+    }
+  },
+);
 
 const profileSlice = createSlice({
   name: 'profile',
@@ -48,6 +74,32 @@ const profileSlice = createSlice({
       state.loading = 'succeeded';
     });
     builder.addCase(getUser.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+
+    builder.addCase(postForgotPassword.pending, (state) => {
+      state.loading = 'pending';
+      state.error = undefined;
+    });
+    builder.addCase(postForgotPassword.fulfilled, (state) => {
+      state.passwordIsSend = true;
+      state.loading = 'succeeded';
+    });
+    builder.addCase(postForgotPassword.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+
+    builder.addCase(postResetPassword.pending, (state) => {
+      state.loading = 'pending';
+      state.error = undefined;
+    });
+    builder.addCase(postResetPassword.fulfilled, (state) => {
+      state.passwordIsSend = false;
+      state.loading = 'succeeded';
+    });
+    builder.addCase(postResetPassword.rejected, (state, action) => {
       state.loading = 'failed';
       state.error = action.error.message;
     });
