@@ -28,7 +28,6 @@ export const ProfilePage = () => {
 
   useEffect(
     () => {
-      console.log(location.pathname);
       switch (location.pathname) {
         case '/profile':
           isOrderPage && setIsOrderPage(false);
@@ -50,6 +49,7 @@ export const ProfilePage = () => {
       setActiveMenuProfile,
     ],
   );
+  
   return (
     <main className={isOrderPage ? 'center-container' : profilePage.container}>
       {!isOrderPage && <MenuProfile />}

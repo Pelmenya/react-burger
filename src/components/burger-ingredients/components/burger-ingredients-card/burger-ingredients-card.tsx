@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 import shortid from 'shortid';
-import { useNavigate, NavigateOptions } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useDrag } from 'react-dnd';
 
