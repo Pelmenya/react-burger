@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { profileAPI, TForgotPassword, TResetPassword } from '../../../api/profile-api';
+import {
+  AuthUserData,
+  profileAPI,
+  TForgotPassword,
+  TResetPassword,
+} from '../../../api/profile-api';
 import { LoadingType } from '../../../utils/types/loading';
 import { Nullable } from '../../../utils/types/nullable';
 
@@ -22,6 +27,15 @@ const initialProfileState = {
 export const getUser = createAsyncThunk('profile/getUser', async (token: string) => {
   try {
     const response = await profileAPI.getUser(token);
+    return response;
+  } catch (err) {
+    return Promise.reject(err);
+  }
+});
+
+export const patchUser = createAsyncThunk('profile/patchUser', async (userData: AuthUserData) => {
+  try {
+    const response = await profileAPI.patchUser(userData);
     return response;
   } catch (err) {
     return Promise.reject(err);
@@ -74,6 +88,19 @@ const profileSlice = createSlice({
       state.loading = 'succeeded';
     });
     builder.addCase(getUser.rejected, (state, action) => {
+      state.loading = 'failed';
+      state.error = action.error.message;
+    });
+
+    builder.addCase(patchUser.pending, (state) => {
+      state.loading = 'pending';
+      state.error = undefined;
+    });
+    builder.addCase(patchUser.fulfilled, (state, action) => {
+      state.user = action.payload.user;
+      state.loading = 'succeeded';
+    });
+    builder.addCase(patchUser.rejected, (state, action) => {
       state.loading = 'failed';
       state.error = action.error.message;
     });

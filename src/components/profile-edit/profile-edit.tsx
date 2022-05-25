@@ -1,18 +1,25 @@
 import { FieldValues, useForm } from 'react-hook-form';
+import cn from 'classnames';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { ProfileFormContainer } from '../../components/profile-form-container/profile-form-container';
 import { InputText } from '../profile-form-container/components/input-text/input-text';
 import { useCallback, useEffect, useState } from 'react';
 import { schemaProfileForm } from '../../utils/constants';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getProfileState } from '../../services/redux/selectors/profile';
-import { Loader } from '../loader/loader';
 import { ButtonWithChildren } from '../button-with-children/button-with-children';
 import { Flex } from '../flex/flex';
 
+import profileEdit from './profile-edit.module.css';
+import { patchUser } from '../../services/redux/slices/profile';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { UserData } from '../../api/auth-api';
+
 export const ProfileEdit = () => {
-  const { user } = useSelector(getProfileState);
+  const { user, loading } = useSelector(getProfileState);
+  const dispatch = useDispatch<DispatchType>();
+  const accessToken = localStorage.getItem('accessToken');
+
 
   const [
     isDisabledName,
@@ -27,16 +34,17 @@ export const ProfileEdit = () => {
     setIsDisabledPassword,
   ] = useState(true);
 
-  const { handleSubmit, control, setValue, formState: { errors } } = useForm({
+  const { handleSubmit, control, clearErrors, setValue, formState: { errors } } = useForm({
     resolver: yupResolver(schemaProfileForm),
-    reValidateMode: 'onSubmit',
+    reValidateMode: 'onChange',
   });
 
   const onSubmit = (data: FieldValues) => {
     if (data) {
-      setIsDisabledName(true);
-      setIsDisabledEmail(true);
-      setIsDisabledPassword(true);
+      dispatch(patchUser({
+        userData: data as UserData,
+        token: accessToken as string,
+      }))
     }
   };
 
@@ -67,20 +75,30 @@ export const ProfileEdit = () => {
     ],
   );
 
+  const handlerClickChanel = useCallback(() => {
+    setValue('name', user?.name, { shouldDirty: true });
+    setValue('email', user?.email, { shouldDirty: true });
+    setValue('password', '', { shouldDirty: true });
+    setIsDisabledName(true);
+    setIsDisabledEmail(true);
+    setIsDisabledPassword(true);
+    clearErrors();
+  }, [setValue, user, clearErrors]);
+
   useEffect(
     () => {
-      setValue('name', user?.name, { shouldDirty: true });
-      setValue('email', user?.email, { shouldDirty: true });
+      handlerClickChanel();
     },
     [
       user,
       setValue,
+      handlerClickChanel,
     ],
   );
 
   return (
     <ProfileFormContainer>
-      <form name='edit' className='form mt-30' onSubmit={handleSubmit(onSubmit)}>
+      <form name='edit' className='form form_end mt-30' onSubmit={handleSubmit(onSubmit)}>
         <InputText
           error={!!errors.name}
           control={control}
@@ -109,13 +127,14 @@ export const ProfileEdit = () => {
           onIconClick={handlerSetIsDisabledPassword}
         />
         <Flex>
+          <button type='button' onClick={handlerClickChanel} className={cn('text text_type_main-default', profileEdit.button )}>Отмена</button>
           <ButtonWithChildren
             type='primary'
             size='medium'
             onClick={handleSubmit(onSubmit)}
-            loading={true}
+            loading={loading === 'pending'}
           >
-            <span>Оформить заказ</span>
+            <span>Сохранить</span>
           </ButtonWithChildren>
         </Flex>
       </form>

@@ -31,6 +31,10 @@
   gap: 24px;
 }
 
+.form_end {
+  align-items: flex-end;
+}
+
 .input__icon {
   cursor: pointer;
 }
