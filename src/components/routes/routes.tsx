@@ -11,8 +11,8 @@ import { ProfileEdit } from '../profile-edit/profile-edit';
 import { OrdersPage } from '../../pages/orders-page/orders-page';
 import { useSelector } from 'react-redux';
 import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
-import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { NotFoundPage } from '../../pages/not-found-page/not-found';
+import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
 
 const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
 const ResetPassword = withUserAuth('/profile', ResetPasswordPage);
@@ -41,7 +41,7 @@ export const Routes = () => {
       children: [
         {
           path: ':id',
-          element: !ingredient ? <IngredientDetails /> : null,
+          element: !ingredient ? <IngredientPage /> : null,
         },
       ],
     },
