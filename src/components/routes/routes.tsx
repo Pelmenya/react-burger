@@ -12,6 +12,7 @@ import { OrdersPage } from '../../pages/orders-page/orders-page';
 import { useSelector } from 'react-redux';
 import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
+import { NotFoundPage } from '../../pages/not-found-page/not-found';
 
 const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
 const ResetPassword = withUserAuth('/profile', ResetPasswordPage);
@@ -73,6 +74,10 @@ export const Routes = () => {
           element: <Orders />,
         },
       ],
+    },
+    {
+      path:'*',
+      element: <NotFoundPage />,
     },
   ]);
 
