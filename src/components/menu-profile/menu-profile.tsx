@@ -23,7 +23,7 @@ const menuList = [
   },
   {
     id: 'logout',
-    linkTo: '/login',
+    linkTo: '/',
     text: 'Выход',
     tip: 'Да новых встреч !!!',
   },

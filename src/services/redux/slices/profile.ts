@@ -24,46 +24,24 @@ const initialProfileState = {
   passwordIsSend: false,
 } as ProfileStateType;
 
-export const getUser = createAsyncThunk('profile/getUser', async (token: string) => {
-  try {
-    const response = await profileAPI.getUser(token);
-    return response;
-  } catch (err) {
-    return Promise.reject(err);
-  }
-});
+export const getUser = createAsyncThunk(
+  'profile/getUser',
+  async (token: string) => await profileAPI.getUser(token),
+);
 
-export const patchUser = createAsyncThunk('profile/patchUser', async (userData: AuthUserData) => {
-  try {
-    const response = await profileAPI.patchUser(userData);
-    return response;
-  } catch (err) {
-    return Promise.reject(err);
-  }
-});
+export const patchUser = createAsyncThunk(
+  'profile/patchUser',
+  async (userData: AuthUserData) => await profileAPI.patchUser(userData),
+);
 
 export const postForgotPassword = createAsyncThunk(
   'profile/postForgotPassword',
-  async (body: TForgotPassword) => {
-    try {
-      const response = await profileAPI.postForgotPassword(body);
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (body: TForgotPassword) => await profileAPI.postForgotPassword(body),
 );
 
 export const postResetPassword = createAsyncThunk(
   'profile/postResetPassword',
-  async (body: TResetPassword) => {
-    try {
-      const response = await profileAPI.postForgotPassword(body);
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (body: TResetPassword) => await profileAPI.postForgotPassword(body),
 );
 
 const profileSlice = createSlice({

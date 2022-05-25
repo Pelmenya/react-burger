@@ -10,51 +10,22 @@ const initialAuthState = {} as AuthStateType;
 
 export const postRegister = createAsyncThunk(
   'auth/postRegister',
-  async (userData: UserData) => {
-    try {
-      const response = await authAPI.postRegiter(userData);
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (userData: UserData) => await authAPI.postRegiter(userData),
 );
-
 
 export const postLogin = createAsyncThunk(
   'auth/postLogin',
-  async (userData: Omit<UserData, 'name'>) => {
-    try {
-      const response = await authAPI.postLogin(userData);
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (userData: Omit<UserData, 'name'>) => await authAPI.postLogin(userData),
 );
 
 export const postToken = createAsyncThunk(
   'auth/postToken',
-  async (token: string | null) => {
-    try {
-      const response = await authAPI.postToken({token: token});
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (token: string | null) => await authAPI.postToken({ token: token }),
 );
 
 export const postLogout = createAsyncThunk(
   'auth/postLogout',
-  async (token: string | null) => {
-    try {
-      const response = await authAPI.postLogout({token: token});
-      return response;
-    } catch (err) {
-      return Promise.reject(err);
-    }
-  },
+  async (token: string | null) => await authAPI.postLogout({ token: token }),
 );
 
 const authSlice = createSlice({
@@ -73,7 +44,7 @@ const authSlice = createSlice({
     });
     builder.addCase(postRegister.fulfilled, (state, action) => {
       localStorage.setItem('refreshToken', action.payload.refreshToken);
-			localStorage.setItem('accessToken', action.payload.accessToken);
+      localStorage.setItem('accessToken', action.payload.accessToken);
       state.loading = 'succeeded';
     });
     builder.addCase(postRegister.rejected, (state, action) => {
@@ -87,7 +58,7 @@ const authSlice = createSlice({
     });
     builder.addCase(postLogin.fulfilled, (state, action) => {
       localStorage.setItem('refreshToken', action.payload.refreshToken);
-			localStorage.setItem('accessToken', action.payload.accessToken);
+      localStorage.setItem('accessToken', action.payload.accessToken);
       state.loading = 'succeeded';
     });
     builder.addCase(postLogin.rejected, (state, action) => {
@@ -95,13 +66,13 @@ const authSlice = createSlice({
       state.error = action.error.message;
     });
 
-		builder.addCase(postToken.pending, (state) => {
+    builder.addCase(postToken.pending, (state) => {
       state.loading = 'pending';
       state.error = undefined;
     });
     builder.addCase(postToken.fulfilled, (state, action) => {
-			localStorage.setItem('refreshToken', action.payload.refreshToken);
-			localStorage.setItem('accessToken', action.payload.accessToken);
+      localStorage.setItem('refreshToken', action.payload.refreshToken);
+      localStorage.setItem('accessToken', action.payload.accessToken);
       state.loading = 'succeeded';
     });
     builder.addCase(postToken.rejected, (state, action) => {
@@ -114,15 +85,14 @@ const authSlice = createSlice({
       state.error = undefined;
     });
     builder.addCase(postLogout.fulfilled, (state, action) => {
-			localStorage.removeItem('refreshToken');
-			localStorage.removeItem('accessToken');
+      localStorage.removeItem('refreshToken');
+      localStorage.removeItem('accessToken');
       state.loading = 'succeeded';
     });
     builder.addCase(postLogout.rejected, (state, action) => {
       state.loading = 'failed';
       state.error = action.error.message;
     });
-
   },
 });
 
