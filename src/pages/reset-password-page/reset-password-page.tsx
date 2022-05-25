@@ -31,7 +31,7 @@ const links = [
 ];
 
 export const ResetPasswordPage = () => {
-  const { passwordIsSend } = useSelector(getProfileState);
+  const { passwordIsSend, loading } = useSelector(getProfileState);
   const navigate = useNavigate();
 
   const dispatch = useDispatch<DispatchType>();
@@ -81,7 +81,11 @@ export const ResetPasswordPage = () => {
             placeholder='Введите код из письма'
             name='token'
           />
-          <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
+          <ButtonWithChildren
+            loading={loading === 'pending'}
+            type='primary'
+            size='medium'
+            onClick={handleSubmit(onSubmit)}>
             <span>Сохранить</span>
           </ButtonWithChildren>
         </form>

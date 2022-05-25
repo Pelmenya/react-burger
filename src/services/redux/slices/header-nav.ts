@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 export interface HeaderNavStateType {
-  activeLink: 'main' | 'profile' | 'feed';
+  activeLink: '/' | 'profile' | 'feed';
 }
 
 const initialHeaderNavState = {
-  activeLink: 'main',
+  activeLink: '/',
 } as HeaderNavStateType;
 
 const headerNavSlice = createSlice({

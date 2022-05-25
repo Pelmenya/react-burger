@@ -33,10 +33,10 @@ export const Routes = () => {
     {
       path: 'ingredients',
       element: (
-        <>
+        <div>
           {ingredient && <MainPage />}
           <Outlet />
-        </>
+        </div>
       ),
       children: [
         {
@@ -72,11 +72,17 @@ export const Routes = () => {
         {
           path: 'orders',
           element: <Orders />,
+          children: [
+            {
+              path: ':id',
+              element: <div />,
+            },
+          ],
         },
       ],
     },
     {
-      path:'*',
+      path: '*',
       element: <NotFoundPage />,
     },
   ]);

@@ -29,10 +29,8 @@ const links = [
 ];
 
 export const ForgotPasswordPage = () => {
-
-  const { passwordIsSend } = useSelector(getProfileState);
+  const { passwordIsSend, loading } = useSelector(getProfileState);
   const navigate = useNavigate();
-
 
   const dispatch = useDispatch<DispatchType>();
 
@@ -70,7 +68,11 @@ export const ForgotPasswordPage = () => {
       <ProfileFormContainer title='Восстановление пароля' links={links}>
         <form name='forgotPassword' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputEmail error={!!errors.email} control={control} placeholder='Укажите e-mail' />
-          <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
+          <ButtonWithChildren
+            loading={loading === 'pending'}
+            type='primary'
+            size='medium'
+            onClick={handleSubmit(onSubmit)}>
             <span>Восстановить</span>
           </ButtonWithChildren>
         </form>

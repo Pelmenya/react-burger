@@ -14,7 +14,7 @@ import { useSelector } from 'react-redux';
 export const AppHeader = () => {
   const { activeLink } = useSelector(getHeaderNavState);
 
-  const main = useMemo(() => (activeLink === 'main' ? 'primary' : 'secondary'), [
+  const main = useMemo(() => (activeLink === '/' ? 'primary' : 'secondary'), [
     activeLink,
   ]);
   const feed = useMemo(() => (activeLink === 'feed' ? 'primary' : 'secondary'), [

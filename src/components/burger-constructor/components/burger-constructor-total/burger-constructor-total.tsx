@@ -16,22 +16,30 @@ import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
 import { useIngredientsIds } from '../../../../hooks/use-ingredients-ids';
 import { DispatchType } from '../../../../utils/types/dispatch-type';
 import { ButtonWithChildren } from '../../../button-with-children/button-with-children';
+import { getProfileState } from '../../../../services/redux/selectors/profile';
+import { useNavigate } from 'react-router';
 
 export const BurgerConstructorTotal = () => {
   const dispatch = useDispatch<DispatchType>();
-  const { total } = useSelector(getOrderState);
+  const navigate = useNavigate();
+  const { total, loading } = useSelector(getOrderState);
+  const { user } = useSelector(getProfileState);
 
   const { totalCost } = useTotalCostOrder();
   const { orderIngredientsIds } = useIngredientsIds();
 
   const handlerOnOpenModal = useCallback(
     () => {
-      dispatch(setOpenOrderModal(true));
-      dispatch(setIngredientsIds(orderIngredientsIds));
-      dispatch(postOrders({ ingredients: orderIngredientsIds }));
+      if (user) {
+        dispatch(setOpenOrderModal(true));
+        dispatch(setIngredientsIds(orderIngredientsIds));
+        dispatch(postOrders({ ingredients: orderIngredientsIds }));
+      } else navigate('login');
     },
     [
+      user,
       orderIngredientsIds,
+      navigate,
       dispatch,
     ],
   );
@@ -57,7 +65,12 @@ export const BurgerConstructorTotal = () => {
             <CurrencyIcon type='primary' />
           </div>
         </div>
-        <ButtonWithChildren type='primary' size='large' onClick={handlerOnOpenModal} disabled={!total}>
+        <ButtonWithChildren
+          type='primary'
+          size='large'
+          onClick={handlerOnOpenModal}
+          loading={loading === 'pending'}
+          disabled={!total}>
           <span>Оформить заказ</span>
         </ButtonWithChildren>
       </Flex>

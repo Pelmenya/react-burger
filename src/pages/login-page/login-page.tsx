@@ -8,10 +8,11 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { postLogin } from '../../services/redux/slices/auth';
 import { UserData } from '../../api/auth-api';
+import { getAuthState } from '../../services/redux/selectors/auth';
 
 const schema = yup
   .object({
@@ -35,6 +36,7 @@ const links = [
 
 export const LoginPage = () => {
   const { setActive } = useNavHeader();
+  const { loading} = useSelector(getAuthState);
 
   const dispatch = useDispatch<DispatchType>();
 
@@ -62,7 +64,11 @@ export const LoginPage = () => {
         <form name='login' className='form' onSubmit={handleSubmit(onSubmit)}>
           <InputEmail error={!!errors.email} control={control} />
           <InputPassword error={!!errors.password} control={control} />
-          <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
+          <ButtonWithChildren
+            loading={loading === 'pending'}
+            type='primary'
+            size='medium'
+            onClick={handleSubmit(onSubmit)}>
             <span>Войти</span>
           </ButtonWithChildren>
         </form>

@@ -48,7 +48,7 @@ export const MainPage = () => {
   );
 
   useEffect(() => {
-    setActive('main');
+    setActive('/');
   });
 
   return (

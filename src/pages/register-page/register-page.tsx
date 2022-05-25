@@ -11,8 +11,9 @@ import { InputText } from '../../components/profile-form-container/components/in
 import { UserData } from '../../api/auth-api';
 import { schemaProfileForm } from '../../utils/constants';
 import { postRegister } from '../../services/redux/slices/auth';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { DispatchType } from '../../utils/types/dispatch-type';
+import { getAuthState } from '../../services/redux/selectors/auth';
 
 const links = [
   {
@@ -24,6 +25,7 @@ const links = [
 
 export const RegisterPage = () => {
   const dispatch = useDispatch<DispatchType>();
+  const { loading } = useSelector(getAuthState);
 
   const { setActive } = useNavHeader();
 
@@ -52,7 +54,11 @@ export const RegisterPage = () => {
           <InputText error={!!errors.name} control={control} />
           <InputEmail error={!!errors.email} control={control} />
           <InputPassword error={!!errors.password} control={control} />
-          <ButtonWithChildren type='primary' size='medium' onClick={handleSubmit(onSubmit)}>
+          <ButtonWithChildren
+            loading={loading === 'pending'}
+            type='primary'
+            size='medium'
+            onClick={handleSubmit(onSubmit)}>
             <span>Зарегистрироваться</span>
           </ButtonWithChildren>
         </form>

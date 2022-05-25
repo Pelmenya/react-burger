@@ -5,8 +5,15 @@ import { ProfileFormContainer } from '../../components/profile-form-container/pr
 import { InputText } from '../profile-form-container/components/input-text/input-text';
 import { useCallback, useEffect, useState } from 'react';
 import { schemaProfileForm } from '../../utils/constants';
+import { useSelector } from 'react-redux';
+import { getProfileState } from '../../services/redux/selectors/profile';
+import { Loader } from '../loader/loader';
+import { ButtonWithChildren } from '../button-with-children/button-with-children';
+import { Flex } from '../flex/flex';
 
 export const ProfileEdit = () => {
+  const { user } = useSelector(getProfileState);
+
   const [
     isDisabledName,
     setIsDisabledName,
@@ -60,11 +67,16 @@ export const ProfileEdit = () => {
     ],
   );
 
-  useEffect(() => {
-    setValue('name', 'Вася', { shouldDirty: true });
-    setValue('email', 'sss@ya.ru', { shouldDirty: true });
-    setValue('password', 'sss@ya.ru', { shouldDirty: true });
-  });
+  useEffect(
+    () => {
+      setValue('name', user?.name, { shouldDirty: true });
+      setValue('email', user?.email, { shouldDirty: true });
+    },
+    [
+      user,
+      setValue,
+    ],
+  );
 
   return (
     <ProfileFormContainer>
@@ -73,8 +85,8 @@ export const ProfileEdit = () => {
           error={!!errors.name}
           control={control}
           disabled={isDisabledName}
-          icon={isDisabledName ? 'EditIcon' : 'CheckMarkIcon'}
-          onIconClick={isDisabledName ? handlerSetIsDisabledName : handleSubmit(onSubmit)}
+          icon={isDisabledName ? 'EditIcon' : 'CloseIcon'}
+          onIconClick={handlerSetIsDisabledName}
         />
         <InputText
           placeholder='Логин'
@@ -83,8 +95,8 @@ export const ProfileEdit = () => {
           error={!!errors.email}
           control={control}
           disabled={isDisabledEmail}
-          icon={isDisabledEmail ? 'EditIcon' : 'CheckMarkIcon'}
-          onIconClick={isDisabledEmail ? handlerSetIsDisabledEmail : handleSubmit(onSubmit)}
+          icon={isDisabledEmail ? 'EditIcon' : 'CloseIcon'}
+          onIconClick={handlerSetIsDisabledEmail}
         />
         <InputText
           placeholder='Пароль'
@@ -93,9 +105,19 @@ export const ProfileEdit = () => {
           error={!!errors.password}
           control={control}
           disabled={isDisabledPassword}
-          icon={isDisabledPassword ? 'EditIcon' : 'CheckMarkIcon'}
-          onIconClick={isDisabledPassword ? handlerSetIsDisabledPassword : handleSubmit(onSubmit)}
+          icon={isDisabledPassword ? 'EditIcon' : 'CloseIcon'}
+          onIconClick={handlerSetIsDisabledPassword}
         />
+        <Flex>
+          <ButtonWithChildren
+            type='primary'
+            size='medium'
+            onClick={handleSubmit(onSubmit)}
+            loading={true}
+          >
+            <span>Оформить заказ</span>
+          </ButtonWithChildren>
+        </Flex>
       </form>
     </ProfileFormContainer>
   );
