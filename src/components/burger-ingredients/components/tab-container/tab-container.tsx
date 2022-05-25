@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredients';
 import { Flex } from '../../../flex/flex';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
-import { TabWithChildren } from '../../../../hocs/withTab';
+import { TabWithChildren } from '../../../../hocs/with-tab';
 
 
 export const TabContainer = () => {

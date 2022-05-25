@@ -4,7 +4,7 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ProfileFormContainer } from '../../components/profile-form-container/profile-form-container';
-import { useNavHeader } from '../../hooks/useNavHeader';
+import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';

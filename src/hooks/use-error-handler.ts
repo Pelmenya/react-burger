@@ -5,7 +5,7 @@ import { clearAuthError, postToken } from '../services/redux/slices/auth';
 import { clearProfileError } from '../services/redux/slices/profile';
 import { JWT_EXPIRED } from '../utils/constants';
 import { DispatchType } from '../utils/types/dispatch-type';
-import { useRequestError } from './useRequestError';
+import { useRequestError } from './use-request-error';
 
 export const useErrorHandler = () => {
   const dispatch = useDispatch<DispatchType>();

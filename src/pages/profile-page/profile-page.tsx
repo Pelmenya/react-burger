@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useLocation } from 'react-router';
 import { MenuProfile } from '../../components/menu-profile/menu-profile';
-import { useNavHeader } from '../../hooks/useNavHeader';
+import { useNavHeader } from '../../hooks/use-nav-header';
 
 import profilePage from './profile-page.module.css';
-import { useMenuProfile } from '../../hooks/useMenuProfile';
+import { useMenuProfile } from '../../hooks/use-menu-profile';
 
 export const ProfilePage = () => {
 

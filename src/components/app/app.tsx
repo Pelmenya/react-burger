@@ -9,7 +9,7 @@ import { Modal } from '../modal/modal';
 import { clearError } from '../../services/redux/slices/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
-import { useErrorHandler } from '../../hooks/useErrorHandler';
+import { useErrorHandler } from '../../hooks/use-error-handler';
 import { getUser, resetUser } from '../../services/redux/slices/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
 

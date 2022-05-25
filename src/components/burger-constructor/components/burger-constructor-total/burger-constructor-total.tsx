@@ -12,8 +12,8 @@ import {
   setOrderTotal,
 } from '../../../../services/redux/slices/order';
 import { getOrderState } from '../../../../services/redux/selectors/order';
-import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
-import { useIngredientsIds } from '../../../../hooks/useIngredientsIds';
+import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
+import { useIngredientsIds } from '../../../../hooks/use-ingredients-ids';
 import { DispatchType } from '../../../../utils/types/dispatch-type';
 import { ButtonWithChildren } from '../../../button-with-children/button-with-children';
 

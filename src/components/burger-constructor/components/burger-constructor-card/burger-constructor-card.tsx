@@ -12,7 +12,7 @@ import { setOrderTotal } from '../../../../services/redux/slices/order';
 import { updateCountIngredient } from '../../../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
 import { useDrag, useDrop } from 'react-dnd';
-import { useTotalCostOrder } from '../../../../hooks/useTotalCostOrder';
+import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
 import { BurgerIngredientsCardPropsType } from '../../../burger-ingredients/components/burger-ingredients-card/burger-ingredients-card';
 import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 

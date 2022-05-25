@@ -4,10 +4,10 @@ import { FieldValues, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { ProfileFormContainer } from '../../components/profile-form-container/profile-form-container';
-import { useNavHeader } from '../../hooks/useNavHeader';
+import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
-import { TForgotPassword, profileAPI } from '../../api/profile-api';
+import { TForgotPassword } from '../../api/profile-api';
 import { useDispatch, useSelector } from 'react-redux';
 import { postForgotPassword } from '../../services/redux/slices/profile';
 import { DispatchType } from '../../utils/types/dispatch-type';

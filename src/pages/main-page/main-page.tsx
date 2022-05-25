@@ -16,7 +16,7 @@ import { IngredientDetails } from '../../components/ingredient-details/ingredien
 import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
 import { setOpenOrderModal } from '../../services/redux/slices/order';
-import { useNavHeader } from '../../hooks/useNavHeader';
+import { useNavHeader } from '../../hooks/use-nav-header';
 import { useNavigate } from 'react-router';
 
 export const MainPage = () => {
