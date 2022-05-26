@@ -1,4 +1,4 @@
-import { useRoutes, Outlet } from 'react-router-dom';
+import { useLocation, Routes, Route, Outlet } from 'react-router-dom';
 import { ForgotPasswordPage } from '../../pages/forgot-password-page/forgot-password-page';
 import { LoginPage } from '../../pages/login-page/login-page';
 import { MainPage } from '../../pages/main-page/main-page';
@@ -9,10 +9,9 @@ import { withProtectedAuth } from '../../hocs/with-protected-auth';
 import { ProfilePage } from '../../pages/profile-page/profile-page';
 import { ProfileEdit } from '../profile-edit/profile-edit';
 import { OrdersPage } from '../../pages/orders-page/orders-page';
-import { useSelector } from 'react-redux';
-import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
 import { NotFoundPage } from '../../pages/not-found-page/not-found';
 import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
+import { IngredientModal } from '../ingredient-modal/ingredient-modal';
 
 const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
 const ResetPassword = withUserAuth('/profile', ResetPasswordPage);
@@ -22,70 +21,34 @@ const Profile = withProtectedAuth('/login', ProfilePage);
 const Edit = withProtectedAuth('/login', ProfileEdit);
 const Orders = withProtectedAuth('/login', OrdersPage);
 
-export const Routes = () => {
-  const { ingredient } = useSelector(getCurrentIngredientState);
+export const RoutesApp = () => {
+  const location = useLocation();
+  const locationState = location.state as { background?: Location };
 
-  let element = useRoutes([
-    {
-      path: '/',
-      element: <MainPage />,
-    },
-    {
-      path: 'ingredients',
-      element: (
-        <div>
-          {ingredient && <MainPage />}
-          <Outlet />
-        </div>
-      ),
-      children: [
-        {
-          path: ':id',
-          element: !ingredient ? <IngredientPage /> : null,
-        },
-      ],
-    },
-    {
-      path: 'forgot-password',
-      element: <ForgotPassword />,
-    },
-    {
-      path: 'reset-password',
-      element: <ResetPassword />,
-    },
-    {
-      path: 'login',
-      element: <Login />,
-    },
-    {
-      path: 'register',
-      element: <Register />,
-    },
-    {
-      path: 'profile',
-      element: <Profile />,
-      children: [
-        {
-          path: '',
-          element: <Edit />,
-        },
-        {
-          path: 'orders',
-          element: <Orders />,
-          children: [
-            {
-              path: ':id',
-              element: <div />,
-            },
-          ],
-        },
-      ],
-    },
-    {
-      path: '*',
-      element: <NotFoundPage />,
-    },
-  ]);
-
-  return element;
+  return (
+    <>
+      <Routes location={locationState?.background|| location}>
+        <Route path='/' element={<Outlet />}>
+          <Route index element={<MainPage />} />
+          <Route path='ingredients/:id' element={<IngredientPage/> } />
+          <Route path='forgot-password' element={<ForgotPassword />} />
+          <Route path='reset-password' element={<ResetPassword />} />
+          <Route path='login' element={<Login />} />
+          <Route path='register' element={<Register />} />
+          <Route path='profile' element={<Profile />}>
+            <Route index element={<Edit />} />
+            <Route path='orders' element={<Orders />}>
+              <Route path=':id' element={<div />} />
+            </Route>
+          </Route>
+        </Route>
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+      {locationState?.background && (
+        <Routes>
+          <Route path='ingredients/:id' element={<IngredientModal />} />
+        </Routes>
+      )}
+    </>
+  );
 };

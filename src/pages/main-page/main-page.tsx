@@ -9,34 +9,18 @@ import mainPage from './main-page.module.css';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useDispatch, useSelector } from 'react-redux';
-import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
-import { resetCurrentIngredient } from '../../services/redux/slices/current-ingredient';
 import { Modal } from '../../components/modal/modal';
-import { IngredientDetails } from '../../components/ingredient-details/ingredient-details';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
 import { setOpenOrderModal } from '../../services/redux/slices/order';
 import { useNavHeader } from '../../hooks/use-nav-header';
-import { useNavigate } from 'react-router';
-
+import { Outlet } from 'react-router';
 export const MainPage = () => {
   const { setActive } = useNavHeader();
-  const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const { isOpen: isOpenCurrentIngredientModal } = useSelector(getCurrentIngredientState);
   const { isOpen: isOpenOrderModal } = useSelector(getOrderState);
 
-  const handlerOnCloseCurrentIngredientModal = useCallback(
-    () => {
-      navigate('/');
-      dispatch(resetCurrentIngredient());
-    },
-    [
-      dispatch,
-      navigate,
-    ],
-  );
 
   const handlerOnCloseOrderModal = useCallback(
     () => {
@@ -62,11 +46,7 @@ export const MainPage = () => {
           <BurgerConstructor />
         </aside>
       </DndProvider>
-      {isOpenCurrentIngredientModal && (
-        <Modal title={'Детали ингредиента'} handlerOnClose={handlerOnCloseCurrentIngredientModal}>
-          <IngredientDetails />
-        </Modal>
-      )}
+      <Outlet />
       {isOpenOrderModal && (
         <Modal title={undefined} handlerOnClose={handlerOnCloseOrderModal}>
           <OrderDetails />

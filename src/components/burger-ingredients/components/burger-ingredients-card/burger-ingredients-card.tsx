@@ -1,14 +1,12 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import shortid from 'shortid';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { useDrag } from 'react-dnd';
 
 import burgerIngredientsCard from './burger-ingredients-card.module.css';
 import { Counter, CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { Title } from '../../../title/title';
-import { useDispatch } from 'react-redux';
-import { setCurrentIngredient } from '../../../../services/redux/slices/current-ingredient';
 import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 
 export interface BurgerIngredientsCardPropsType {
@@ -16,8 +14,8 @@ export interface BurgerIngredientsCardPropsType {
 }
 
 export const BurgerIngredientsCard = ({ ingredient }: BurgerIngredientsCardPropsType) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const [
     { opacity },
@@ -30,17 +28,9 @@ export const BurgerIngredientsCard = ({ ingredient }: BurgerIngredientsCardProps
     }),
   });
 
-  const handlerOnClick = useCallback(
-    () => {
-      navigate(`/ingredients/${ingredient._id}`);
-      dispatch(setCurrentIngredient(ingredient));
-    },
-    [
-      navigate,
-      dispatch,
-      ingredient,
-    ],
-  );
+  const handlerOnClick = () => {
+    navigate(`/ingredients/${ingredient._id}`, { state: { background: location } });
+  };
 
   return (
     <div className={burgerIngredientsCard.wrapper}>
