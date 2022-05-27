@@ -68,7 +68,7 @@ export const LoginPage = () => {
             loading={loading === 'pending'}
             type='primary'
             size='medium'
-            onClick={handleSubmit(onSubmit)}>
+          >
             <span>Войти</span>
           </ButtonWithChildren>
         </form>

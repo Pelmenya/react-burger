@@ -58,7 +58,7 @@ export const RegisterPage = () => {
             loading={loading === 'pending'}
             type='primary'
             size='medium'
-            onClick={handleSubmit(onSubmit)}>
+          >
             <span>Зарегистрироваться</span>
           </ButtonWithChildren>
         </form>

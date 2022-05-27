@@ -72,7 +72,7 @@ export const ForgotPasswordPage = () => {
             loading={loading === 'pending'}
             type='primary'
             size='medium'
-            onClick={handleSubmit(onSubmit)}>
+          >
             <span>Восстановить</span>
           </ButtonWithChildren>
         </form>

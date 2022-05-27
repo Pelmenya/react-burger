@@ -85,7 +85,7 @@ export const ResetPasswordPage = () => {
             loading={loading === 'pending'}
             type='primary'
             size='medium'
-            onClick={handleSubmit(onSubmit)}>
+          >
             <span>Сохранить</span>
           </ButtonWithChildren>
         </form>
