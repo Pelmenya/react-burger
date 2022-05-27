@@ -33,7 +33,7 @@ export const MenuProfile = () => {
   const refreshToken = localStorage.getItem('refreshToken');
   const { activeItem } = useSelector(getMenuProfileState);
   const dispatch = useDispatch<DispatchType>();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   return (
     <div>
       <ul className={cn('text text_type_main-medium pl-5', menu.list)}>
