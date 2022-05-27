@@ -13,10 +13,10 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found';
 import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
 import { IngredientModal } from '../ingredient-modal/ingredient-modal';
 
-const ForgotPassword = withUserAuth('/profile', ForgotPasswordPage);
-const ResetPassword = withUserAuth('/profile', ResetPasswordPage);
-const Login = withUserAuth('/profile', LoginPage);
-const Register = withUserAuth('/profile', RegisterPage);
+const ForgotPassword = withUserAuth('/', ForgotPasswordPage);
+const ResetPassword = withUserAuth('/', ResetPasswordPage);
+const Login = withUserAuth('/', LoginPage);
+const Register = withUserAuth('/', RegisterPage);
 const Profile = withProtectedAuth('/login', ProfilePage);
 const Edit = withProtectedAuth('/login', ProfileEdit);
 const Orders = withProtectedAuth('/login', OrdersPage);

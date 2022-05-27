@@ -51,7 +51,7 @@ export const LoginPage = () => {
 
   useEffect(
     () => {
-      setActive('profile');
+      setActive('');
     },
     [
       setActive,

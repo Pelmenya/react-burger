@@ -40,7 +40,7 @@ export const RegisterPage = () => {
 
   useEffect(
     () => {
-      setActive('profile');
+      setActive('');
     },
     [
       setActive,

@@ -56,7 +56,7 @@ export const ForgotPasswordPage = () => {
   );
   useEffect(
     () => {
-      setActive('profile');
+      setActive('');
     },
     [
       setActive,

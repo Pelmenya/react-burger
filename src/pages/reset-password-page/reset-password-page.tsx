@@ -59,7 +59,7 @@ export const ResetPasswordPage = () => {
 
   useEffect(
     () => {
-      setActive('profile');
+      setActive('');
     },
     [
       setActive,

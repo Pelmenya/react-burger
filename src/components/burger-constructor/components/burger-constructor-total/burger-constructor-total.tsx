@@ -17,13 +17,14 @@ import { useIngredientsIds } from '../../../../hooks/use-ingredients-ids';
 import { DispatchType } from '../../../../utils/types/dispatch-type';
 import { ButtonWithChildren } from '../../../button-with-children/button-with-children';
 import { getProfileState } from '../../../../services/redux/selectors/profile';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export const BurgerConstructorTotal = () => {
   const dispatch = useDispatch<DispatchType>();
   const navigate = useNavigate();
   const { total, loading } = useSelector(getOrderState);
   const { user } = useSelector(getProfileState);
+  const location = useLocation();
 
   const { totalCost } = useTotalCostOrder();
   const { orderIngredientsIds } = useIngredientsIds();
@@ -34,13 +35,14 @@ export const BurgerConstructorTotal = () => {
         dispatch(setOpenOrderModal(true));
         dispatch(setIngredientsIds(orderIngredientsIds));
         dispatch(postOrders({ ingredients: orderIngredientsIds }));
-      } else navigate('login');
+      } else navigate('login', { state: { from: location } });
     },
     [
       user,
       orderIngredientsIds,
       navigate,
       dispatch,
+      location
     ],
   );
 
