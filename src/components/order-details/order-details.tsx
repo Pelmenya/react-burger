@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import React, { useCallback, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { Flex } from '../flex/flex';
@@ -9,9 +9,12 @@ import orderDetails from './order-details.module.css';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { Loader } from '../loader/loader';
 import { BadRequest } from '../bad-request/bad-request';
+import { DispatchType } from '../../utils/types/dispatch-type';
+import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
 
 export const OrderDetails = () => {
   const { num, error, loading } = useSelector(getOrderState);
+  const dispatch = useDispatch<DispatchType>();
 
   const formatOrderNumber = useCallback((numOrder: string) => {
     let arrNumbers = numOrder.split('');
@@ -20,6 +23,10 @@ export const OrderDetails = () => {
     }
     return arrNumbers.join('');
   }, []);
+
+  useEffect(() => {
+    loading === 'succeeded' && dispatch(resetBurgerConstructor());
+  }, [loading, dispatch]);
 
   return (
     <Flex flexDirection={'column'} className={orderDetails.wrapper}>
