@@ -13,6 +13,8 @@ import { DispatchType } from '../../utils/types/dispatch-type';
 import { postLogin } from '../../services/redux/slices/auth';
 import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
+import { Navigate, useLocation } from 'react-router';
+import { LocationStateType } from '../../utils/types/LocationStateType';
 
 const schema = yup
   .object({
@@ -36,8 +38,13 @@ const links = [
 
 export const LoginPage = () => {
   const { setActive } = useNavHeader();
-  const { loading} = useSelector(getAuthState);
+  
+  const { loading } = useSelector(getAuthState);
+  const accessToken = localStorage.getItem('accessToken')
 
+  const location = useLocation() as LocationStateType;
+  const from = location?.state?.from || '/' ;
+  
   const dispatch = useDispatch<DispatchType>();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
@@ -51,12 +58,20 @@ export const LoginPage = () => {
 
   useEffect(
     () => {
-      setActive('');
+      setActive('profile');
     },
     [
       setActive,
     ],
   );
+
+  if (accessToken) {
+    return (
+      <Navigate
+        to={from}
+      />
+    );
+  }
 
   return (
     <main className='center-container'>
