@@ -3,7 +3,7 @@ import cn from 'classnames';
 export interface TitlePropsType {
   type?: 'h1' | 'h2' | 'h3';
   className?: string;
-  children: JSX.Element | string;
+  children?: JSX.Element | string;
 }
 
 export const Title = ({ type, className = '', children }: TitlePropsType) => {
