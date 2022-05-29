@@ -20,7 +20,6 @@ export const ProfileEdit = () => {
   const dispatch = useDispatch<DispatchType>();
   const accessToken = localStorage.getItem('accessToken');
 
-
   const [
     isDisabledName,
     setIsDisabledName,
@@ -131,7 +130,6 @@ export const ProfileEdit = () => {
           <ButtonWithChildren
             type='primary'
             size='medium'
-            onClick={handleSubmit(onSubmit)}
             loading={loading === 'pending'}
           >
             <span>Сохранить</span>
