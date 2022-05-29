@@ -23,7 +23,6 @@ export const BurgerConstructor = () => {
   const dispatch = useDispatch();
   const { ingredients } = useSelector(getBurgerIngredientsState);
   const { bun, toppings } = useSelector(getBurgerConstructorState);
-
   const dropIngredient = (ingredient: BurgerIngredientType) => {
     if (ingredient.type === 'bun') {
       if (ingredient._id !== bun?._id) {
@@ -91,10 +90,12 @@ export const BurgerConstructor = () => {
         }
         ref={drop}>
         <Flex flexDirection='column' className={burgerConstructor.constructor__container}>
+          <>
           {!bun && !toppings.length && <BurgerConstructorEmpty />}
           {bun && <BurgerConstructorCard ingredient={bun} type='top' isLocked={true} />}
           {toppings && <BurgerConstructorToppingsList />}
           {bun && <BurgerConstructorCard ingredient={bun} type='bottom' isLocked={true} />}
+          </>
           <BurgerConstructorTotal />
         </Flex>
       </div>

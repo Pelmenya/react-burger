@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { BurgerIngredientType } from '../../../utils/types/burger-ingredient';
 
 export interface BurgerConstructorStateType {
-  bun?:BurgerIngredientType;
+  bun?: BurgerIngredientType;
   toppings: BurgerIngredientType[];
 }
 
@@ -20,8 +20,12 @@ const burgerConstractorSlice = createSlice({
     setToppings: (state, action) => {
       state.toppings = action.payload;
     },
+    resetBurgerConstructor: (state) => {
+      state.toppings = [];
+      state.bun = undefined;
+    },
   },
 });
 
-export const { setBun, setToppings } = burgerConstractorSlice.actions;
+export const { setBun, setToppings, resetBurgerConstructor } = burgerConstractorSlice.actions;
 export const burgerConstructorReducer = burgerConstractorSlice.reducer;

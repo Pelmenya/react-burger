@@ -1,5 +1,5 @@
 import React from 'react';
-import { ThreeDots } from 'react-loader-spinner';
+import { Oval, ThreeDots } from 'react-loader-spinner';
 import { Flex } from '../flex/flex';
 
 import loader from './loader.module.css';
@@ -19,7 +19,18 @@ export const Loader = ({
 }: LoaderPropsType) => (
   <Flex flexDirection='column' className={loader.container}>
     <Flex className={loader.wrapper}>
-      <ThreeDots height={height} width={width} color={color} />
+      {type === 'large' ? (
+        <ThreeDots height={height} width={width} color={color} />
+      ) : (
+        <Oval
+          ariaLabel='loading-indicator'
+          height={40}
+          width={40}
+          strokeWidth={5}
+          color={color}
+          secondaryColor='#fff'
+        />
+      )}
     </Flex>
   </Flex>
 );

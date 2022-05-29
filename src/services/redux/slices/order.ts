@@ -21,12 +21,8 @@ const initialIngredientsState = {
 export const postOrders = createAsyncThunk(
   'currentIngredient/postOrders',
   async (body: IngredientsIdsPropsType) => {
-    try {
-      const response = await ordersAPI.postOrders(body);
-      return response.order.number;
-    } catch (err) {
-      return Promise.reject(err);
-    }
+    const response = await ordersAPI.postOrders(body);
+    return response.order.number;
   },
 );
 
@@ -51,6 +47,7 @@ const orderSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(postOrders.pending, (state) => {
       state.loading = 'pending';
+      state.error = undefined;
     });
     builder.addCase(postOrders.fulfilled, (state, action) => {
       state.num = action.payload;

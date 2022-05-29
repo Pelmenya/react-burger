@@ -1,0 +1,8 @@
+.question {
+	color: var(--text-inactive-color);
+}
+
+.link {
+	color: var(--colors-interface-accent);
+	text-decoration: none;
+}

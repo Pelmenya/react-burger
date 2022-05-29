@@ -3,7 +3,7 @@ import { ingredientsAPI } from '../../../api/ingredients-api';
 import { BurgerIngredientsType } from '../../../utils/types/burger-ingredients';
 import { LoadingType } from '../../../utils/types/loading';
 export interface BurgerIngredientsStateType extends BurgerIngredientsType, LoadingType {
-  currentTab: 'buns' | 'sauses' | 'toppings';
+  currentTab: 'buns' | 'sauces' | 'toppings';
 }
 
 const initialIngredientsState = {
@@ -13,12 +13,8 @@ const initialIngredientsState = {
 } as BurgerIngredientsStateType;
 
 export const fetchIngredients = createAsyncThunk('burgerIngredients/fetchIngredients', async () => {
-  try {
-    const response = await ingredientsAPI.getIngredients();
-    return response.data;
-  } catch (err) {
-    return Promise.reject(err);
-  }
+  const response = await ingredientsAPI.getIngredients();
+  return response.data;
 });
 
 const burgerIngredientsSlice = createSlice({
@@ -28,9 +24,9 @@ const burgerIngredientsSlice = createSlice({
     setCurrentTab: (state, action) => {
       state.currentTab = action.payload;
     },
-    updateCountIngredient: (state, action) =>{
+    updateCountIngredient: (state, action) => {
       state.ingredients = action.payload;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchIngredients.pending, (state) => {

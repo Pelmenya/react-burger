@@ -25,9 +25,11 @@ export const BurgerIngredients = () => {
         <Title type='h2' className={burgerIngredients.title}>
           Ингредиенты бургера
         </Title>
-        {loading === 'pending' && <Loader />}
-        {loading === 'succeeded' && <TabContainer />}
-        {loading === 'failed' && <BadRequest error={error} />}
+        <>
+          {loading === 'pending' && <Loader />}
+          {loading === 'succeeded' && <TabContainer />}
+          {loading === 'failed' && <BadRequest error={error} />}
+        </>
       </Flex>
     </section>
   );

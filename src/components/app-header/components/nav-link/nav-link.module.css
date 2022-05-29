@@ -13,10 +13,28 @@
   margin-right: 0px;
 }
 
-.link:hover{
-  border: 1px dashed #4C4CFF;
+.link:hover {
+  border: 1px dashed #4c4cff;
 }
 
 .link__text {
   margin: 0;
+  padding: 0;
+  margin: 0;
+  font-family: 'Jet Brains Mono';
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.link__text_inactive,
+.link__text_inactive:active,
+.link__text_inactive:visited {
+  color: #8585ad;
+}
+
+.link__text_active,
+.link__text_active:active,
+.link__text_active:visited {
+  color: #fff;
 }
