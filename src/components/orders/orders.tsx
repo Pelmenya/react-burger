@@ -1,6 +1,7 @@
 
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
+import { useLocation } from 'react-router';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { BadRequest } from '../bad-request/bad-request';
 import { Flex } from '../flex/flex';
@@ -11,8 +12,9 @@ import ordersStyle from './orders.module.css';
 
 export const Orders = () => {
   const { loading, error } = useSelector(getBurgerIngredientsState);
-
-  return <section className={cn(ordersStyle.container,  ordersStyle.container_medium) }>
+  const location = useLocation();
+  console.log(location);
+  return <section className={cn(ordersStyle.container, location.pathname === '/feed' ? ordersStyle.container_medium : ordersStyle.container_large) }>
       <Flex flexDirection='column'>
         <Title type='h2' className={cn(ordersStyle.title)}>
           Заказы

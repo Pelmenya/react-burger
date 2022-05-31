@@ -12,6 +12,7 @@ import { OrdersPage } from '../../pages/orders-page/orders-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found';
 import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
 import { IngredientModal } from '../ingredient-modal/ingredient-modal';
+import { Orders } from '../orders/orders';
 
 export const RoutesApp = () => {
   const location = useLocation();
@@ -30,7 +31,7 @@ export const RoutesApp = () => {
             <Route index element={<ProtectedRoute redirect='/login' element={<ProfileEdit />} />} />
             <Route
               path='orders'
-              element={<ProtectedRoute redirect='/login' element={<OrdersPage />} />}>
+              element={<ProtectedRoute redirect='/login' element={<Orders />} />}>
               <Route path=':id' element={<div />} />
             </Route>
           </Route>
