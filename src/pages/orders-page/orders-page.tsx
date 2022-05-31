@@ -1,5 +1,6 @@
 import cn from 'classnames';
 import { useEffect } from 'react';
+import { OrdersStatistics } from '../../components/orders-statistics/orders-statistics';
 import { Orders } from '../../components/orders/orders';
 import { Title } from '../../components/title/title';
 import { useNavHeader } from '../../hooks/use-nav-header';
@@ -24,6 +25,7 @@ export const OrdersPage = () => {
       </Title>
       <aside className={ordersPage.main__content}>
         <Orders />
+        <OrdersStatistics />
       </aside>
     </main>
   );
