@@ -40,6 +40,7 @@ export const OrdersCard = ({ order }: any) => {
           {ingredients.map((item, index, arr) => (
             <IngredientPreview
               ingredient={order}
+              key={order._id + index}
               zIndex={arr.length - index}
               lastCount={
                 (index === countIngredientsOfOrdersCard - 1 && countNext > 0 && countNext) ||

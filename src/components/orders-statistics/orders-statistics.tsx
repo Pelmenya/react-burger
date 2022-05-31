@@ -3,6 +3,18 @@ import { Flex } from '../flex/flex';
 import { Title } from '../title/title';
 import ordersStatistics from './orders-statistics.module.css';
 
+export const normalizeTotalCount = (count: number): string => {
+  const arr = String(count).split('').reverse();
+  const arrResult: string[] = [];
+  arr.forEach((item, index) => {
+    if (!((index + 1) % 3)) {
+      arrResult.push(item);
+      arrResult.push(' ');
+    } else arrResult.push(item);
+  });
+  return arrResult.reverse().join('');
+};
+
 export const OrdersStatistics = () => {
   return (
     <section className={ordersStatistics.container}>
@@ -35,11 +47,11 @@ export const OrdersStatistics = () => {
       </Flex>
       <Flex flexDirection='column' className={ordersStatistics.wrapper}>
         <p className='text text_type_main-medium'>Выполнено за все время:</p>
-        <p className='text text_type_digits-large'>{'034538'}</p>
+        <p className='text text_type_digits-large'>{normalizeTotalCount(99225)}</p>
       </Flex>
       <Flex flexDirection='column' className={ordersStatistics.wrapper}>
         <p className='text text_type_main-medium'>Выполнено за сегодня:</p>
-        <p className='text text_type_digits-large'>{'348'}</p>
+        <p className='text text_type_digits-large'>{normalizeTotalCount(1125)}</p>
       </Flex>
     </section>
   );
