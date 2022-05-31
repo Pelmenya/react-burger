@@ -1,0 +1,14 @@
+.container_medium {
+  width: 600px;
+  max-width: 600px;
+}
+
+.container_large {
+  width: 800px;
+  max-width: 800px;
+}
+
+.title {
+  display: none;
+}
+

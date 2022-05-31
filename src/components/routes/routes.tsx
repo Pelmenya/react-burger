@@ -22,6 +22,7 @@ export const RoutesApp = () => {
       <Routes location={locationState?.background || location}>
         <Route path='/' element={<Outlet />}>
           <Route index element={<MainPage />} />
+          <Route path='feed' element={<OrdersPage />} />
           <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route
             path='profile'
