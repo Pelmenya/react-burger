@@ -1,0 +1,33 @@
+.h1 {
+  display: none;
+}
+
+.container {
+  width: 640px;
+}
+
+.number {
+  width: 100%;
+  text-align: center;
+}
+
+.ingredients {
+  max-height: 312px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+}
+
+.ingredients__card {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ingredients__price {
+  white-space: nowrap;
+}
+
+.total {
+  composes: ingredients__card;
+  margin-top: 40px;
+}

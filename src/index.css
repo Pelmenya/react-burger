@@ -38,3 +38,7 @@
 .input__icon {
   cursor: pointer;
 }
+
+.text_color_interface {
+  color: var(--colors-interface-success);
+}

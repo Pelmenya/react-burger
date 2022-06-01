@@ -25,13 +25,7 @@ export const OrdersStatistics = () => {
         <Flex flexDirection='column' className={cn('mr-9', ordersStatistics.feed)}>
           <p className='text text_type_main-medium mb-6'>Готовы: </p>
           <Flex flexDirection='column' gap={8}>
-            <p
-              className={cn(
-                'text text_type_digits-default',
-                ordersStatistics.text_color_interface,
-              )}>
-              {'034538'}
-            </p>
+            <p className={'text text_type_digits-default text_color_interface'}>{'034538'}</p>
           </Flex>
         </Flex>
         <Flex flexDirection='column' className={ordersStatistics.feed}>

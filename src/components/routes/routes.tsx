@@ -13,6 +13,7 @@ import { NotFoundPage } from '../../pages/not-found-page/not-found';
 import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
 import { IngredientModal } from '../ingredient-modal/ingredient-modal';
 import { Orders } from '../orders/orders';
+import { OrderPage } from '../../pages/order-page/order-page';
 
 export const RoutesApp = () => {
   const location = useLocation();
@@ -32,9 +33,9 @@ export const RoutesApp = () => {
             <Route
               path='orders'
               element={<ProtectedRoute redirect='/login' element={<Orders />} />}>
-              <Route path=':id' element={<div />} />
             </Route>
           </Route>
+          <Route path='profile/orders/:id' element={<OrderPage />} />
           <Route
             path='forgot-password'
             element={<AuthRoute redirect='/' element={<ForgotPasswordPage />} />}

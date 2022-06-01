@@ -29,8 +29,8 @@ export const IngredientPage = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className='pt-30'>
+    <main className='pt-30'>
       <IngredientDetails />
-    </div>
+    </main>
   );
 };

@@ -21,7 +21,3 @@
 .feed {
   width: 272px;
 }
-
-.text_color_interface {
-  color: var(--colors-interface-success);
-}
