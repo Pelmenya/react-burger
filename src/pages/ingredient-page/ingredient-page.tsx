@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { IngredientDetails } from '../../components/ingredient-details/ingredient-details';
 import { Loader } from '../../components/loader/loader';
+import { Title } from '../../components/title/title';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { setCurrentIngredient } from '../../services/redux/slices/current-ingredient';
 import { DispatchType } from '../../utils/types/dispatch-type';
@@ -29,7 +30,8 @@ export const IngredientPage = () => {
   return isLoading ? (
     <Loader />
   ) : (
-    <main className='pt-30'>
+    <main className='main-column-center pt-30'>
+      <Title type='h1'>Детали ингредиента</Title>
       <IngredientDetails />
     </main>
   );
