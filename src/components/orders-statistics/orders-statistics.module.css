@@ -1,0 +1,23 @@
+.container {
+  width: 580px;
+  max-width: 580px;
+  margin-left: 60px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 60px;
+}
+
+.wrapper {
+  width: 100%;
+  justify-content: space-between;
+}
+
+.title {
+  display: none;
+}
+
+.feed {
+  width: 272px;
+}

@@ -33,7 +33,7 @@ export const AppHeader = () => {
           <Link to='/' className={appHeader.header__link}>
             <NavLink icon={<BurgerIcon type={main} />} type={main} text={'Конструктор'} />
           </Link>
-          <Link to='/login' className={appHeader.header__link}>
+          <Link to='/feed' className={appHeader.header__link}>
             <NavLink icon={<ListIcon type={feed} />} type={feed} text={'Лента заказов'} />
           </Link>
         </div>

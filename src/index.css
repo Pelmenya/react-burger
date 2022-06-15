@@ -38,3 +38,13 @@
 .input__icon {
   cursor: pointer;
 }
+
+.text_color_interface {
+  color: var(--colors-interface-success);
+}
+
+.main-column-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

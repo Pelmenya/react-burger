@@ -14,7 +14,7 @@ import { postLogin } from '../../services/redux/slices/auth';
 import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { Navigate, useLocation } from 'react-router';
-import { LocationStateType } from '../../utils/types/LocationStateType';
+import { LocationStateType } from '../../utils/types/location-state-type';
 
 const schema = yup
   .object({

@@ -12,6 +12,8 @@ import { OrdersPage } from '../../pages/orders-page/orders-page';
 import { NotFoundPage } from '../../pages/not-found-page/not-found';
 import { IngredientPage } from '../../pages/ingredient-page/ingredient-page';
 import { IngredientModal } from '../ingredient-modal/ingredient-modal';
+import { Orders } from '../orders/orders';
+import { OrderPage } from '../../pages/order-page/order-page';
 
 export const RoutesApp = () => {
   const location = useLocation();
@@ -22,6 +24,7 @@ export const RoutesApp = () => {
       <Routes location={locationState?.background || location}>
         <Route path='/' element={<Outlet />}>
           <Route index element={<MainPage />} />
+          <Route path='feed' element={<OrdersPage />} />
           <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route
             path='profile'
@@ -29,10 +32,10 @@ export const RoutesApp = () => {
             <Route index element={<ProtectedRoute redirect='/login' element={<ProfileEdit />} />} />
             <Route
               path='orders'
-              element={<ProtectedRoute redirect='/login' element={<OrdersPage />} />}>
-              <Route path=':id' element={<div />} />
+              element={<ProtectedRoute redirect='/login' element={<Orders />} />}>
             </Route>
           </Route>
+          <Route path='profile/orders/:id' element={<OrderPage />} />
           <Route
             path='forgot-password'
             element={<AuthRoute redirect='/' element={<ForgotPasswordPage />} />}

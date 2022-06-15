@@ -1,0 +1,11 @@
+.list {
+  max-height: calc(100vh - 230px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.list_profile {
+  max-height: calc(100vh - 174px);
+}

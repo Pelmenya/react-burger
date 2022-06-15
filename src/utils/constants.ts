@@ -1,5 +1,7 @@
 import * as yup from 'yup';
+
 export const maxCountBuns = 2;
+export const countIngredientsOfOrdersCard = 6;
 
 export const ERRORS = {
   ERROR_NAME: 'Кириллица c заглавной буквы, от 2 символов',

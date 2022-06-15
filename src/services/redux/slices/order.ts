@@ -22,7 +22,7 @@ export const postOrders = createAsyncThunk(
   'currentIngredient/postOrders',
   async (body: IngredientsIdsPropsType) => {
     const response = await ordersAPI.postOrders(body);
-    return response.order.number;
+    return response;
   },
 );
 
@@ -50,7 +50,7 @@ const orderSlice = createSlice({
       state.error = undefined;
     });
     builder.addCase(postOrders.fulfilled, (state, action) => {
-      state.num = action.payload;
+      state.num = action.payload.order.number;
       state.loading = 'succeeded';
     });
     builder.addCase(postOrders.rejected, (state, action) => {
