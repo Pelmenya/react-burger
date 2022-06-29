@@ -43,6 +43,9 @@ const orderSlice = createSlice({
       state.isOpen = false;
       state.num = null;
     },
+    clearOrderError: (state) => {
+      state.error = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(postOrders.pending, (state) => {
@@ -50,6 +53,7 @@ const orderSlice = createSlice({
       state.error = undefined;
     });
     builder.addCase(postOrders.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.num = action.payload.order.number;
       state.loading = 'succeeded';
     });
@@ -65,5 +69,6 @@ export const {
   setOrderTotal,
   setOpenOrderModal,
   resetOrder,
+  clearOrderError,
 } = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;

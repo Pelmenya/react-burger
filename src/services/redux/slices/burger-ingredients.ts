@@ -27,6 +27,9 @@ const burgerIngredientsSlice = createSlice({
     updateCountIngredient: (state, action) => {
       state.ingredients = action.payload;
     },
+    resetCountIngredients: (state) => {
+      state.ingredients = state.ingredients.map((ingredient) => ({ ...ingredient, count: 0 }));
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchIngredients.pending, (state) => {
@@ -43,5 +46,5 @@ const burgerIngredientsSlice = createSlice({
   },
 });
 
-export const { setCurrentTab, updateCountIngredient } = burgerIngredientsSlice.actions;
+export const { setCurrentTab, updateCountIngredient, resetCountIngredients } = burgerIngredientsSlice.actions;
 export const burgerIngredientsReducer = burgerIngredientsSlice.reducer;

@@ -3,7 +3,8 @@ import { SERVER, ORDERS_END_POINTS } from '../utils/api-constants/server';
 import { checkResponse } from '../utils/functions/checkResponse';
 
 export interface IngredientsIdsPropsType {
-  ingredients: string[];
+  ingredientsIds: string[];
+  token: string;
 }
 
 class OrdersAPI {
@@ -13,11 +14,16 @@ class OrdersAPI {
     this.server = server;
   }
 
-  postOrders = async (ingredientsIds: IngredientsIdsPropsType) => {
+  postOrders = async (orderData: IngredientsIdsPropsType) => {
+    const reqHeaders = {
+      ...headers.headers,
+      authorization: orderData.token,
+    };
+    console.log(orderData.ingredientsIds);
     return fetch(`${this.server}${ORDERS_END_POINTS.POST_ORDERS}`, {
       method: 'POST',
-      ...headers,
-      body: JSON.stringify(ingredientsIds),
+      headers: { ...reqHeaders },
+      body: JSON.stringify({ ingredients: orderData.ingredientsIds }),
     }).then(checkResponse);
   };
 }

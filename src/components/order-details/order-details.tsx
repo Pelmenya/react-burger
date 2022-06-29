@@ -11,6 +11,7 @@ import { Loader } from '../loader/loader';
 import { BadRequest } from '../bad-request/bad-request';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
+import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
 
 export const OrderDetails = () => {
   const { num, error, loading } = useSelector(getOrderState);
@@ -25,7 +26,10 @@ export const OrderDetails = () => {
   }, []);
 
   useEffect(() => {
-    loading === 'succeeded' && dispatch(resetBurgerConstructor());
+    if (loading === 'succeeded') { 
+      dispatch(resetBurgerConstructor());
+      dispatch(resetCountIngredients());
+    }
   }, [loading, dispatch]);
 
   return (
