@@ -5,11 +5,12 @@ export interface OrderType {
   number: number;
   createdAt: string;
   updatedAt: string;
+  name: string;
 }
 
 export interface OrdersType {
   success: boolean;
-  orders: OrdersType[];
+  orders: OrderType[];
   total: number;
   totalToday: number;
 }

@@ -12,18 +12,11 @@ import { BadRequest } from '../bad-request/bad-request';
 import { DispatchType } from '../../utils/types/dispatch-type';
 import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
 import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
+import { formatOrderNumber } from '../../utils/functions/formatOrderNumber';
 
 export const OrderDetails = () => {
   const { num, error, loading } = useSelector(getOrderState);
   const dispatch = useDispatch<DispatchType>();
-
-  const formatOrderNumber = useCallback((numOrder: string) => {
-    let arrNumbers = numOrder.split('');
-    while (arrNumbers.length < 6) {
-      arrNumbers.unshift('0');
-    }
-    return arrNumbers.join('');
-  }, []);
 
   useEffect(() => {
     if (loading === 'succeeded') { 

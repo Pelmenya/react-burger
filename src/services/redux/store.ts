@@ -9,7 +9,7 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat([
       socketMiddleware('wss://norma.nomoreparties.space/orders/all'),
-      logger,
+      //logger,
     ]),
   devTools: process.env.NODE_ENV !== 'production',
 });
