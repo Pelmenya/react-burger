@@ -3,6 +3,7 @@ import shortid from 'shortid';
 import { useOrder } from '../../../hooks/use-order';
 import { countIngredientsOfOrdersCard } from '../../../utils/constants';
 import { formatOrderNumber } from '../../../utils/functions/formatOrderNumber';
+import { formatOrderTime } from '../../../utils/functions/formatOrderTime';
 import { OrderType } from '../../../utils/types/orders';
 import { Flex } from '../../flex/flex';
 import { IngredientPreview } from '../../ingredient-preview/ingredient-preview';
@@ -26,7 +27,7 @@ export const OrdersCard = ({
     <Flex flexDirection='column' gap={24} className={ordersCard.container}>
       <Flex className={ordersCard.wrapper}>
         <p className='text text_type_digits-default'>#{formatOrderNumber(String(number))}</p>
-        <p className='text text_type_main-default text_color_inactive'>{createdAt}</p>
+        <p className='text text_type_main-default text_color_inactive'>{formatOrderTime(createdAt)}</p>
       </Flex>
       <Title type='h5'>{name}</Title>
       <p className='text text_type_digits-default'>{status}</p>
