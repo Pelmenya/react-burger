@@ -33,16 +33,10 @@ export const useErrorHandler = () => {
       dispatch(clearAuthError());
     }
 
-    if (errorOrder === JWT_EXPIRED) {
-      dispatch(clearOrderError());
-      dispatch(postToken(refreshToken));
-    }
-
-    if (errorOrder && errorOrder !== JWT_EXPIRED ) {
+    if (errorOrder && errorOrder !== JWT_EXPIRED) {
       setRequestError(errorOrder);
       dispatch(clearOrderError());
     }
-
   };
 
   return { callErrorHandler };

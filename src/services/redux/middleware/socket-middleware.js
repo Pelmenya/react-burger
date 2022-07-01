@@ -9,18 +9,18 @@ export const socketMiddleware = (wsUrl) => {
       const { dispatch } = store;
       const { type } = action;
      // const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
-     console.log(type);
+//     console.log(type);
      if (type === 'orders/wsInit') {
         socket = new WebSocket(wsUrl);
       }
       if (socket) {
         socket.onopen = event => {
-          console.log("OnOpen", event);
+       //   console.log("OnOpen", event);
           //dispatch({ type: onOpen, payload: event });
         };
 
         socket.onerror = event => {
-          console.log("OnError", event);
+//          console.log("OnError", event);
 //          dispatch({ type: onError, payload: event });
         };
 

@@ -19,7 +19,6 @@ class OrdersAPI {
       ...headers.headers,
       authorization: orderData.token,
     };
-    console.log(orderData.ingredientsIds);
     return fetch(`${this.server}${ORDERS_END_POINTS.POST_ORDERS}`, {
       method: 'POST',
       headers: { ...reqHeaders },

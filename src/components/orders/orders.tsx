@@ -13,7 +13,6 @@ import ordersStyle from './orders.module.css';
 export const Orders = () => {
   const { loading, error } = useSelector(getBurgerIngredientsState);
   const location = useLocation();
-  console.log(location);
   return <section className={cn(ordersStyle.container, location.pathname === '/feed' ? ordersStyle.container_medium : ordersStyle.container_large) }>
       <Flex flexDirection='column'>
         <Title type='h2' className={cn(ordersStyle.title)}>
