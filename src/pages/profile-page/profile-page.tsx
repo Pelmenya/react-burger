@@ -5,6 +5,7 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 
 import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/use-menu-profile';
+import { profileRegExp } from '../../utils/regexp';
 
 export const ProfilePage = () => {
 
@@ -12,6 +13,8 @@ export const ProfilePage = () => {
   const { setActiveMenuProfile } = useMenuProfile();
 
   const location = useLocation();
+  const isProfile = profileRegExp.test(location.pathname);
+
   const [
     isOrderPage,
     setIsOrderPage,
@@ -52,7 +55,7 @@ export const ProfilePage = () => {
   
   return (
     <main className={isOrderPage ? 'center-container' : profilePage.container}>
-      {!isOrderPage && <MenuProfile />}
+      {isProfile && <MenuProfile />}
       <Outlet />
     </main>
   );

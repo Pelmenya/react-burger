@@ -53,7 +53,6 @@ const orderSlice = createSlice({
       state.error = undefined;
     });
     builder.addCase(postOrders.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.num = action.payload.order.number;
       state.loading = 'succeeded';
     });

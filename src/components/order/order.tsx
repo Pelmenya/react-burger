@@ -15,13 +15,13 @@ export const Order = () => {
         Заказ
       </Title>
       <Flex flexDirection='column' className={orderStyle.container}>
-        <p className={cn('text text_type_digits-default mb-10', orderStyle.number)}>#{'004567'}</p>
         <Title type='h2'>{mock[0].name}</Title>
         <p className='text text_type_main-default text_color_interface mt-3 mb-15'>Выполнен</p>
         <p className='text text_type_main-medium mb-6'>Состав:</p>
         <Flex flexDirection='column' className={cn(orderStyle.ingredients, 'pr-6')} gap={16}>
-          {mock.map((item) => (
-            <Flex className={orderStyle.ingredients__card} gap={16}>
+          {/* Поменять */}
+          {mock.map((item, index) => (
+            <Flex key={index} className={orderStyle.ingredients__card} gap={16}>
               <Flex className={orderStyle.ingredients__card} gap={16}>
                 <IngredientPreview ingredient={item} />
                 <Title className={orderStyle.ingredients__title}>{item.name}</Title>
