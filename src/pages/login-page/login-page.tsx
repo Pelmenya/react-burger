@@ -15,6 +15,7 @@ import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { Navigate, useLocation } from 'react-router';
 import { LocationStateType } from '../../utils/types/location-state-type';
+import { wsClose } from '../../services/redux/slices/orders';
 
 const schema = yup
   .object({
@@ -54,6 +55,7 @@ export const LoginPage = () => {
 
   const onSubmit = (data: FieldValues) => {
     dispatch(postLogin(data as Omit<UserData, 'name'>));
+    dispatch(wsClose())
   };
 
   useEffect(

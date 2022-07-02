@@ -12,7 +12,6 @@ import { getErrorRequestState } from '../../services/redux/selectors/error-reque
 import { useErrorHandler } from '../../hooks/use-error-handler';
 import { getUser, resetUser } from '../../services/redux/slices/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
-import { wsInitAllOrders } from '../../services/redux/slices/orders';
 
 export const App = () => {
   const accessToken = localStorage.getItem('accessToken');

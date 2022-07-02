@@ -1,15 +1,18 @@
 import cn from 'classnames';
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { OrdersStatistics } from '../../components/orders-statistics/orders-statistics';
 import { Orders } from '../../components/orders/orders';
 import { Title } from '../../components/title/title';
 import { useNavHeader } from '../../hooks/use-nav-header';
+import { getOrdersState } from '../../services/redux/selectors/orders';
 import { wsInitAllOrders } from '../../services/redux/slices/orders';
 import ordersPage from '../main-page/main-page.module.css';
 
 export const OrdersPage = () => {
   const { setActive } = useNavHeader();
+  const { socketAll } = useSelector(getOrdersState);
+
   const dispatch = useDispatch();
   useEffect(
     () => {
@@ -22,10 +25,11 @@ export const OrdersPage = () => {
 
   useEffect(
     () => {
-      dispatch(wsInitAllOrders('Привет'));
+      if (!socketAll) dispatch(wsInitAllOrders('Orders'));
     },
     [
       dispatch,
+      socketAll,
     ],
   );
 

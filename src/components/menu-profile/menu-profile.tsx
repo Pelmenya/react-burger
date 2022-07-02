@@ -29,11 +29,13 @@ const menuList = [
   },
 ];
 
+
 export const MenuProfile = () => {
   const refreshToken = localStorage.getItem('refreshToken');
   const { activeItem } = useSelector(getMenuProfileState);
   const dispatch = useDispatch<DispatchType>();
   const navigate = useNavigate();
+
   return (
     <div>
       <ul className={cn('text text_type_main-medium pl-5', menu.list)}>
@@ -46,7 +48,9 @@ export const MenuProfile = () => {
                 navigate(item.linkTo)
                 dispatch(setActiveMenuProfileItem(item.id)) 
               }
-              if (item.id === 'logout') dispatch(postLogout(refreshToken));
+              if (item.id === 'logout') {
+                dispatch(postLogout(refreshToken));
+              }
             }}>
             {item.text}
           </li>

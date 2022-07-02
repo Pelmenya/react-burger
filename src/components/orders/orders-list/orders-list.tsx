@@ -12,19 +12,17 @@ export const OrdersList = () => {
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname);
   const isProfile = profileRegExp.test(location.pathname)
-
-  const { ordersData, socket } = useSelector(getOrdersState);
-  
+  const { ordersData, ordersUserData, socketAll, socketUser } = useSelector(getOrdersState);
 
   return (
     <Flex
       flexDirection='column'
       gap={24}
       className={cn(ordersList.list, isProfile && ordersList.list_profile)}>
-      { isFeed && socket === 'all-orders' ? (
+      { isFeed && socketAll ? (
         ordersData?.orders.map((order) => <OrdersCard key={order._id} {...order} />)
-      ) : isProfile && socket === 'user-orders' ? (
-        ordersData?.orders.map((order) => <OrdersCard key={order._id} {...order} />)
+      ) : isProfile && socketUser  ? (
+        ordersUserData?.orders.map((order) => <OrdersCard key={order._id} {...order} />)
       ): <Loader />}
     </Flex>
   );
