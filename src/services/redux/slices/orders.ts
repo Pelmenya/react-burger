@@ -3,6 +3,7 @@ import { Nullable } from '../../../utils/types/nullable';
 import { OrdersType } from '../../../utils/types/orders';
 
 export interface OrdersStateType {
+  socket?: 'user-orders' | 'all-orders';
   ordersData: Nullable<OrdersType>;
   error?: string;
 }
@@ -15,7 +16,15 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState: initialOrdersState,
   reducers: {
-    wsInit: () => {},
+    wsInitAllOrders: (state, action) => {
+      state.socket = 'all-orders';
+    },
+    wsInitUserOrders: (state, action) => {
+      state.socket = 'user-orders';
+    },
+    wsClose: (state) => {
+      state.socket = undefined;
+    },
     clearOrdersError: (state) => {
       state.error = undefined;
     },
@@ -25,5 +34,10 @@ const ordersSlice = createSlice({
   },
 });
 
-export const { clearOrdersError, setOrdersData, wsInit } = ordersSlice.actions;
+export const {
+  clearOrdersError,
+  setOrdersData,
+  wsInitAllOrders,
+  wsInitUserOrders,
+} = ordersSlice.actions;
 export const ordersReducer = ordersSlice.reducer;

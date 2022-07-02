@@ -40,6 +40,7 @@ export const OrdersCard = ({
           return 'Готовится';
         case 'done':
           return 'Выполнен';
+        default: return 'Отменен'
       }
     },
     [

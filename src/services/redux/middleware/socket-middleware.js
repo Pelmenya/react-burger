@@ -1,32 +1,47 @@
+import { ALL_ORDERS, SOCKET } from "../../../utils/api-constants/ws";
 import { setOrdersData } from "../slices/orders";
 
 
-export const socketMiddleware = (wsUrl) => {
+export const socketMiddleware = () => {
   return store => {
     let socket = null;
+    let nameSocket = undefined;
 
     return next => action => {
       const { dispatch } = store;
+      
       const { type } = action;
-     // const { wsInit, wsSendMessage, onOpen, onClose, onError, onMessage } = wsActions;
-//     console.log(type);
-     if (type === 'orders/wsInit') {
-        socket = new WebSocket(wsUrl);
+      const accessToken = localStorage.getItem('accessToken')?.split(' ')[1];
+     if (type === 'orders/wsInitAllOrders') {
+        socket = null;
+        socket = new WebSocket(`${SOCKET}${ALL_ORDERS}`);
+        nameSocket = 'all-orders'
       }
+
+      if (type === 'orders/wsInitUserOrders') {
+        socket = null;
+        socket = new WebSocket(`${SOCKET}?token=${accessToken}`);
+        nameSocket = 'user-orders'
+      }
+
       if (socket) {
         socket.onopen = event => {
-       //   console.log("OnOpen", event);
+          //console.log("OnOpen", event);
           //dispatch({ type: onOpen, payload: event });
         };
 
         socket.onerror = event => {
-//          console.log("OnError", event);
-//          dispatch({ type: onError, payload: event });
+          console.log("OnError", event);
+         // dispatch({ type: onError, payload: event });
         };
 
         socket.onmessage = event => {
           const { data } = event;
-          dispatch(setOrdersData(JSON.parse(data)));
+          const parseData = JSON.parse(data);
+          console.log(parseData)
+        if (nameSocket === 'all-orders') dispatch(setOrdersData(parseData));
+        if (parseData.orders instanceof Array) 
+          if (nameSocket === 'user-orders') dispatch(setOrdersData({...parseData, orders: [ ...parseData.orders.reverse()]})); 
         };
 
         socket.onclose = event => {

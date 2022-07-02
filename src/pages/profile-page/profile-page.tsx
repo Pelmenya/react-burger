@@ -6,11 +6,13 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/use-menu-profile';
 import { profileRegExp } from '../../utils/regexp';
+import { useDispatch } from 'react-redux';
+import { wsInitUserOrders } from '../../services/redux/slices/orders';
 
 export const ProfilePage = () => {
   const { setActive } = useNavHeader();
   const { setActiveMenuProfile } = useMenuProfile();
-
+  const dispatch = useDispatch();
   const location = useLocation();
   const isProfile = profileRegExp.test(location.pathname);
 
@@ -25,6 +27,15 @@ export const ProfilePage = () => {
     },
     [
       setActive,
+    ],
+  );
+
+  useEffect(
+    () => {
+      dispatch(wsInitUserOrders('Привет Юзер'));
+    },
+    [
+      dispatch,
     ],
   );
 

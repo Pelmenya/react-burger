@@ -12,7 +12,7 @@ export const OrderModal = () => {
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname);
   const isProfile = profileRegExp.test(location.pathname);
-
+	
   const { id } = useParams();
 
   /*   useEffect(
@@ -33,8 +33,9 @@ export const OrderModal = () => {
       if (isProfile) navigate(`/profile/orders`, { state: null });
     },
     [
-      dispatch,
       navigate,
+      isFeed,
+      isProfile,
     ],
   );
 

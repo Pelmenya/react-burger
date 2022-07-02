@@ -12,7 +12,7 @@ import { getErrorRequestState } from '../../services/redux/selectors/error-reque
 import { useErrorHandler } from '../../hooks/use-error-handler';
 import { getUser, resetUser } from '../../services/redux/slices/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
-import { wsInit } from '../../services/redux/slices/orders';
+import { wsInitAllOrders } from '../../services/redux/slices/orders';
 
 export const App = () => {
   const accessToken = localStorage.getItem('accessToken');
@@ -63,15 +63,6 @@ export const App = () => {
       refreshToken,
       accessToken,
       user,
-      dispatch,
-    ],
-  );
-
-  useEffect(
-    () => {
-      dispatch(wsInit());
-    },
-    [
       dispatch,
     ],
   );
