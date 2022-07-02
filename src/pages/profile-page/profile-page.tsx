@@ -8,7 +8,6 @@ import { useMenuProfile } from '../../hooks/use-menu-profile';
 import { profileRegExp } from '../../utils/regexp';
 
 export const ProfilePage = () => {
-
   const { setActive } = useNavHeader();
   const { setActiveMenuProfile } = useMenuProfile();
 
@@ -52,9 +51,9 @@ export const ProfilePage = () => {
       setActiveMenuProfile,
     ],
   );
-  
+
   return (
-    <main className={isOrderPage ? 'center-container' : profilePage.container}>
+    <main className={isProfile ? profilePage.container : 'center-container'}>
       {isProfile && <MenuProfile />}
       <Outlet />
     </main>
