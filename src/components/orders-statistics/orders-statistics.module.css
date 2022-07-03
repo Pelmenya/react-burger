@@ -21,3 +21,8 @@
 .feed {
   width: 272px;
 }
+
+.orders {
+  max-height: 160px;
+  flex-wrap: wrap;
+}

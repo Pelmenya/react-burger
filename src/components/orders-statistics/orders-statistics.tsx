@@ -1,24 +1,11 @@
 import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { getOrdersState } from '../../services/redux/selectors/orders';
+import { maxCountOrdersInFeed } from '../../utils/constants';
+import { normalizeTotalCount } from '../../utils/functions/normalizeTotalCount';
 import { Flex } from '../flex/flex';
 import { Title } from '../title/title';
 import ordersStatistics from './orders-statistics.module.css';
-
-export const normalizeTotalCount = (count: number | undefined): string => {
-  if (count) {
-    const arr = String(count).split('').reverse();
-    const arrResult: string[] = [];
-    arr.forEach((item, index) => {
-      if (!((index + 1) % 3)) {
-        arrResult.push(item);
-        arrResult.push(' ');
-      } else arrResult.push(item);
-    });
-    return arrResult.reverse().join('');
-  }
-  return '';
-};
 
 export const OrdersStatistics = () => {
   const { ordersData } = useSelector(getOrdersState);
@@ -31,18 +18,28 @@ export const OrdersStatistics = () => {
       <Flex className={ordersStatistics.wrapper}>
         <Flex flexDirection='column' className={cn('mr-9', ordersStatistics.feed)}>
           <p className='text text_type_main-medium mb-6'>Готовы: </p>
-          <Flex flexDirection='column' gap={8}>
-            <p className={'text text_type_digits-default text_color_interface'}>{'034538'}</p>
+          <Flex className={ordersStatistics.orders} flexDirection='column' gap={8}>
+            {ordersData?.orders
+              .filter((order) => order.status === 'done')
+              .splice(0, maxCountOrdersInFeed)
+              .map((order) => (
+                <p key={order._id} className={'text text_type_digits-default text_color_interface'}>
+                  {order.number}
+                </p>
+              ))}
           </Flex>
         </Flex>
         <Flex flexDirection='column' className={ordersStatistics.feed}>
           <p className='text text_type_main-medium mb-6'>В работе:</p>
-          <Flex flexDirection='column' gap={8}>
-            <p className='text text_type_digits-default'>{'034538'}</p>
-            <p className='text text_type_digits-default'>{'034538'}</p>
-            <p className='text text_type_digits-default'>{'034538'}</p>
-            <p className='text text_type_digits-default'>{'034538'}</p>
-            <p className='text text_type_digits-default'>{'034538'}</p>
+          <Flex className={ordersStatistics.orders} flexDirection='column' gap={8}>
+            {ordersData?.orders
+              .filter((order) => order.status !== 'done')
+              .splice(0, maxCountOrdersInFeed)
+              .map((order) => (
+                <p key={order._id} className={'text text_type_digits-default'}>
+                  {order.number}
+                </p>
+              ))}
           </Flex>
         </Flex>
       </Flex>
