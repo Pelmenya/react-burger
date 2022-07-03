@@ -2,6 +2,7 @@ import cn from 'classnames';
 import { useSelector } from 'react-redux';
 import { getOrdersState } from '../../services/redux/selectors/orders';
 import { maxCountOrdersInFeed } from '../../utils/constants';
+import { formatOrderNumber } from '../../utils/functions/formatOrderNumber';
 import { normalizeTotalCount } from '../../utils/functions/normalizeTotalCount';
 import { Flex } from '../flex/flex';
 import { Title } from '../title/title';
@@ -24,7 +25,7 @@ export const OrdersStatistics = () => {
               .splice(0, maxCountOrdersInFeed)
               .map((order) => (
                 <p key={order._id} className={'text text_type_digits-default text_color_interface'}>
-                  {order.number}
+                  {formatOrderNumber(String(order.number))}
                 </p>
               ))}
           </Flex>
@@ -37,7 +38,7 @@ export const OrdersStatistics = () => {
               .splice(0, maxCountOrdersInFeed)
               .map((order) => (
                 <p key={order._id} className={'text text_type_digits-default'}>
-                  {order.number}
+                  {formatOrderNumber(String(order.number))}
                 </p>
               ))}
           </Flex>

@@ -5,25 +5,27 @@ import { Flex } from '../../flex/flex';
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
 import { getOrdersState } from '../../../services/redux/selectors/orders';
-import {feedRegExp, profileRegExp } from '../../../utils/regexp';
+import { feedRegExp, profileRegExp } from '../../../utils/regexp';
 import { Loader } from '../../loader/loader';
 
 export const OrdersList = () => {
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname);
-  const isProfile = profileRegExp.test(location.pathname)
-  const { ordersData, ordersUserData, socketAll, socketUser } = useSelector(getOrdersState);
+  const isProfile = profileRegExp.test(location.pathname);
+  const { ordersData, ordersUserData } = useSelector(getOrdersState);
 
   return (
     <Flex
       flexDirection='column'
       gap={24}
       className={cn(ordersList.list, isProfile && ordersList.list_profile)}>
-      { isFeed && socketAll ? (
-        ordersData?.orders.map((order) => <OrdersCard key={order._id} {...order} />)
-      ) : isProfile && socketUser  ? (
-        ordersUserData?.orders.map((order) => <OrdersCard key={order._id} {...order} />)
-      ): <Loader />}
+      {isFeed && ordersData ? (
+        ordersData.orders.map((order) => <OrdersCard key={order._id} {...order} />)
+      ) : isProfile && ordersUserData ? (
+        ordersUserData.orders.map((order) => <OrdersCard key={order._id} {...order} />)
+      ) : (
+        <Loader />
+      )}
     </Flex>
   );
 };
