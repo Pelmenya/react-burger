@@ -25,7 +25,7 @@ export const OrdersPage = () => {
 
   useEffect(
     () => {
-      if (!socketAll) dispatch(wsInitAllOrders('Orders'));
+      if (!socketAll) dispatch(wsInitAllOrders());
     },
     [
       dispatch,

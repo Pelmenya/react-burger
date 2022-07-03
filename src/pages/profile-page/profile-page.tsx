@@ -36,7 +36,7 @@ export const ProfilePage = () => {
   useEffect(
     () => {
       if (!socketUser) {
-        dispatch(wsInitUserOrders('UserOrders'));
+        dispatch(wsInitUserOrders());
       }
     },
     [

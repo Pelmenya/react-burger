@@ -8,9 +8,9 @@ export const socketMiddleware = () => {
 
     return (next) => (action) => {
       const { dispatch } = store;
-
       const { type } = action;
       const accessToken = localStorage.getItem('accessToken')?.split(' ')[1];
+
       if (type === 'orders/wsInitAllOrders') {
         socketAll = new WebSocket(`${SOCKET}${ALL_ORDERS}`);
       }
@@ -20,33 +20,21 @@ export const socketMiddleware = () => {
       }
 
       if (socketAll) {
-        socketAll.onopen = (event) => {
-          //console.log("OnOpen", event);
-          //dispatch({ type: onOpen, payload: event });
-        };
-
-
         socketAll.onmessage = (event) => {
           const { data } = event;
-          const parseData = {...JSON.parse(data)};
+          const parseData = JSON.parse(data);
           dispatch(setOrdersData(parseData));
-        };
-
-        socketAll.onclose = (event) => {
-          console.log('OnClose', event);
-          //        dispatch({ type: onClose, payload: event });
         };
       }
 
       if (socketUser) {
-        socketUser.onerror = (event) => {
-          console.log('OnError', event);
-          // dispatch({ type: onError, payload: event });
+        socketUser.onerror = () => {
+          dispatch(wsClose());
         };
 
         socketUser.onmessage = (event) => {
           const { data } = event;
-          const parseData = {...JSON.parse(data)};
+          const parseData = JSON.parse(data);
           if (parseData.orders instanceof Array)
             dispatch(
               setOrdersUserData({
@@ -57,12 +45,11 @@ export const socketMiddleware = () => {
               }),
             );
         };
-        if (type === 'orders/wsClose') {
-          socketUser = null;
-          dispatch(
-            setOrdersUserData(null)          );        }
         
-
+        if (type === 'orders/wsClose') {
+          socketUser.close();
+          dispatch(setOrdersUserData(null));
+        }
       }
 
       next(action);

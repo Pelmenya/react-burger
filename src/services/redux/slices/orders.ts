@@ -21,10 +21,10 @@ const ordersSlice = createSlice({
   name: 'orders',
   initialState: initialOrdersState,
   reducers: {
-    wsInitAllOrders: (state, action) => {
+    wsInitAllOrders: (state) => {
       state.socketAll = true;
     },
-    wsInitUserOrders: (state, action) => {
+    wsInitUserOrders: (state) => {
       state.socketUser = true;
     },
     wsClose: (state) => {
