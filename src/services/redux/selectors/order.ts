@@ -1,7 +1,3 @@
-import { OrderStateType } from "../slices/order";
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  order: OrderStateType;
-}
-
-export const getOrderState = (state: State) => state.order;
+export const getOrderState = (state: RootState) => state.order;

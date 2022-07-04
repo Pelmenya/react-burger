@@ -6,16 +6,17 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/use-menu-profile';
 import { profileRegExp } from '../../utils/regexp';
-import { useDispatch, useSelector } from 'react-redux';
 import { wsInitUserOrders } from '../../services/redux/slices/orders';
 import { getOrdersState } from '../../services/redux/selectors/orders';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const ProfilePage = () => {
   const { setActive } = useNavHeader();
   const { setActiveMenuProfile } = useMenuProfile();
-  const { socketUser } = useSelector(getOrdersState);
+  const { socketUser } = useAppSelector(getOrdersState);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const location = useLocation();
   const isProfile = profileRegExp.test(location.pathname);
 

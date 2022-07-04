@@ -1,7 +1,4 @@
-import { AuthStateType } from '../slices/auth';
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  auth: AuthStateType;
-}
 
-export const getAuthState = (state: State) => state.auth;
+export const getAuthState = (state: RootState) => state.auth;

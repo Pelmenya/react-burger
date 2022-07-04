@@ -5,14 +5,14 @@ import { Title } from '../title/title';
 import { TabContainer } from './components/tab-container/tab-container';
 
 import burgerIngredients from './burger-ingredients.module.css';
-import { useSelector } from 'react-redux';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { Loader } from '../loader/loader';
 import { useDrop } from 'react-dnd';
 import { BadRequest } from '../bad-request/bad-request';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const BurgerIngredients = () => {
-  const { loading, error } = useSelector(getBurgerIngredientsState);
+  const { loading, error } = useAppSelector(getBurgerIngredientsState);
   const [
     ,
     dropRef,

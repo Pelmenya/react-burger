@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getMenuProfileState } from '../../services/redux/selectors/menu-profile';
 import { postLogout } from '../../services/redux/slices/auth';
 import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile';
-import { DispatchType } from '../../utils/types/dispatch-type';
 
 import menu from './menu-profile.module.css';
 
@@ -32,8 +32,8 @@ const menuList = [
 
 export const MenuProfile = () => {
   const refreshToken = localStorage.getItem('refreshToken');
-  const { activeItem } = useSelector(getMenuProfileState);
-  const dispatch = useDispatch<DispatchType>();
+  const { activeItem } = useAppSelector(getMenuProfileState);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (

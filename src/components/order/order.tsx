@@ -23,7 +23,7 @@ export const Order = () => {
           {mock.map((item, index) => (
             <Flex key={index} className={orderStyle.ingredients__card} gap={16}>
               <Flex className={orderStyle.ingredients__card} gap={16}>
-                <IngredientPreview ingredient={item} />
+                <IngredientPreview ingredient={item}/>
                 <Title className={orderStyle.ingredients__title}>{item.name}</Title>
               </Flex>
               <span className={cn('constructor-element__price', orderStyle.ingredients__price)}>

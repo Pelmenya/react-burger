@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getOrdersState } from '../../services/redux/selectors/orders';
 import { maxCountOrdersInFeed } from '../../utils/constants';
 import { formatOrderNumber } from '../../utils/functions/formatOrderNumber';
@@ -9,7 +9,7 @@ import { Title } from '../title/title';
 import ordersStatistics from './orders-statistics.module.css';
 
 export const OrdersStatistics = () => {
-  const { ordersData } = useSelector(getOrdersState);
+  const { ordersData } = useAppSelector(getOrdersState);
 
   return (
     <section className={ordersStatistics.container}>

@@ -1,6 +1,3 @@
-import { BurgerIngredientsStateType } from '../slices/burger-ingredients';
-interface State {
-  burgerIngredients: BurgerIngredientsStateType;
-}
+import { RootState } from "../../../utils/types/root-state";
 
-export const getBurgerIngredientsState = (state: State) => state.burgerIngredients;
+export const getBurgerIngredientsState = (state: RootState) => state.burgerIngredients;

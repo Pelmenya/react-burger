@@ -83,6 +83,7 @@ export const OrdersCard = ({
                 ingredient={item}
                 key={shortid.generate()}
                 lastCount={(index === 0 && countNext > 0 && countNext) || undefined}
+                isRotate={true}
               />
             ))}
         </ul>

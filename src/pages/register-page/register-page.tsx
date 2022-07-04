@@ -11,9 +11,9 @@ import { InputText } from '../../components/profile-form-container/components/in
 import { UserData } from '../../api/auth-api';
 import { schemaProfileForm } from '../../utils/constants';
 import { postRegister } from '../../services/redux/slices/auth';
-import { useDispatch, useSelector } from 'react-redux';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { getAuthState } from '../../services/redux/selectors/auth';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 const links = [
   {
@@ -24,8 +24,8 @@ const links = [
 ];
 
 export const RegisterPage = () => {
-  const dispatch = useDispatch<DispatchType>();
-  const { loading } = useSelector(getAuthState);
+  const dispatch = useAppDispatch();
+  const { loading } = useAppSelector(getAuthState);
 
   const { setActive } = useNavHeader();
 

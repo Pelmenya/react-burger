@@ -9,6 +9,9 @@
   height: 64px;
   background-image: linear-gradient(63.18deg, #801ab3 0%, #4c4cff 100%);
   margin-left: -16px;
+}
+
+.container_rotate {
   transform: rotate(180deg);
 }
 

@@ -3,16 +3,16 @@ import ordersList from './orders-list.module.css';
 import { OrdersCard } from '../orders-card/orders-card';
 import { Flex } from '../../flex/flex';
 import { useLocation } from 'react-router';
-import { useSelector } from 'react-redux';
 import { getOrdersState } from '../../../services/redux/selectors/orders';
 import { feedRegExp, profileRegExp } from '../../../utils/regexp';
 import { Loader } from '../../loader/loader';
+import { useAppSelector } from '../../../hooks/use-app-selector';
 
 export const OrdersList = () => {
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname);
   const isProfile = profileRegExp.test(location.pathname);
-  const { ordersData, ordersUserData } = useSelector(getOrdersState);
+  const { ordersData, ordersUserData } = useAppSelector(getOrdersState);
 
   return (
     <Flex

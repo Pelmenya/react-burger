@@ -1,7 +1,3 @@
-import { ProfileStateType } from "../slices/profile";
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  profile: ProfileStateType;
-}
-
-export const getProfileState = (state: State) => state.profile;
+export const getProfileState = (state: RootState) => state.profile;

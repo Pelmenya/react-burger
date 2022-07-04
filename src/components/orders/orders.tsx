@@ -1,7 +1,7 @@
 
 import cn from 'classnames';
-import { useSelector } from 'react-redux';
 import { useLocation } from 'react-router';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { feedRegExp } from '../../utils/regexp';
 import { BadRequest } from '../bad-request/bad-request';
@@ -12,7 +12,7 @@ import { OrdersList } from './orders-list/orders-list';
 import ordersStyle from './orders.module.css';
 
 export const Orders = () => {
-  const { loading, error } = useSelector(getBurgerIngredientsState);
+  const { loading, error } = useAppSelector(getBurgerIngredientsState);
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname)
   return <section className={cn(ordersStyle.container, isFeed ? ordersStyle.container_medium : ordersStyle.container_large) }>

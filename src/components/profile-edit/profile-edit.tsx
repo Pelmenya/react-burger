@@ -5,19 +5,19 @@ import { ProfileFormContainer } from '../../components/profile-form-container/pr
 import { InputText } from '../profile-form-container/components/input-text/input-text';
 import { useCallback, useEffect, useState } from 'react';
 import { schemaProfileForm } from '../../utils/constants';
-import { useDispatch, useSelector } from 'react-redux';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { ButtonWithChildren } from '../button-with-children/button-with-children';
 import { Flex } from '../flex/flex';
 
 import profileEdit from './profile-edit.module.css';
 import { patchUser } from '../../services/redux/slices/profile';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { UserData } from '../../api/auth-api';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 
 export const ProfileEdit = () => {
-  const { user, loading } = useSelector(getProfileState);
-  const dispatch = useDispatch<DispatchType>();
+  const { user, loading } = useAppSelector(getProfileState);
+  const dispatch = useAppDispatch();
   const accessToken = localStorage.getItem('accessToken');
 
   const [

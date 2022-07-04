@@ -1,13 +1,12 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { useLocation, useNavigate, useParams } from 'react-router';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { feedRegExp, profileRegExp } from '../../utils/regexp';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { Modal } from '../modal/modal';
 import { Order } from '../order/order';
 
 export const OrderModal = () => {
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const location = useLocation();
   const isFeed = feedRegExp.test(location.pathname);

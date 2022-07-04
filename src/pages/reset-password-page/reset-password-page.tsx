@@ -9,11 +9,11 @@ import { ButtonWithChildren } from '../../components/button-with-children/button
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { TResetPassword } from '../../api/profile-api';
-import { useDispatch, useSelector } from 'react-redux';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { postResetPassword } from '../../services/redux/slices/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 const schema = yup
   .object({
@@ -31,10 +31,10 @@ const links = [
 ];
 
 export const ResetPasswordPage = () => {
-  const { passwordIsSend, loading } = useSelector(getProfileState);
+  const { passwordIsSend, loading } = useAppSelector(getProfileState);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
 
   const { setActive } = useNavHeader();
 
