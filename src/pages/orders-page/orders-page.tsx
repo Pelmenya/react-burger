@@ -6,11 +6,14 @@ import { Title } from '../../components/title/title';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useNavHeader } from '../../hooks/use-nav-header';
+import { getAuthState } from '../../services/redux/selectors/auth';
 import { getOrdersState } from '../../services/redux/selectors/orders';
+import { getProfileState } from '../../services/redux/selectors/profile';
 import { wsInitAllOrders } from '../../services/redux/slices/orders';
 import ordersPage from '../main-page/main-page.module.css';
 
 export const OrdersPage = () => {
+  const { loading } = useAppSelector(getProfileState);
   const { setActive } = useNavHeader();
   const { socketAll } = useAppSelector(getOrdersState);
 
@@ -26,11 +29,12 @@ export const OrdersPage = () => {
 
   useEffect(
     () => {
-      if (!socketAll) dispatch(wsInitAllOrders());
+      if (loading === 'succeeded' && !socketAll) dispatch(wsInitAllOrders());
     },
     [
       dispatch,
       socketAll,
+      loading,
     ],
   );
 

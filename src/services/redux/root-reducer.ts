@@ -11,7 +11,7 @@ import { ordersReducer } from './slices/orders';
 import { profileReducer } from './slices/profile';
 
 export const rootReducer = combineReducers({
-  errorRequest: errorRequestReducer,  
+  errorRequest: errorRequestReducer,
   headerNav: headerNavReducer,
   burgerIngredients: burgerIngredientsReducer,
   burgerConstructor: burgerConstructorReducer,

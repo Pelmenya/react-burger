@@ -1,16 +1,20 @@
+import { Middleware } from 'redux';
 import { ALL_ORDERS, SOCKET } from '../../../utils/api-constants/ws';
-import { setOrdersData, setOrdersUserData, wsClose } from '../slices/orders';
+import { Nullable } from '../../../utils/types/nullable';
+import { postToken } from '../slices/auth';
+import { setOrdersData, setOrdersUserData, wsInitUserOrders } from '../slices/orders';
+import { StoreType } from '../store';
 
-export const socketMiddleware = () => {
-  return (store) => {
-    let socketAll = null;
-    let socketUser = null;
+export const socketMiddleware = (() => {
+  return (store: StoreType) => {
+    let socketAll: Nullable<WebSocket> = null;
+    let socketUser: Nullable<WebSocket> = null;
 
     return (next) => (action) => {
       const { dispatch } = store;
       const { type } = action;
       const accessToken = localStorage.getItem('accessToken')?.split(' ')[1];
-
+      const refreshToken = localStorage.getItem('refreshToken');
       if (type === 'orders/wsInitAllOrders') {
         socketAll = new WebSocket(`${SOCKET}${ALL_ORDERS}`);
       }
@@ -28,13 +32,13 @@ export const socketMiddleware = () => {
       }
 
       if (socketUser) {
-        socketUser.onerror = () => {
-          dispatch(wsClose());
-        };
-
         socketUser.onmessage = (event) => {
           const { data } = event;
           const parseData = JSON.parse(data);
+          if (parseData.message === 'Invalid or missing token'){
+            dispatch(postToken(refreshToken));
+            if (refreshToken) dispatch(wsInitUserOrders());
+          }
           if (parseData.orders instanceof Array)
             dispatch(
               setOrdersUserData({
@@ -55,4 +59,4 @@ export const socketMiddleware = () => {
       next(action);
     };
   };
-};
+})() as Middleware;

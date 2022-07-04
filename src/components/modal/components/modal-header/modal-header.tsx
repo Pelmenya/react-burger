@@ -8,7 +8,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import modalHeader from './modal-header.module.css';
 
 export interface ModalHeaderPropsType {
-  title?: string;
+  title?: string | JSX.Element ;
   handlerOnClose: () => void;
 }
 

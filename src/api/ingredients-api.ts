@@ -1,5 +1,5 @@
 import { SERVER, INGREDIENTS_END_POINTS } from '../utils/api-constants/server';
-import { checkResponse } from '../utils/functions/checkResponse';
+import { checkResponse } from '../utils/functions/check-response';
 
 class IngredientsAPI {
   server: string;

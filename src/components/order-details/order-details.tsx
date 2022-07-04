@@ -10,7 +10,7 @@ import { Loader } from '../loader/loader';
 import { BadRequest } from '../bad-request/bad-request';
 import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
 import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
-import { formatOrderNumber } from '../../utils/functions/formatOrderNumber';
+import { formatOrderNumber } from '../../utils/functions/format-order-number';
 import { JWT_EXPIRED } from '../../utils/constants';
 import { postToken } from '../../services/redux/slices/auth';
 import { postOrders } from '../../services/redux/slices/order';

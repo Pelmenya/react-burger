@@ -7,14 +7,13 @@ export interface OrdersStateType {
   socketAll: boolean;
   ordersData: Nullable<OrdersType>;
   ordersUserData: Nullable<OrdersType>;
-  viewOrder: Nullable<OrderType>;
+  viewOrder?: OrderType;
   error?: string;
 }
 
 const initialOrdersState = {
   ordersData: null,
   ordersUserData: null,
-  viewOrder: null,
   socketAll: false,
   socketUser: false,
 } as OrdersStateType;
@@ -46,7 +45,7 @@ const ordersSlice = createSlice({
       state.viewOrder = action.payload;
     },
     clearViewOrder: (state, action) => {
-      state.viewOrder = null;
+      state.viewOrder = undefined;
     },
   },
 });

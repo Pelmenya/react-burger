@@ -1,8 +1,8 @@
-import { useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../services/redux/selectors/burger-constructor';
+import { useAppSelector } from './use-app-selector';
 
 export const useIngredientsIds = () => {
-  const { bun, toppings } = useSelector(getBurgerConstructorState);
+  const { bun, toppings } = useAppSelector(getBurgerConstructorState);
 
   let orderIngredientsIds = [] as string[];
   if (toppings.length)

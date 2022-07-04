@@ -1,12 +1,11 @@
-import { useCallback } from 'react';
 import cn from 'classnames';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import shortid from 'shortid';
 
 import { useOrder } from '../../../hooks/use-order';
 import { countIngredientsOfOrdersCard } from '../../../utils/constants';
-import { formatOrderNumber } from '../../../utils/functions/formatOrderNumber';
-import { formatOrderTime } from '../../../utils/functions/formatOrderTime';
+import { formatOrderNumber } from '../../../utils/functions/format-order-number';
+import { formatOrderTime } from '../../../utils/functions/format-order-time';
 import { OrderType } from '../../../utils/types/orders';
 import { Flex } from '../../flex/flex';
 import { IngredientPreview } from '../../ingredient-preview/ingredient-preview';
@@ -14,6 +13,8 @@ import { Title } from '../../title/title';
 import ordersCard from './orders-card.module.css';
 import { useLocation, useNavigate } from 'react-router';
 import { feedRegExp, profileRegExp } from '../../../utils/regexp';
+import { getOrderStatus } from '../../../utils/functions/get-order-status';
+import { useMemo } from 'react';
 
 export const OrdersCard = ({
   _id,
@@ -28,38 +29,34 @@ export const OrdersCard = ({
   const isProfile = profileRegExp.test(location.pathname);
   const navigate = useNavigate();
 
-  const { getTotalOrderCost, getViewOrderIngredients } = useOrder(ingredientsIds);
+  const { getTotalOrderCost, getViewOrderIngredients } = useOrder();
   const countNext = ingredientsIds.length - countIngredientsOfOrdersCard;
-
-  const getOrderStatus = useCallback(
-    () => {
-      switch (status) {
-        case 'created':
-          return 'Создан';
-        case 'pending':
-          return 'Готовится';
-        case 'done':
-          return 'Выполнен';
-        default: return 'Отменен'
-      }
-    },
-    [
-      status,
-    ],
-  );
 
   const handlerOnClick = () => {
     if (isFeed) navigate(`/feed/${_id}`, { state: { background: location } });
     if (isProfile) navigate(`/profile/orders/${_id}`, { state: { background: location } });
   };
 
+  const totalOrderCost = useMemo(() => getTotalOrderCost(ingredientsIds), [
+    ingredientsIds,
+    getTotalOrderCost,
+  ]);
+  const viewOrderIngredients = useMemo(() => getViewOrderIngredients(ingredientsIds), [
+    ingredientsIds,
+    getViewOrderIngredients,
+  ]);
+  const orderTime = useMemo(() => formatOrderTime(createdAt), [
+    createdAt,
+  ]);
+  const orderStatus = useMemo(() => getOrderStatus(status), [
+    status,
+  ]);
+
   return (
     <div className={ordersCard.container} onClick={handlerOnClick}>
       <Flex className={ordersCard.wrapper}>
         <p className='text text_type_digits-default'>#{formatOrderNumber(String(number))}</p>
-        <p className='text text_type_main-default text_color_inactive'>
-          {formatOrderTime(createdAt)}
-        </p>
+        <p className='text text_type_main-default text_color_inactive'>{orderTime}</p>
       </Flex>
       <Title type='h5'>{name}</Title>
       {isProfile ? (
@@ -69,14 +66,14 @@ export const OrdersCard = ({
             ordersCard.status,
             status === 'done' && 'text_color_interface',
           )}>
-          {getOrderStatus()}
+          {orderStatus}
         </p>
       ) : (
         <></>
       )}
       <Flex className={ordersCard.wrapper}>
         <ul className={ordersCard.ingredients}>
-          {getViewOrderIngredients()
+          {viewOrderIngredients
             .reverse()
             .map((item, index) => (
               <IngredientPreview
@@ -88,7 +85,7 @@ export const OrdersCard = ({
             ))}
         </ul>
         <span className='constructor-element__price'>
-          {getTotalOrderCost()}
+          {totalOrderCost}
           <CurrencyIcon type='primary' />
         </span>
       </Flex>

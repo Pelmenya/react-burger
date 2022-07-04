@@ -9,7 +9,7 @@ import { ModalHeader } from './components/modal-header/modal-header';
 
 export interface ModalPropsType {
   children?: JSX.Element;
-  title?: string;
+  title?: string | JSX.Element;
   handlerOnClose: () => void;
 }
 

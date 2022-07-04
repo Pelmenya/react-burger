@@ -1,6 +1,6 @@
 import { headers } from '../utils/api-constants/headers';
 import { SERVER, ORDERS_END_POINTS } from '../utils/api-constants/server';
-import { checkResponse } from '../utils/functions/checkResponse';
+import { checkResponse } from '../utils/functions/check-response';
 
 export interface IngredientsIdsPropsType {
   ingredientsIds: string[];
