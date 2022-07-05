@@ -15,7 +15,6 @@ import { IngredientModal } from '../ingredient-modal/ingredient-modal';
 import { Orders } from '../orders/orders';
 import { OrderPage } from '../../pages/order-page/order-page';
 import { OrderModal } from '../order-modal/order-modal';
-import { Order } from '../order/order';
 
 export const RoutesApp = () => {
   const location = useLocation();
