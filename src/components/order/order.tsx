@@ -67,8 +67,7 @@ export const Order = () => {
         </p>
         <p className='text text_type_main-medium mb-6'>Состав:</p>
         <Flex flexDirection='column' className={cn(orderStyle.ingredients, 'pr-6')} gap={16}>
-          {/* Поменять */}
-          {order?.ingredientsTotal.map((item, index) => (
+          {order?.ingredientsTotal.map((item) => (
             <Flex key={item._id} className={orderStyle.ingredients__card} gap={16}>
               <Flex className={orderStyle.ingredients__card} gap={16}>
                 <IngredientPreview ingredient={item} />

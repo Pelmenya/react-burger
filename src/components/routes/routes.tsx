@@ -27,7 +27,7 @@ export const RoutesApp = () => {
         <Route path='/' element={<Outlet />}>
           <Route index element={<MainPage />} />
           <Route path='feed' element={<OrdersPage />} />
-          <Route path='feed/:id' element={<Order />} />
+          <Route path='feed/:id' element={<OrderPage />} />
           <Route path='ingredients/:id' element={<IngredientPage />} />
           <Route
             path='profile'

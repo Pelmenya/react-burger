@@ -6,7 +6,6 @@ import { Title } from '../../components/title/title';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useNavHeader } from '../../hooks/use-nav-header';
-import { getAuthState } from '../../services/redux/selectors/auth';
 import { getOrdersState } from '../../services/redux/selectors/orders';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { wsInitAllOrders } from '../../services/redux/slices/orders';
