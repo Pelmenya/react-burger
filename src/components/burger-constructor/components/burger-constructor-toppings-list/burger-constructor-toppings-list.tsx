@@ -5,11 +5,11 @@ import { Flex } from '../../../flex/flex';
 import { BurgerConstructorCard } from '../burger-constructor-card/burger-constructor-card';
 
 import burgerConstructorToppngsList from './burger-constructor-toppings-list.module.css';
-import { useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../../../services/redux/selectors/burger-constructor';
+import { useAppSelector } from '../../../../hooks/use-app-selector';
 
 export const BurgerConstructorToppingsList = () => {
-  const { toppings } = useSelector(getBurgerConstructorState);
+  const { toppings } = useAppSelector(getBurgerConstructorState);
 
   return (
     <Flex

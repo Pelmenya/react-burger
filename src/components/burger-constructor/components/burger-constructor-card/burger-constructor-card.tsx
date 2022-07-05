@@ -5,7 +5,6 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 
 import burgerConstructorCard from './burger-constructor-card.module.css';
 import { Spacer } from '../../../spacer/spacer';
-import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../../../services/redux/selectors/burger-constructor';
 import { setToppings } from '../../../../services/redux/slices/burger-constructor';
 import { setOrderTotal } from '../../../../services/redux/slices/order';
@@ -15,6 +14,8 @@ import { useDrag, useDrop } from 'react-dnd';
 import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
 import { BurgerIngredientsCardPropsType } from '../../../burger-ingredients/components/burger-ingredients-card/burger-ingredients-card';
 import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
+import { useAppDispatch } from '../../../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../../../hooks/use-app-selector';
 
 export interface BurgerConstructorCardPropsType extends BurgerIngredientsCardPropsType {
   type?: 'top' | 'bottom',
@@ -22,9 +23,9 @@ export interface BurgerConstructorCardPropsType extends BurgerIngredientsCardPro
 }
 
 export const BurgerConstructorCard = ({ ingredient, type, isLocked = false } : BurgerConstructorCardPropsType) => {
-  const dispatch = useDispatch();
-  const { ingredients } = useSelector(getBurgerIngredientsState);
-  const { toppings } = useSelector(getBurgerConstructorState);
+  const dispatch = useAppDispatch();
+  const { ingredients } = useAppSelector(getBurgerIngredientsState);
+  const { toppings } = useAppSelector(getBurgerConstructorState);
   const { totalCost } = useTotalCostOrder();
 
   const isBun = useMemo(() => ingredient.type === 'bun', [

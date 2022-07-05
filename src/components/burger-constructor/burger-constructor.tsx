@@ -10,7 +10,6 @@ import burgerConstructor from './burger-constructor.module.css';
 import { BurgerConstructorEmpty } from './components/burger-constructor-empty/burger-constructor-empty';
 import { useDrop } from 'react-dnd';
 import shortid from 'shortid';
-import { useDispatch, useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../../services/redux/selectors/burger-constructor';
 import { setBun, setToppings } from '../../services/redux/slices/burger-constructor';
 import { updateCountIngredient } from '../../services/redux/slices/burger-ingredients';
@@ -18,11 +17,13 @@ import { getBurgerIngredientsState } from '../../services/redux/selectors/burger
 import { maxCountBuns } from '../../utils/constants';
 import { BurgerConstructorTotal } from './components/burger-constructor-total/burger-constructor-total';
 import { BurgerIngredientType } from '../../utils/types/burger-ingredient';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const BurgerConstructor = () => {
-  const dispatch = useDispatch();
-  const { ingredients } = useSelector(getBurgerIngredientsState);
-  const { bun, toppings } = useSelector(getBurgerConstructorState);
+  const dispatch = useAppDispatch();
+  const { ingredients } = useAppSelector(getBurgerIngredientsState);
+  const { bun, toppings } = useAppSelector(getBurgerConstructorState);
   const dropIngredient = (ingredient: BurgerIngredientType) => {
     if (ingredient.type === 'bun') {
       if (ingredient._id !== bun?._id) {

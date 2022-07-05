@@ -9,12 +9,12 @@ import {
 import { NavLink } from './components/nav-link/nav-link';
 import { Link } from 'react-router-dom';
 import { getHeaderNavState } from '../../services/redux/selectors/header-nav';
-import { useSelector } from 'react-redux';
 import { getProfileState } from '../../services/redux/selectors/profile';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const AppHeader = () => {
-  const { user } = useSelector(getProfileState);
-  const { activeLink } = useSelector(getHeaderNavState);
+  const { user } = useAppSelector(getProfileState);
+  const { activeLink } = useAppSelector(getHeaderNavState);
 
   const main = useMemo(() => (activeLink === '/' ? 'primary' : 'secondary'), [
     activeLink,
