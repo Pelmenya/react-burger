@@ -53,7 +53,4 @@ export const {
   wsClose,
 } = ordersSlice.actions;
 
-console.log(ordersSlice.actions)
-
-
 export const ordersReducer = ordersSlice.reducer;

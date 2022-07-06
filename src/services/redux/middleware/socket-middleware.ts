@@ -1,6 +1,6 @@
 import { Middleware } from 'redux';
 import { Nullable } from '../../../utils/types/nullable';
-import { clearOrdersData, setOrdersData } from '../slices/orders';
+import { clearOrdersData, setOrdersData, wsInit, wsClose } from '../slices/orders';
 import { StoreType } from '../store';
 
 export const socketMiddleware = (() => {
@@ -10,12 +10,12 @@ export const socketMiddleware = (() => {
     return (next) => (action) => {
       const { dispatch } = store;
       const { type, payload } = action;
-      if (type === 'orders/wsInit') {
+      if (type === wsInit.type) {
         socket = new WebSocket(payload);
       }
 
       if (socket) {
-        if (type === 'orders/wsClose') {
+        if (type === wsClose.type) {
           socket.close();
           dispatch(clearOrdersData());
         }
