@@ -4,6 +4,7 @@ import { OrdersType, OrderType } from '../../../utils/types/orders';
 
 export interface OrdersStateType {
   socket: boolean;
+  socketUrl: string;
   ordersData: Nullable<OrdersType>;
   viewOrder?: OrderType;
   error?: string;
@@ -19,11 +20,17 @@ const ordersSlice = createSlice({
   initialState: initialOrdersState,
   reducers: {
     wsInit: (state, action) => {
-      state.socket = true;
+      state.socketUrl = action.payload;
     },
     wsClose: (state) => {
       state.socket = false;
       state.ordersData = null;
+    },
+    wsOpen: (state) =>{
+      state.socket = true;
+    },
+    wsError: (state, action) => {
+      state.error = action.payload;
     },
     clearOrdersError: (state) => {
       state.error = undefined;
@@ -46,6 +53,8 @@ export const {
   setViewOrder,
   clearOrdersData,
   wsInit,
+  wsOpen,
+  wsError,
   wsClose,
 } = ordersSlice.actions;
 export const ordersReducer = ordersSlice.reducer;
