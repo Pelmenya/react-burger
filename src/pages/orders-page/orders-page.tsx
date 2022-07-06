@@ -4,19 +4,15 @@ import { OrdersStatistics } from '../../components/orders-statistics/orders-stat
 import { Orders } from '../../components/orders/orders';
 import { Title } from '../../components/title/title';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
-import { useAppSelector } from '../../hooks/use-app-selector';
 import { useNavHeader } from '../../hooks/use-nav-header';
-import { getOrdersState } from '../../services/redux/selectors/orders';
-import { getProfileState } from '../../services/redux/selectors/profile';
-import { wsInitAllOrders } from '../../services/redux/slices/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders';
+import { ALL_ORDERS, SOCKET } from '../../utils/api-constants/ws';
 import ordersPage from '../main-page/main-page.module.css';
 
 export const OrdersPage = () => {
-  const { loading } = useAppSelector(getProfileState);
   const { setActive } = useNavHeader();
-  const { socketAll } = useAppSelector(getOrdersState);
-
   const dispatch = useAppDispatch();
+
   useEffect(
     () => {
       setActive('feed');
@@ -28,12 +24,13 @@ export const OrdersPage = () => {
 
   useEffect(
     () => {
-      if (loading === 'succeeded' && !socketAll) dispatch(wsInitAllOrders());
+        dispatch(wsInit(`${SOCKET}${ALL_ORDERS}`));
+        return () => {
+          dispatch(wsClose());
+      }
     },
     [
       dispatch,
-      socketAll,
-      loading,
     ],
   );
 

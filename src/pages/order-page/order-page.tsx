@@ -7,56 +7,74 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useViewOrder } from '../../hooks/use-view-order';
 import { getOrdersState } from '../../services/redux/selectors/orders';
-import { wsInitAllOrders, wsInitUserOrders } from '../../services/redux/slices/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders';
 import { feedRegExp, profileRegExp } from '../../utils/regexp';
 import orderPage from './order-page.module.css';
 import { formatOrderNumber } from '../../utils/functions/format-order-number';
+import { ALL_ORDERS, SOCKET } from '../../utils/api-constants/ws';
+import { getProfileState } from '../../services/redux/selectors/profile';
+import { Loader } from '../../components/loader/loader';
 
 export const OrderPage = () => {
   const { viewOrder } = useAppSelector(getOrdersState);
   const location = useLocation();
-  const { socketUser, socketAll } = useAppSelector(getOrdersState);
   const dispatch = useAppDispatch();
+  const { user } = useAppSelector(getProfileState);
+
   const isFeed = feedRegExp.test(location.pathname);
   const isProfile = profileRegExp.test(location.pathname);
   const { id } = useParams();
 
-  useEffect(
-    () => {
-      if (!socketUser && isProfile) {
-        dispatch(wsInitUserOrders());
-      }
-    },
-    [
-      dispatch,
-      socketUser,
-      isProfile,
-    ],
-  );
+  const accessToken = localStorage.getItem('accessToken')?.split(' ')[1];
 
   useEffect(
     () => {
-      if (!socketAll && isFeed) {
-        dispatch(wsInitAllOrders());
+      if (isFeed) {
+        dispatch(wsInit(`${SOCKET}${ALL_ORDERS}`));
+        return () => {
+          dispatch(wsClose());
+        };
       }
     },
     [
       dispatch,
-      socketAll,
       isFeed,
     ],
   );
 
-  useViewOrder(id, isFeed, isProfile);
+  useEffect(
+    () => {
+      if (user && isProfile) {
+        dispatch(wsInit(`${SOCKET}?token=${accessToken}`));
+        return () => {
+          dispatch(wsClose());
+        };
+      }
+    },
+    [
+      dispatch,
+      accessToken,
+      user,
+      isProfile,
+    ],
+  );
+
+  useViewOrder(id);
 
   return (
     <main className='pt-20'>
-      <Title type='h1'>
-        <span className={cn('text text_type_digits-default mb-10', orderPage.title)}>
-          #{viewOrder && formatOrderNumber(String(viewOrder.number))}
-        </span>
-      </Title>
-      <Order />
+      {viewOrder ? (
+        <>
+          <Title type='h1'>
+            <span className={cn('text text_type_digits-default mb-10', orderPage.title)}>
+              #{viewOrder && formatOrderNumber(String(viewOrder.number))}
+            </span>
+          </Title>
+          <Order />
+        </>
+      ) : (
+        <Loader />
+      )}
     </main>
   );
 };

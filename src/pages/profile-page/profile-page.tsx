@@ -6,19 +6,22 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/use-menu-profile';
 import { profileRegExp } from '../../utils/regexp';
-import { wsInitUserOrders } from '../../services/redux/slices/orders';
-import { getOrdersState } from '../../services/redux/selectors/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { SOCKET } from '../../utils/api-constants/ws';
 import { useAppSelector } from '../../hooks/use-app-selector';
+import { getProfileState } from '../../services/redux/selectors/profile';
 
 export const ProfilePage = () => {
   const { setActive } = useNavHeader();
   const { setActiveMenuProfile } = useMenuProfile();
-  const { socketUser } = useAppSelector(getOrdersState);
+  const { user } = useAppSelector(getProfileState);
 
   const dispatch = useAppDispatch();
   const location = useLocation();
   const isProfile = profileRegExp.test(location.pathname);
+
+  const accessToken = localStorage.getItem('accessToken')?.split(' ')[1];
 
   const [
     isOrderPage,
@@ -36,13 +39,17 @@ export const ProfilePage = () => {
 
   useEffect(
     () => {
-      if (!socketUser) {
-        dispatch(wsInitUserOrders());
+      if (user) {
+        dispatch(wsInit(`${SOCKET}?token=${accessToken}`));
+        return () => {
+          dispatch(wsClose());
+        };
       }
     },
     [
       dispatch,
-      socketUser
+      accessToken,
+      user,
     ],
   );
 

@@ -19,7 +19,7 @@ export const OrderModal = () => {
   const isProfile = profileRegExp.test(location.pathname);
   const { id } = useParams();
 
-  useViewOrder(id, isFeed, isProfile);
+  useViewOrder(id);
 
 
   const handlerOnCloseCurrentOrderModal = useCallback(
