@@ -10,6 +10,7 @@ import { useAppSelector } from '../../hooks/use-app-selector';
 import { getOrdersState } from '../../services/redux/selectors/orders';
 import { useViewOrder } from '../../hooks/use-view-order';
 import { formatOrderNumber } from '../../utils/functions/format-order-number';
+import { Loader } from '../loader/loader';
 
 export const OrderModal = () => {
   const { viewOrder } = useAppSelector(getOrdersState);
@@ -20,7 +21,6 @@ export const OrderModal = () => {
   const { id } = useParams();
 
   useViewOrder(id);
-
 
   const handlerOnCloseCurrentOrderModal = useCallback(
     () => {
@@ -35,11 +35,21 @@ export const OrderModal = () => {
   );
 
   return (
-    <Modal title={<span className={cn('text text_type_digits-default', orderModal.number)}>{viewOrder && `#${formatOrderNumber(String(viewOrder.number))}`}</span>} handlerOnClose={handlerOnCloseCurrentOrderModal}>
-      <>
-        <Spacer spaceHeight={20}/>
-        <Order />
-      </>
+    <Modal
+      title={
+        <span className={cn('text text_type_digits-default', orderModal.number)}>
+          {viewOrder && `#${formatOrderNumber(String(viewOrder.number))}`}
+        </span>
+      }
+      handlerOnClose={handlerOnCloseCurrentOrderModal}>
+      {viewOrder ? (
+        <>
+          <Spacer spaceHeight={20} />
+          <Order />
+        </>
+      ) : (
+        <Loader />
+      )}
     </Modal>
   );
 };

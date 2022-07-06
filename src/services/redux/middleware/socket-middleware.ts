@@ -1,5 +1,4 @@
 import { Middleware } from 'redux';
-import { tokenRegExp } from '../../../utils/regexp';
 import { Nullable } from '../../../utils/types/nullable';
 import { clearOrdersData, setOrdersData } from '../slices/orders';
 import { StoreType } from '../store';
@@ -19,22 +18,7 @@ export const socketMiddleware = (() => {
         socket.onmessage = (event) => {
           const { data } = event;
           const parseData = JSON.parse(data);
-          if (parseData.orders) {
-            if (socket?.url) {
-              if (tokenRegExp.test(socket.url)) {
-                dispatch(
-                  setOrdersData({
-                    ...parseData,
-                    orders: [
-                      ...parseData.orders.reverse(),
-                    ],
-                  }),
-                );
-              } else {
-                dispatch(setOrdersData(parseData));
-              }
-            } else socket?.close();
-          }
+          dispatch(setOrdersData(parseData));
         };
 
         if (type === 'orders/wsClose') {
