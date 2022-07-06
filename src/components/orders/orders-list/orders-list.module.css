@@ -1,4 +1,7 @@
 .list {
+  display: flex;
+  gap: 24px;
+  flex-direction: column;
   max-height: calc(100vh - 230px);
   overflow-y: auto;
   overflow-x: hidden;

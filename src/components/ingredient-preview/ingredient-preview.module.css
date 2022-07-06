@@ -11,6 +11,10 @@
   margin-left: -16px;
 }
 
+.container_rotate {
+  transform: rotate(180deg);
+}
+
 .container:first-of-type {
   margin-left: 0px;
 }

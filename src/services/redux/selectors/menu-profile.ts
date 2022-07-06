@@ -1,7 +1,3 @@
-import { MenuProfileStateType } from "../slices/menu-profile";
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  menuProfile: MenuProfileStateType;
-}
-
-export const getMenuProfileState = (state: State) => state.menuProfile;
+export const getMenuProfileState = (state: RootState) => state.menuProfile;

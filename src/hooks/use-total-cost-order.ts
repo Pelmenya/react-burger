@@ -1,9 +1,9 @@
-import { useSelector } from 'react-redux';
 import { getBurgerConstructorState } from '../services/redux/selectors/burger-constructor';
 import { maxCountBuns } from '../utils/constants';
+import { useAppSelector } from './use-app-selector';
 
 export const useTotalCostOrder = () => {
-  const { bun, toppings } = useSelector(getBurgerConstructorState);
+  const { bun, toppings } = useAppSelector(getBurgerConstructorState);
  
 	let totalCost = 0;
 

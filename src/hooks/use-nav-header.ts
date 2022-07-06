@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { setActiveLink } from '../services/redux/slices/header-nav';
+import { useAppDispatch } from './use-app-dispatch';
 
 export const useNavHeader = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const setActive = useCallback((navItem: string) => dispatch(setActiveLink(navItem)), [
     dispatch,
   ]);

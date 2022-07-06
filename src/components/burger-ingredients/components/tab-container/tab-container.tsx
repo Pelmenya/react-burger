@@ -1,17 +1,22 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import tabContainer from './tab-container.module.css';
 import { BurgerIngredientsList } from '../burger-ingredients-list/burger-ingredients-list';
-import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredients';
 import { Flex } from '../../../flex/flex';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
 import { TabWithChildren } from '../../../../hocs/with-tab';
-
+import { Nullable } from '../../../../utils/types/nullable';
+import { useAppDispatch } from '../../../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../../../hooks/use-app-selector';
 
 export const TabContainer = () => {
-  const dispatch = useDispatch();
-  const { ingredients, currentTab } = useSelector(getBurgerIngredientsState);
+  const dispatch = useAppDispatch();
+  const [
+    tab,
+    setTab,
+  ] = useState<Nullable<string>>(null);
+  const { ingredients, currentTab } = useAppSelector(getBurgerIngredientsState);
 
   const tabContainerRef = useRef(null);
   const bunsRef = useRef(null);
@@ -106,6 +111,21 @@ export const TabContainer = () => {
       }
     },
     [
+      dispatch,
+    ],
+  );
+
+  useEffect(
+    () => {
+      if (!tab) {
+        setTab(currentTab);
+        dispatch(setCurrentTab('buns'));
+      }
+    },
+    [
+      currentTab,
+      tab,
+      setTab,
       dispatch,
     ],
   );

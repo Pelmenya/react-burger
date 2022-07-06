@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { setActiveMenuProfileItem } from '../services/redux/slices/menu-profile';
+import { useAppDispatch } from './use-app-dispatch';
 
 export const useMenuProfile = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const setActiveMenuProfile = useCallback((navItem: string) => dispatch(setActiveMenuProfileItem(navItem)), [
     dispatch,
   ]);

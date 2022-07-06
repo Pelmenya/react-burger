@@ -1,7 +1,4 @@
-import { HeaderNavStateType } from '../slices/header-nav';
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  headerNav: HeaderNavStateType;
-}
 
-export const getHeaderNavState = (state: State) => state.headerNav;
+export const getHeaderNavState = (state: RootState) => state.headerNav;

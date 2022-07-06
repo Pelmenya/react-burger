@@ -43,6 +43,9 @@ const orderSlice = createSlice({
       state.isOpen = false;
       state.num = null;
     },
+    clearOrderError: (state) => {
+      state.error = undefined;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(postOrders.pending, (state) => {
@@ -65,5 +68,6 @@ export const {
   setOrderTotal,
   setOpenOrderModal,
   resetOrder,
+  clearOrderError,
 } = orderSlice.actions;
 export const orderReducer = orderSlice.reducer;

@@ -1,59 +1,94 @@
+import cn from 'classnames';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import shortid from 'shortid';
+
+import { useOrder } from '../../../hooks/use-order';
 import { countIngredientsOfOrdersCard } from '../../../utils/constants';
+import { formatOrderNumber } from '../../../utils/functions/format-order-number';
+import { formatOrderTime } from '../../../utils/functions/format-order-time';
+import { OrderType } from '../../../utils/types/orders';
 import { Flex } from '../../flex/flex';
 import { IngredientPreview } from '../../ingredient-preview/ingredient-preview';
 import { Title } from '../../title/title';
 import ordersCard from './orders-card.module.css';
+import { useLocation, useNavigate } from 'react-router';
+import { feedRegExp, profileRegExp } from '../../../utils/regexp';
+import { getOrderStatus } from '../../../utils/functions/get-order-status';
+import { useMemo } from 'react';
 
-const number = '034534';
-const time = 'Сегодня, 16:20 i-GMT+3';
-const total = 589;
-const ordersMock = [
-  0,
-  1,
-  2,
-  3,
-  4,
-  5,
-  6,
-  7,
-  8,
-  4,
-  5,
-  6,
-  7,
-  8,
-];
+export const OrdersCard = ({
+  _id,
+  status,
+  name,
+  number,
+  ingredients: ingredientsIds,
+  createdAt,
+}: OrderType) => {
+  const location = useLocation();
+  const isFeed = feedRegExp.test(location.pathname);
+  const isProfile = profileRegExp.test(location.pathname);
+  const navigate = useNavigate();
 
-export const OrdersCard = ({ order }: any) => {
-  const ingredients = ordersMock.filter((item, index) => index < countIngredientsOfOrdersCard);
-  const countNext = ordersMock.length - countIngredientsOfOrdersCard;
+  const { getTotalOrderCost, getViewOrderIngredients } = useOrder();
+  const countNext = ingredientsIds.length - countIngredientsOfOrdersCard;
+
+  const handlerOnClick = () => {
+    if (isFeed) navigate(`/feed/${_id}`, { state: { background: location } });
+    if (isProfile) navigate(`/profile/orders/${_id}`, { state: { background: location } });
+  };
+
+  const totalOrderCost = useMemo(() => getTotalOrderCost(ingredientsIds), [
+    ingredientsIds,
+    getTotalOrderCost,
+  ]);
+  const viewOrderIngredients = useMemo(() => getViewOrderIngredients(ingredientsIds), [
+    ingredientsIds,
+    getViewOrderIngredients,
+  ]);
+  const orderTime = useMemo(() => formatOrderTime(createdAt), [
+    createdAt,
+  ]);
+  const orderStatus = useMemo(() => getOrderStatus(status), [
+    status,
+  ]);
+
   return (
-    <Flex flexDirection='column' gap={24} className={ordersCard.container}>
+    <div className={ordersCard.container} onClick={handlerOnClick}>
       <Flex className={ordersCard.wrapper}>
-        <p className='text text_type_digits-default'>#{number}</p>
-        <p className='text text_type_main-default text_color_inactive'>{time}</p>
+        <p className='text text_type_digits-default'>#{formatOrderNumber(String(number))}</p>
+        <p className='text text_type_main-default text_color_inactive'>{orderTime}</p>
       </Flex>
-      <Title type='h5'>{order.name}</Title>
+      <Title type='h5'>{name}</Title>
+      {isProfile ? (
+        <p
+          className={cn(
+            'text text_type_main-default mt-2',
+            ordersCard.status,
+            status === 'done' && 'text_color_interface',
+          )}>
+          {orderStatus}
+        </p>
+      ) : (
+        <></>
+      )}
       <Flex className={ordersCard.wrapper}>
         <ul className={ordersCard.ingredients}>
-          {ingredients.map((item, index, arr) => (
-            <IngredientPreview
-              ingredient={order}
-              key={order._id + index}
-              zIndex={arr.length - index}
-              lastCount={
-                (index === countIngredientsOfOrdersCard - 1 && countNext > 0 && countNext) ||
-                undefined
-              }
-            />
-          ))}
+          {viewOrderIngredients
+            .reverse()
+            .map((item, index) => (
+              <IngredientPreview
+                ingredient={item}
+                key={shortid.generate()}
+                lastCount={(index === 0 && countNext > 0 && countNext) || undefined}
+                isRotate={true}
+              />
+            ))}
         </ul>
         <span className='constructor-element__price'>
-          {total}
+          {totalOrderCost}
           <CurrencyIcon type='primary' />
         </span>
       </Flex>
-    </Flex>
+    </div>
   );
 };

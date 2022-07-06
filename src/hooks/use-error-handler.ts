@@ -1,31 +1,42 @@
-import { useDispatch, useSelector } from 'react-redux';
 import { getAuthState } from '../services/redux/selectors/auth';
 import { getOrderState } from '../services/redux/selectors/order';
 import { getProfileState } from '../services/redux/selectors/profile';
 import { clearAuthError, postToken } from '../services/redux/slices/auth';
+import { clearOrderError } from '../services/redux/slices/order';
 import { clearProfileError } from '../services/redux/slices/profile';
 import { JWT_EXPIRED } from '../utils/constants';
-import { DispatchType } from '../utils/types/dispatch-type';
+import { useAppDispatch } from './use-app-dispatch';
+import { useAppSelector } from './use-app-selector';
 import { useRequestError } from './use-request-error';
 
 export const useErrorHandler = () => {
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
   const refreshToken = localStorage.getItem('refreshToken');
-  const { error: errorOrder } = useSelector(getOrderState);
-  const { error: errorProfile } = useSelector(getProfileState);
-  const { error: errorAuth } = useSelector(getAuthState);
+  const { error: errorOrder } = useAppSelector(getOrderState);
+  const { error: errorProfile } = useAppSelector(getProfileState);
+  const { error: errorAuth } = useAppSelector(getAuthState);
   const { setRequestError } = useRequestError();
 
   const callErrorHandler = () => {
-    errorProfile === JWT_EXPIRED &&
-      dispatch(clearProfileError()) &&
-      dispatch(postToken(refreshToken));
-    errorProfile &&
-      errorProfile !== JWT_EXPIRED &&
-      setRequestError(errorProfile) &&
+    if (errorProfile === JWT_EXPIRED) {
       dispatch(clearProfileError());
-    errorAuth && setRequestError(errorAuth) && dispatch(clearAuthError());
-    errorOrder && setRequestError(errorOrder) && dispatch(clearAuthError()); 
+      dispatch(postToken(refreshToken));
+    }
+
+    if (errorProfile && errorProfile !== JWT_EXPIRED) {
+      setRequestError(errorProfile);
+      dispatch(clearProfileError());
+    }
+
+    if (errorAuth) {
+      setRequestError(errorAuth);
+      dispatch(clearAuthError());
+    }
+
+    if (errorOrder && errorOrder !== JWT_EXPIRED) {
+      setRequestError(errorOrder);
+      dispatch(clearOrderError());
+    }
   };
 
   return { callErrorHandler };

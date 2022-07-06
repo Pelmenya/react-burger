@@ -1,6 +1,4 @@
-import { BurgerConstructorStateType } from '../slices/burger-constructor';
-interface State {
-  burgerConstructor: BurgerConstructorStateType;
-}
+import { RootState } from "../../../utils/types/root-state";
 
-export const getBurgerConstructorState = (state: State) => state.burgerConstructor;
+
+export const getBurgerConstructorState = (state: RootState) => state.burgerConstructor;

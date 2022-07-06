@@ -4,7 +4,6 @@ import cn from 'classnames';
 import burgerConstructorTotal from './burger-constructor-total.module.css';
 import { Flex } from '../../../flex/flex';
 import { CurrencyIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   postOrders,
   setIngredientsIds,
@@ -14,16 +13,20 @@ import {
 import { getOrderState } from '../../../../services/redux/selectors/order';
 import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
 import { useIngredientsIds } from '../../../../hooks/use-ingredients-ids';
-import { DispatchType } from '../../../../utils/types/dispatch-type';
 import { ButtonWithChildren } from '../../../button-with-children/button-with-children';
 import { getProfileState } from '../../../../services/redux/selectors/profile';
 import { useLocation, useNavigate } from 'react-router';
+import { useAppDispatch } from '../../../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../../../hooks/use-app-selector';
 
 export const BurgerConstructorTotal = () => {
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const { total, loading } = useSelector(getOrderState);
-  const { user } = useSelector(getProfileState);
+
+  const { total, loading } = useAppSelector(getOrderState);
+  const { user } = useAppSelector(getProfileState);
+
+  const accessToken = localStorage.getItem('accessToken');
   const location = useLocation();
 
   const { totalCost } = useTotalCostOrder();
@@ -33,8 +36,15 @@ export const BurgerConstructorTotal = () => {
     () => {
       if (user) {
         dispatch(setOpenOrderModal(true));
-        dispatch(setIngredientsIds(orderIngredientsIds));
-        dispatch(postOrders({ ingredients: orderIngredientsIds }));
+        dispatch(setIngredientsIds([...orderIngredientsIds]));
+        if (accessToken) {
+          dispatch(
+            postOrders({
+              ingredientsIds: [...orderIngredientsIds],
+              token: accessToken,
+            }),
+          );
+        }
       } else navigate('login', { state: { from: location } });
     },
     [
@@ -42,7 +52,8 @@ export const BurgerConstructorTotal = () => {
       orderIngredientsIds,
       navigate,
       dispatch,
-      location
+      location,
+      accessToken,
     ],
   );
 

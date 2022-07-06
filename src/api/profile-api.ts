@@ -1,6 +1,6 @@
 import { headers } from '../utils/api-constants/headers';
 import { SERVER, PROFILE_END_POINTS } from '../utils/api-constants/server';
-import { checkResponse } from '../utils/functions/checkResponse';
+import { checkResponse } from '../utils/functions/check-response';
 import { UserData } from './auth-api';
 
 export type TForgotPassword = {

@@ -1,5 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
 import cn from 'classnames';
 
 import { Flex } from '../flex/flex';
@@ -9,35 +8,50 @@ import orderDetails from './order-details.module.css';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { Loader } from '../loader/loader';
 import { BadRequest } from '../bad-request/bad-request';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
+import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
+import { formatOrderNumber } from '../../utils/functions/format-order-number';
+import { JWT_EXPIRED } from '../../utils/constants';
+import { postToken } from '../../services/redux/slices/auth';
+import { postOrders } from '../../services/redux/slices/order';
+import { getAuthState } from '../../services/redux/selectors/auth';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const OrderDetails = () => {
-  const { num, error, loading } = useSelector(getOrderState);
-  const dispatch = useDispatch<DispatchType>();
-
-  const formatOrderNumber = useCallback((numOrder: string) => {
-    let arrNumbers = numOrder.split('');
-    while (arrNumbers.length < 6) {
-      arrNumbers.unshift('0');
-    }
-    return arrNumbers.join('');
-  }, []);
+  const { num, error, loading, ingredientsIds } = useAppSelector(getOrderState);
+  const { loading: loadingToken } = useAppSelector(getAuthState);
+  const dispatch = useAppDispatch();
+  const refreshToken = localStorage.getItem('refreshToken')
+  const accessToken = localStorage.getItem('accessToken')
 
   useEffect(() => {
-    loading === 'succeeded' && dispatch(resetBurgerConstructor());
-  }, [loading, dispatch]);
+    if (loading === 'succeeded') { 
+      dispatch(resetBurgerConstructor());
+      dispatch(resetCountIngredients());
+    }
+
+    if (loading === 'failed') { 
+      if  (error === JWT_EXPIRED) {
+        dispatch(postToken(refreshToken));
+          if (accessToken && loadingToken === 'succeeded') { 
+            dispatch(postOrders({ingredientsIds: ingredientsIds, token: accessToken}))
+          }
+      }
+    }
+
+  }, [loading, dispatch, refreshToken, accessToken, error, ingredientsIds, loadingToken]);
 
   return (
     <Flex flexDirection={'column'} className={orderDetails.wrapper}>
       <>
-        {loading === 'pending' && <Loader />}
+        {(loading === 'pending' || error === JWT_EXPIRED) && <Loader />}
         {loading === 'succeeded' && (
           <p className={cn('text text_type_digits-large', orderDetails.order)}>
             {formatOrderNumber(String(num))}
           </p>
         )}
-        {loading === 'failed' && <BadRequest error={error} />}
+        {(loading === 'failed' && error !== JWT_EXPIRED) && <BadRequest error={error} />}
       </>
       <p className={cn('text text_type_main-medium mt-8 mb-15', orderDetails.order)}>
         идентификатор заказа

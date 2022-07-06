@@ -5,14 +5,14 @@ import { Flex } from '../flex/flex';
 import { Title } from '../title/title';
 
 import ingredientDetails from './ingredient-details.module.css';
-import { useSelector } from 'react-redux';
 import { getCurrentIngredientState } from '../../services/redux/selectors/current-ingredient';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { Loader } from '../loader/loader';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 export const IngredientDetails = () => {
-  const { ingredient }  = useSelector(getCurrentIngredientState);
-  const { loading } = useSelector(getBurgerIngredientsState);
+  const { ingredient }  = useAppSelector(getCurrentIngredientState);
+  const { loading } = useAppSelector(getBurgerIngredientsState);
   const isLoading = loading === 'pending';
 
   const replacePoint = useCallback((num?: number) => String(num).split('.').join(','), []);

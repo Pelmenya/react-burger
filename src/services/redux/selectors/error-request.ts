@@ -1,7 +1,4 @@
-import { ErrorRequestStateType } from '../slices/error-request';
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  errorRequest: ErrorRequestStateType;
-}
 
-export const getErrorRequestState = (state: State) => state.errorRequest;
+export const getErrorRequestState = (state: RootState) => state.errorRequest;

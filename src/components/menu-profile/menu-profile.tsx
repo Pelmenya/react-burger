@@ -1,10 +1,10 @@
 import cn from 'classnames';
-import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 import { getMenuProfileState } from '../../services/redux/selectors/menu-profile';
 import { postLogout } from '../../services/redux/slices/auth';
 import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile';
-import { DispatchType } from '../../utils/types/dispatch-type';
 
 import menu from './menu-profile.module.css';
 
@@ -29,11 +29,13 @@ const menuList = [
   },
 ];
 
+
 export const MenuProfile = () => {
   const refreshToken = localStorage.getItem('refreshToken');
-  const { activeItem } = useSelector(getMenuProfileState);
-  const dispatch = useDispatch<DispatchType>();
+  const { activeItem } = useAppSelector(getMenuProfileState);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
   return (
     <div>
       <ul className={cn('text text_type_main-medium pl-5', menu.list)}>
@@ -42,10 +44,13 @@ export const MenuProfile = () => {
             key={item.id}
             className={cn(menu.item, 'pt-4 pb-4', activeItem === item.id && menu.item_active)}
             onClick={() => {
-              activeItem !== item.id &&
-                dispatch(setActiveMenuProfileItem(item.id)) &&
-                navigate(item.linkTo, { replace: true });
-              item.id === 'logout' && dispatch(postLogout(refreshToken));
+              if (activeItem !== item.id) {
+                navigate(item.linkTo)
+                dispatch(setActiveMenuProfileItem(item.id)) 
+              }
+              if (item.id === 'logout') {
+                dispatch(postLogout(refreshToken));
+              }
             }}>
             {item.text}
           </li>

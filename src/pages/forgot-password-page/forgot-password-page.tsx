@@ -8,11 +8,11 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { TForgotPassword } from '../../api/profile-api';
-import { useDispatch, useSelector } from 'react-redux';
 import { postForgotPassword } from '../../services/redux/slices/profile';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { useNavigate } from 'react-router';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 
 const schema = yup
   .object({
@@ -29,10 +29,10 @@ const links = [
 ];
 
 export const ForgotPasswordPage = () => {
-  const { passwordIsSend, loading } = useSelector(getProfileState);
+  const { passwordIsSend, loading } = useAppSelector(getProfileState);
   const navigate = useNavigate();
 
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
 
   const { setActive } = useNavHeader();
 

@@ -1,7 +1,3 @@
-import { CurrentIngredientStateType } from "../slices/current-ingredient";
+import { RootState } from "../../../utils/types/root-state";
 
-interface State {
-  currentIngredient: CurrentIngredientStateType;
-}
-
-export const getCurrentIngredientState = (state: State) => state.currentIngredient;
+export const getCurrentIngredientState = (state: RootState) => state.currentIngredient;

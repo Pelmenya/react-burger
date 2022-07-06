@@ -8,13 +8,14 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { useDispatch, useSelector } from 'react-redux';
-import { DispatchType } from '../../utils/types/dispatch-type';
 import { postLogin } from '../../services/redux/slices/auth';
 import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { Navigate, useLocation } from 'react-router';
 import { LocationStateType } from '../../utils/types/location-state-type';
+import { wsClose } from '../../services/redux/slices/orders';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+import { useAppSelector } from '../../hooks/use-app-selector';
 
 const schema = yup
   .object({
@@ -39,13 +40,13 @@ const links = [
 export const LoginPage = () => {
   const { setActive } = useNavHeader();
   
-  const { loading } = useSelector(getAuthState);
+  const { loading } = useAppSelector(getAuthState);
   const accessToken = localStorage.getItem('accessToken')
 
   const location = useLocation() as LocationStateType;
   const from = location?.state?.from || '/' ;
   
-  const dispatch = useDispatch<DispatchType>();
+  const dispatch = useAppDispatch();
 
   const { handleSubmit, control, formState: { errors } } = useForm({
     resolver: yupResolver(schema),
@@ -54,6 +55,7 @@ export const LoginPage = () => {
 
   const onSubmit = (data: FieldValues) => {
     dispatch(postLogin(data as Omit<UserData, 'name'>));
+    dispatch(wsClose())
   };
 
   useEffect(

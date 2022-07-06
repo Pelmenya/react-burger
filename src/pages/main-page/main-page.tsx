@@ -8,18 +8,20 @@ import { Title } from '../../components/title/title';
 import mainPage from './main-page.module.css';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useDispatch, useSelector } from 'react-redux';
 import { Modal } from '../../components/modal/modal';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
 import { setOpenOrderModal } from '../../services/redux/slices/order';
 import { useNavHeader } from '../../hooks/use-nav-header';
 import { Outlet } from 'react-router';
+import { useAppSelector } from '../../hooks/use-app-selector';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
+
 export const MainPage = () => {
   const { setActive } = useNavHeader();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { isOpen: isOpenOrderModal } = useSelector(getOrderState);
+  const { isOpen: isOpenOrderModal } = useAppSelector(getOrderState);
 
 
   const handlerOnCloseOrderModal = useCallback(

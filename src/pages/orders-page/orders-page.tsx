@@ -3,11 +3,15 @@ import { useEffect } from 'react';
 import { OrdersStatistics } from '../../components/orders-statistics/orders-statistics';
 import { Orders } from '../../components/orders/orders';
 import { Title } from '../../components/title/title';
+import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNavHeader } from '../../hooks/use-nav-header';
+import { wsClose, wsInit } from '../../services/redux/slices/orders';
+import { ALL_ORDERS, SOCKET } from '../../utils/api-constants/ws';
 import ordersPage from '../main-page/main-page.module.css';
 
 export const OrdersPage = () => {
   const { setActive } = useNavHeader();
+  const dispatch = useAppDispatch();
 
   useEffect(
     () => {
@@ -15,6 +19,18 @@ export const OrdersPage = () => {
     },
     [
       setActive,
+    ],
+  );
+
+  useEffect(
+    () => {
+        dispatch(wsInit(`${SOCKET}${ALL_ORDERS}`));
+        return () => {
+          dispatch(wsClose());
+      }
+    },
+    [
+      dispatch,
     ],
   );
 
