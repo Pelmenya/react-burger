@@ -29,9 +29,6 @@ const ordersSlice = createSlice({
     wsOpen: (state) =>{
       state.socket = true;
     },
-    wsError: (state, action) => {
-      state.error = action.payload;
-    },
     clearOrdersError: (state) => {
       state.error = undefined;
     },
@@ -53,8 +50,10 @@ export const {
   setViewOrder,
   clearOrdersData,
   wsInit,
-  wsOpen,
-  wsError,
   wsClose,
 } = ordersSlice.actions;
+
+console.log(ordersSlice.actions)
+
+
 export const ordersReducer = ordersSlice.reducer;

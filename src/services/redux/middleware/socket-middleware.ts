@@ -1,6 +1,6 @@
 import { Middleware } from 'redux';
 import { Nullable } from '../../../utils/types/nullable';
-import { clearOrdersData, setOrdersData, wsError, wsOpen } from '../slices/orders';
+import { clearOrdersData, setOrdersData } from '../slices/orders';
 import { StoreType } from '../store';
 
 export const socketMiddleware = (() => {
@@ -24,14 +24,6 @@ export const socketMiddleware = (() => {
           const { data } = event;
           const parseData = JSON.parse(data);
           dispatch(setOrdersData(parseData));
-        };
-
-        socket.onopen = () => {
-          dispatch(wsOpen());
-        };
-
-        socket.onerror = event => {
-          dispatch(wsError(event));
         };
 
         socket.onclose = () => {
