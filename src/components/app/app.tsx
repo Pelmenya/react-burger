@@ -4,7 +4,7 @@ import { AppHeader } from '../app-header/app-header';
 import { fetchIngredients } from '../../services/redux/slices/burger-ingredients/burger-ingredients';
 import { RoutesApp } from '../routes/routes';
 import { Modal } from '../modal/modal';
-import { clearError } from '../../services/redux/slices/error-request';
+import { clearError } from '../../services/redux/slices/error-request/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
 import { useErrorHandler } from '../../hooks/use-error-handler';

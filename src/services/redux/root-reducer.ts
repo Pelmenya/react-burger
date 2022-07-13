@@ -3,7 +3,7 @@ import { authReducer } from './slices/auth/auth';
 import { burgerConstructorReducer } from './slices/burger-constructor/burger-constructor';
 import { burgerIngredientsReducer } from './slices/burger-ingredients/burger-ingredients';
 import { currentIngredientReducer } from './slices/current-ingredient/current-ingredient';
-import { errorRequestReducer } from './slices/error-request';
+import { errorRequestReducer } from './slices/error-request/error-request';
 import { headerNavReducer } from './slices/header-nav';
 import { menuProfileReducer } from './slices/menu-profile';
 import { orderReducer } from './slices/order';
