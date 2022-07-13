@@ -1,4 +1,4 @@
-import { ingredientMock } from '../../../../utils/mock';
+import { ingredientMock } from '../../../../utils/mocks';
 import {
   initialBurgerConstructorState,
   burgerConstructorReducer,

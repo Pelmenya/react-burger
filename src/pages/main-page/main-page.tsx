@@ -11,7 +11,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { Modal } from '../../components/modal/modal';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { OrderDetails } from '../../components/order-details/order-details';
-import { setOpenOrderModal } from '../../services/redux/slices/order';
+import { setOpenOrderModal } from '../../services/redux/slices/order/order';
 import { useNavHeader } from '../../hooks/use-nav-header';
 import { Outlet } from 'react-router';
 import { useAppSelector } from '../../hooks/use-app-selector';

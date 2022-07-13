@@ -1,4 +1,4 @@
-import { errorMessageMock } from '../../../../utils/mock';
+import { errorMessageMock } from '../../../../utils/mocks';
 import {
   clearError,
   errorRequestReducer,

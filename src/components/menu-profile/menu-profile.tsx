@@ -4,7 +4,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getMenuProfileState } from '../../services/redux/selectors/menu-profile';
 import { postLogout } from '../../services/redux/slices/auth/auth';
-import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile';
+import { setActiveMenuProfileItem } from '../../services/redux/slices/menu-profile/menu-profile';
 
 import menu from './menu-profile.module.css';
 

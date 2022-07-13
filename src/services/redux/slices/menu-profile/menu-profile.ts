@@ -4,7 +4,7 @@ export interface MenuProfileStateType {
   activeItem: 'logout' | 'profile' | 'orders';
 }
 
-const initialMenuProfileState = {
+export const initialMenuProfileState = {
   activeItem: 'profile',
 } as MenuProfileStateType;
 

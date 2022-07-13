@@ -1,4 +1,4 @@
-import { errorMessageMock, errorMock, ingredientMock } from '../../../../utils/mock';
+import { errorMessageMock, errorMock, ingredientMock } from '../../../../utils/mocks';
 import {
   burgerIngredientsReducer,
   fetchIngredients,

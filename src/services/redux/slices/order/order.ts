@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { IngredientsIdsPropsType, ordersAPI } from '../../../api/orders-api';
-import { LoadingType } from '../../../utils/types/loading';
-import { Nullable } from '../../../utils/types/nullable';
+import { IngredientsIdsPropsType, ordersAPI } from '../../../../api/orders-api';
+import { LoadingType } from '../../../../utils/types/loading';
+import { Nullable } from '../../../../utils/types/nullable';
 export interface OrderStateType extends LoadingType {
   isOpen: boolean;
   num: Nullable<string>;
@@ -10,7 +10,7 @@ export interface OrderStateType extends LoadingType {
   error?: string;
 }
 
-const initialIngredientsState = {
+export const initialOrderState = {
   isOpen: false,
   loading: 'idle',
   num: null,
@@ -19,7 +19,7 @@ const initialIngredientsState = {
 } as OrderStateType;
 
 export const postOrders = createAsyncThunk(
-  'currentIngredient/postOrders',
+  'order/postOrders',
   async (body: IngredientsIdsPropsType) => {
     const response = await ordersAPI.postOrders(body);
     return response;
@@ -27,8 +27,8 @@ export const postOrders = createAsyncThunk(
 );
 
 const orderSlice = createSlice({
-  name: 'currentIngredient',
-  initialState: initialIngredientsState,
+  name: 'order',
+  initialState: initialOrderState,
   reducers: {
     setIngredientsIds: (state, action) => {
       state.ingredientsIds = action.payload;

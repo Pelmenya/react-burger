@@ -13,7 +13,7 @@ import { resetCountIngredients } from '../../services/redux/slices/burger-ingred
 import { formatOrderNumber } from '../../utils/functions/format-order-number';
 import { JWT_EXPIRED } from '../../utils/constants';
 import { postToken } from '../../services/redux/slices/auth/auth';
-import { postOrders } from '../../services/redux/slices/order';
+import { postOrders } from '../../services/redux/slices/order/order';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';

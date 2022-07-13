@@ -9,7 +9,7 @@ import {
   setIngredientsIds,
   setOpenOrderModal,
   setOrderTotal,
-} from '../../../../services/redux/slices/order';
+} from '../../../../services/redux/slices/order/order';
 import { getOrderState } from '../../../../services/redux/selectors/order';
 import { useTotalCostOrder } from '../../../../hooks/use-total-cost-order';
 import { useIngredientsIds } from '../../../../hooks/use-ingredients-ids';
