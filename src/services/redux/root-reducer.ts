@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { authReducer } from './slices/auth';
+import { authReducer } from './slices/auth/auth';
 import { burgerConstructorReducer } from './slices/burger-constructor';
 import { burgerIngredientsReducer } from './slices/burger-ingredients';
 import { currentIngredientReducer } from './slices/current-ingredient';

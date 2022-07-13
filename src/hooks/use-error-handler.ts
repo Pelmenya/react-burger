@@ -1,7 +1,7 @@
 import { getAuthState } from '../services/redux/selectors/auth';
 import { getOrderState } from '../services/redux/selectors/order';
 import { getProfileState } from '../services/redux/selectors/profile';
-import { clearAuthError, postToken } from '../services/redux/slices/auth';
+import { clearAuthError, postToken } from '../services/redux/slices/auth/auth';
 import { clearOrderError } from '../services/redux/slices/order';
 import { clearProfileError } from '../services/redux/slices/profile';
 import { JWT_EXPIRED } from '../utils/constants';

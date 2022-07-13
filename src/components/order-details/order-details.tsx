@@ -12,7 +12,7 @@ import { resetBurgerConstructor } from '../../services/redux/slices/burger-const
 import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
 import { formatOrderNumber } from '../../utils/functions/format-order-number';
 import { JWT_EXPIRED } from '../../utils/constants';
-import { postToken } from '../../services/redux/slices/auth';
+import { postToken } from '../../services/redux/slices/auth/auth';
 import { postOrders } from '../../services/redux/slices/order';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';

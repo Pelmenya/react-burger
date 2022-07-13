@@ -10,7 +10,7 @@ import { InputPassword } from '../../components/profile-form-container/component
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { UserData } from '../../api/auth-api';
 import { schemaProfileForm } from '../../utils/constants';
-import { postRegister } from '../../services/redux/slices/auth';
+import { postRegister } from '../../services/redux/slices/auth/auth';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
