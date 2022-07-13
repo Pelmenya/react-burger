@@ -4,7 +4,7 @@ export interface HeaderNavStateType {
   activeLink: '/' | 'profile' | 'feed';
 }
 
-const initialHeaderNavState = {
+export const initialHeaderNavState = {
   activeLink: '/',
 } as HeaderNavStateType;
 

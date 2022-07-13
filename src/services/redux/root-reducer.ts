@@ -4,7 +4,7 @@ import { burgerConstructorReducer } from './slices/burger-constructor/burger-con
 import { burgerIngredientsReducer } from './slices/burger-ingredients/burger-ingredients';
 import { currentIngredientReducer } from './slices/current-ingredient/current-ingredient';
 import { errorRequestReducer } from './slices/error-request/error-request';
-import { headerNavReducer } from './slices/header-nav';
+import { headerNavReducer } from './slices/header-nav/header-nav';
 import { menuProfileReducer } from './slices/menu-profile';
 import { orderReducer } from './slices/order';
 import { ordersReducer } from './slices/orders';
