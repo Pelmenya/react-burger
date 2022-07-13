@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BurgerIngredientType } from '../../../utils/types/burger-ingredient';
+import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 
 export interface CurrentIngredientStateType {
   isOpen: boolean;
   ingredient?: BurgerIngredientType;
 }
 
-const initialCurrentIngredientState = {
+export const initialCurrentIngredientState = {
   isOpen: false,
 } as CurrentIngredientStateType;
 
