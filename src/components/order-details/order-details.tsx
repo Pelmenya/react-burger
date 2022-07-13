@@ -8,7 +8,7 @@ import orderDetails from './order-details.module.css';
 import { getOrderState } from '../../services/redux/selectors/order';
 import { Loader } from '../loader/loader';
 import { BadRequest } from '../bad-request/bad-request';
-import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor';
+import { resetBurgerConstructor } from '../../services/redux/slices/burger-constructor/burger-constructor';
 import { resetCountIngredients } from '../../services/redux/slices/burger-ingredients';
 import { formatOrderNumber } from '../../utils/functions/format-order-number';
 import { JWT_EXPIRED } from '../../utils/constants';

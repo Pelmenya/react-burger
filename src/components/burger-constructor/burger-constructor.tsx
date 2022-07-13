@@ -11,7 +11,7 @@ import { BurgerConstructorEmpty } from './components/burger-constructor-empty/bu
 import { useDrop } from 'react-dnd';
 import shortid from 'shortid';
 import { getBurgerConstructorState } from '../../services/redux/selectors/burger-constructor';
-import { setBun, setToppings } from '../../services/redux/slices/burger-constructor';
+import { setBun, setToppings } from '../../services/redux/slices/burger-constructor/burger-constructor';
 import { updateCountIngredient } from '../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
 import { maxCountBuns } from '../../utils/constants';

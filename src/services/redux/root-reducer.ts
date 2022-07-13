@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { authReducer } from './slices/auth/auth';
-import { burgerConstructorReducer } from './slices/burger-constructor';
+import { burgerConstructorReducer } from './slices/burger-constructor/burger-constructor';
 import { burgerIngredientsReducer } from './slices/burger-ingredients';
 import { currentIngredientReducer } from './slices/current-ingredient';
 import { errorRequestReducer } from './slices/error-request';

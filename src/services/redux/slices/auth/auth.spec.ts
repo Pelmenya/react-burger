@@ -1,3 +1,4 @@
+import { errorMessageMock, errorMock, userMock } from '../../../../utils/mock';
 import {
   clearAuthError,
   authReducer,
@@ -5,13 +6,10 @@ import {
   postRegister,
   postLogin,
   postToken,
+  postLogout,
 } from './auth';
 
-const userMock = { email: 'mock@email.com', name: 'Fedya', password: 'password' };
-const errorMessageMock = 'Error';
-const errorMock = new Error(errorMessageMock);
-
-describe('Action creators for Auth', () => {
+describe('Action creators and reducer for Auth', () => {
   it('should create an action for empty error', () => {
     const expectedAction = {
       type: clearAuthError.type,
@@ -80,4 +78,23 @@ describe('Action creators for Auth', () => {
       loading: 'failed',
     });
   });
+
+  it('should return undefined error and status loading is pending for logout', () => {
+    const action = postLogout.pending('', null);
+    expect(authReducer(undefined, action)).toStrictEqual({ error: undefined, loading: 'pending' });
+  });
+
+  it('should return undefined error and status loading is fulfilled for logout', () => {
+    const action = postLogout.fulfilled('', '', null);
+    expect(authReducer(initialAuthState, action)).toStrictEqual({ loading: 'succeeded' });
+  });
+
+  it('should return error message "Error" and status loading is failed for logout', () => {
+    const action = postLogout.rejected(errorMock, '', null);
+    expect(authReducer(initialAuthState, action)).toStrictEqual({
+      error: errorMessageMock,
+      loading: 'failed',
+    });
+  });
+
 });

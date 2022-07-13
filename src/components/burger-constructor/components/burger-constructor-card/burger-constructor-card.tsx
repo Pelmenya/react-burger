@@ -6,7 +6,7 @@ import { ConstructorElement, DragIcon } from '@ya.praktikum/react-developer-burg
 import burgerConstructorCard from './burger-constructor-card.module.css';
 import { Spacer } from '../../../spacer/spacer';
 import { getBurgerConstructorState } from '../../../../services/redux/selectors/burger-constructor';
-import { setToppings } from '../../../../services/redux/slices/burger-constructor';
+import { setToppings } from '../../../../services/redux/slices/burger-constructor/burger-constructor';
 import { setOrderTotal } from '../../../../services/redux/slices/order';
 import { updateCountIngredient } from '../../../../services/redux/slices/burger-ingredients';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';

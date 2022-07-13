@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { BurgerIngredientType } from '../../../utils/types/burger-ingredient';
+import { BurgerIngredientType } from '../../../../utils/types/burger-ingredient';
 
 export interface BurgerConstructorStateType {
   bun?: BurgerIngredientType;
   toppings: BurgerIngredientType[];
 }
 
-const initialBurgerConstructorState = {
+export const initialBurgerConstructorState = {
   toppings: [],
 } as BurgerConstructorStateType;
 
