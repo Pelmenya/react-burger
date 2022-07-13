@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import app from './app.module.css';
 import { AppHeader } from '../app-header/app-header';
-import { fetchIngredients } from '../../services/redux/slices/burger-ingredients';
+import { fetchIngredients } from '../../services/redux/slices/burger-ingredients/burger-ingredients';
 import { RoutesApp } from '../routes/routes';
 import { Modal } from '../modal/modal';
 import { clearError } from '../../services/redux/slices/error-request';

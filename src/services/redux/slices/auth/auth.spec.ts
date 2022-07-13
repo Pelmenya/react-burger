@@ -18,7 +18,7 @@ describe('Action creators and reducer for Auth', () => {
   });
 
   it('should return the initial state', () => {
-    expect(authReducer(initialAuthState, { type: undefined })).toEqual({});
+    expect(authReducer({ ...initialAuthState }, { type: undefined })).toEqual({});
   });
 
   it('should return undefined error', () => {
@@ -32,7 +32,7 @@ describe('Action creators and reducer for Auth', () => {
 
   it('should return undefined error and status loading is fulfilled for register', () => {
     const action = postRegister.fulfilled('', '', userMock);
-    expect(authReducer(initialAuthState, action)).toStrictEqual({ loading: 'succeeded' });
+    expect(authReducer({ ...initialAuthState }, action)).toStrictEqual({ loading: 'succeeded' });
   });
 
   it('should return error message "Error" and status loading is failed for register', () => {
@@ -96,5 +96,4 @@ describe('Action creators and reducer for Auth', () => {
       loading: 'failed',
     });
   });
-
 });

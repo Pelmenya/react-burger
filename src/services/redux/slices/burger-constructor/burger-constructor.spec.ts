@@ -9,14 +9,16 @@ import {
 
 describe('Test reducer for Burger Constructor', () => {
   it('should return the initial state Burger Constructor', () => {
-    expect(burgerConstructorReducer(initialBurgerConstructorState, { type: undefined })).toEqual({
+    expect(
+      burgerConstructorReducer({ ...initialBurgerConstructorState }, { type: undefined }),
+    ).toEqual({
       toppings: [],
     });
   });
 
   it('should return the state with bun', () => {
     expect(
-      burgerConstructorReducer(initialBurgerConstructorState, setBun({ ...ingredientMock })),
+      burgerConstructorReducer({ ...initialBurgerConstructorState }, setBun({ ...ingredientMock })),
     ).toEqual({
       bun: { ...ingredientMock },
       toppings: [],
@@ -26,7 +28,7 @@ describe('Test reducer for Burger Constructor', () => {
   it('should return the state with toppings', () => {
     expect(
       burgerConstructorReducer(
-        initialBurgerConstructorState,
+        { ...initialBurgerConstructorState },
         setToppings([
           { ...ingredientMock },
           { ...ingredientMock },

@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
 import tabContainer from './tab-container.module.css';
 import { BurgerIngredientsList } from '../burger-ingredients-list/burger-ingredients-list';
-import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredients';
+import { setCurrentTab } from '../../../../services/redux/slices/burger-ingredients/burger-ingredients';
 import { Flex } from '../../../flex/flex';
 import { getBurgerIngredientsState } from '../../../../services/redux/selectors/burger-ingredients';
 import { TabWithChildren } from '../../../../hocs/with-tab';
