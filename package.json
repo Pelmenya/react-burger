@@ -1,7 +1,8 @@
 {
   "name": "react-burger",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "homepage": "https://github.com/Pelmenya/react-burger",
   "dependencies": {
     "@hookform/resolvers": "2.8.10",
     "@reduxjs/toolkit": "1.8.1",
@@ -38,6 +39,7 @@
     "@types/shortid": "0.0.29",
     "cypress": "10.3.0",
     "eslint-plugin-cypress": "2.12.1",
+    "gh-pages": "4.0.0",
     "jest-watch-typeahead": "0.6.5",
     "redux-logger": "3.0.6"
   },
@@ -46,8 +48,10 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:all": "react-scripts test --watchAll",
-    "eject": "react-scripts eject",
-    "cypress:open": "./node_modules/.bin/cypress open"
+    "cypress:open": "./node_modules/.bin/cypress open",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
