@@ -10,7 +10,7 @@ import { ButtonWithChildren } from '../button-with-children/button-with-children
 import { Flex } from '../flex/flex';
 
 import profileEdit from './profile-edit.module.css';
-import { patchUser } from '../../services/redux/slices/profile';
+import { patchUser } from '../../services/redux/slices/profile/profile';
 import { UserData } from '../../api/auth-api';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';

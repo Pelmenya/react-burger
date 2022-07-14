@@ -1,6 +1,9 @@
 import { OrderType } from './types/orders';
 
 export const userMock = { email: 'mock@email.com', name: 'Fedya', password: 'password' };
+export const userFromServerMock = { email: 'mock@email.com', name: 'Fedya' };
+export const newPasswordMock = { password: 'password' };
+
 export const errorMessageMock = 'Error';
 export const errorMock = new Error(errorMessageMock);
 export const ingredientMock = {

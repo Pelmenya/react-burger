@@ -3,7 +3,7 @@ import { getOrderState } from '../services/redux/selectors/order';
 import { getProfileState } from '../services/redux/selectors/profile';
 import { clearAuthError, postToken } from '../services/redux/slices/auth/auth';
 import { clearOrderError } from '../services/redux/slices/order/order';
-import { clearProfileError } from '../services/redux/slices/profile';
+import { clearProfileError } from '../services/redux/slices/profile/profile';
 import { JWT_EXPIRED } from '../utils/constants';
 import { useAppDispatch } from './use-app-dispatch';
 import { useAppSelector } from './use-app-selector';

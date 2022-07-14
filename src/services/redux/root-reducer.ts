@@ -8,7 +8,7 @@ import { headerNavReducer } from './slices/header-nav/header-nav';
 import { menuProfileReducer } from './slices/menu-profile/menu-profile';
 import { orderReducer } from './slices/order/order';
 import { ordersReducer } from './slices/orders/orders';
-import { profileReducer } from './slices/profile';
+import { profileReducer } from './slices/profile/profile';
 
 export const rootReducer = combineReducers({
   errorRequest: errorRequestReducer,
