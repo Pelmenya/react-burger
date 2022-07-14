@@ -13,7 +13,7 @@ import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { Navigate, useLocation } from 'react-router';
 import { LocationStateType } from '../../utils/types/location-state-type';
-import { wsClose } from '../../services/redux/slices/orders';
+import { wsClose } from '../../services/redux/slices/orders/orders';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 

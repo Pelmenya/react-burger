@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Nullable } from '../../../utils/types/nullable';
-import { OrdersType, OrderType } from '../../../utils/types/orders';
+import { Nullable } from '../../../../utils/types/nullable';
+import { OrdersType, OrderType } from '../../../../utils/types/orders';
 
 export interface OrdersStateType {
   socket: boolean;
@@ -10,7 +10,7 @@ export interface OrdersStateType {
   error?: string;
 }
 
-const initialOrdersState = {
+export const initialOrdersState = {
   ordersData: null,
   socket: false,
 } as OrdersStateType;
@@ -51,6 +51,7 @@ export const {
   clearOrdersData,
   wsInit,
   wsClose,
+  wsOpen,
 } = ordersSlice.actions;
 
 export const ordersReducer = ordersSlice.reducer;

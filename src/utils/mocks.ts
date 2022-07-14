@@ -1,3 +1,5 @@
+import { OrderType } from './types/orders';
+
 export const userMock = { email: 'mock@email.com', name: 'Fedya', password: 'password' };
 export const errorMessageMock = 'Error';
 export const errorMock = new Error(errorMessageMock);
@@ -36,6 +38,17 @@ const order = {
   status: 'done',
   updatedAt: '2022-06-29T16:04:41.319Z',
   _id: '62bc781942d34a001c271072',
+} as OrderType;
+
+export const ordersDataMock = {
+  orders: [
+    { ...order },
+    { ...order },
+    { ...order },
+  ],
+  total: 550,
+  totalToday: 50,
+  success: true,
 };
 
 export const orderMock = {
