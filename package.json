@@ -36,6 +36,8 @@
   "devDependencies": {
     "@types/redux-logger": "3.0.9",
     "@types/shortid": "0.0.29",
+    "cypress": "10.3.0",
+    "eslint-plugin-cypress": "2.12.1",
     "jest-watch-typeahead": "0.6.5",
     "redux-logger": "3.0.6"
   },
@@ -44,7 +46,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:all": "react-scripts test --watchAll",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "cypress:open": "./node_modules/.bin/cypress open"
   },
   "eslintConfig": {
     "extends": [
