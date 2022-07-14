@@ -21,3 +21,4 @@ export const schemaProfileForm = yup
     password: yup.string().min(6).required(),
   })
   .required();
+

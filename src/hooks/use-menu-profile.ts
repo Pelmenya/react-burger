@@ -1,5 +1,5 @@
 import { useCallback } from 'react';
-import { setActiveMenuProfileItem } from '../services/redux/slices/menu-profile';
+import { setActiveMenuProfileItem } from '../services/redux/slices/menu-profile/menu-profile';
 import { useAppDispatch } from './use-app-dispatch';
 
 export const useMenuProfile = () => {

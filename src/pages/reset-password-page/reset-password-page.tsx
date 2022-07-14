@@ -9,7 +9,7 @@ import { ButtonWithChildren } from '../../components/button-with-children/button
 import { InputText } from '../../components/profile-form-container/components/input-text/input-text';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
 import { TResetPassword } from '../../api/profile-api';
-import { postResetPassword } from '../../services/redux/slices/profile';
+import { postResetPassword } from '../../services/redux/slices/profile/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { useNavigate } from 'react-router';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';

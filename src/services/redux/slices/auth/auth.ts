@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { authAPI, UserData } from '../../../api/auth-api';
-import { LoadingType } from '../../../utils/types/loading';
+import { authAPI, UserData } from '../../../../api/auth-api';
+import { LoadingType } from '../../../../utils/types/loading';
 
 export interface AuthStateType extends LoadingType {
   error?: string;
 }
 
-const initialAuthState = {} as AuthStateType;
+export const initialAuthState = {} as AuthStateType;
 
 export const postRegister = createAsyncThunk(
   'auth/postRegister',

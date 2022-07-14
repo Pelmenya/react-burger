@@ -8,12 +8,12 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import { ButtonWithChildren } from '../../components/button-with-children/button-with-children';
 import { InputEmail } from '../../components/profile-form-container/components/input-email/input-email';
 import { InputPassword } from '../../components/profile-form-container/components/input-password/input-password';
-import { postLogin } from '../../services/redux/slices/auth';
+import { postLogin } from '../../services/redux/slices/auth/auth';
 import { UserData } from '../../api/auth-api';
 import { getAuthState } from '../../services/redux/selectors/auth';
 import { Navigate, useLocation } from 'react-router';
 import { LocationStateType } from '../../utils/types/location-state-type';
-import { wsClose } from '../../services/redux/slices/orders';
+import { wsClose } from '../../services/redux/slices/orders/orders';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 

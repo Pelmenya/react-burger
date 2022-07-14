@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import app from './app.module.css';
 import { AppHeader } from '../app-header/app-header';
-import { fetchIngredients } from '../../services/redux/slices/burger-ingredients';
+import { fetchIngredients } from '../../services/redux/slices/burger-ingredients/burger-ingredients';
 import { RoutesApp } from '../routes/routes';
 import { Modal } from '../modal/modal';
-import { clearError } from '../../services/redux/slices/error-request';
+import { clearError } from '../../services/redux/slices/error-request/error-request';
 import { BadRequest } from '../bad-request/bad-request';
 import { getErrorRequestState } from '../../services/redux/selectors/error-request';
 import { useErrorHandler } from '../../hooks/use-error-handler';
-import { getUser, resetUser } from '../../services/redux/slices/profile';
+import { getUser, resetUser } from '../../services/redux/slices/profile/profile';
 import { getProfileState } from '../../services/redux/selectors/profile';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';

@@ -4,9 +4,9 @@ import {
   profileAPI,
   TForgotPassword,
   TResetPassword,
-} from '../../../api/profile-api';
-import { LoadingType } from '../../../utils/types/loading';
-import { Nullable } from '../../../utils/types/nullable';
+} from '../../../../api/profile-api';
+import { LoadingType } from '../../../../utils/types/loading';
+import { Nullable } from '../../../../utils/types/nullable';
 
 export interface UserType {
   email: string;
@@ -19,7 +19,7 @@ export interface ProfileStateType extends LoadingType {
   error?: string;
 }
 
-const initialProfileState = {
+export const initialProfileState = {
   user: null,
   passwordIsSend: false,
 } as ProfileStateType;

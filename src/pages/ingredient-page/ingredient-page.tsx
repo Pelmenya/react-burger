@@ -6,7 +6,7 @@ import { Title } from '../../components/title/title';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
-import { setCurrentIngredient } from '../../services/redux/slices/current-ingredient';
+import { setCurrentIngredient } from '../../services/redux/slices/current-ingredient/current-ingredient';
 
 export const IngredientPage = () => {
   const { ingredients, loading } = useAppSelector(getBurgerIngredientsState);

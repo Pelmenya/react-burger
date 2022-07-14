@@ -1,4 +1,4 @@
-import { setError } from '../services/redux/slices/error-request';
+import { setError } from '../services/redux/slices/error-request/error-request';
 import { useAppDispatch } from './use-app-dispatch';
 
 export const useRequestError = () => {

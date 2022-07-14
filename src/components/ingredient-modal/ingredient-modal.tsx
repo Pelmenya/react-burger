@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { getBurgerIngredientsState } from '../../services/redux/selectors/burger-ingredients';
-import { resetCurrentIngredient, setCurrentIngredient } from '../../services/redux/slices/current-ingredient';
+import { resetCurrentIngredient, setCurrentIngredient } from '../../services/redux/slices/current-ingredient/current-ingredient';
 import { IngredientDetails } from '../ingredient-details/ingredient-details';
 import { Modal } from '../modal/modal';
 

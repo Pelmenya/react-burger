@@ -6,7 +6,7 @@ import { useNavHeader } from '../../hooks/use-nav-header';
 import profilePage from './profile-page.module.css';
 import { useMenuProfile } from '../../hooks/use-menu-profile';
 import { profileRegExp } from '../../utils/regexp';
-import { wsClose, wsInit } from '../../services/redux/slices/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders/orders';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { SOCKET } from '../../utils/api-constants/ws';
 import { useAppSelector } from '../../hooks/use-app-selector';

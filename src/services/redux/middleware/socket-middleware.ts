@@ -1,6 +1,6 @@
 import { Middleware } from 'redux';
 import { Nullable } from '../../../utils/types/nullable';
-import { clearOrdersData, setOrdersData, wsInit, wsClose } from '../slices/orders';
+import { clearOrdersData, setOrdersData, wsInit, wsClose } from '../slices/orders/orders';
 import { StoreType } from '../store';
 
 export const socketMiddleware = (() => {

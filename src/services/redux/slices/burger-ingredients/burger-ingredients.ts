@@ -1,12 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { ingredientsAPI } from '../../../api/ingredients-api';
-import { BurgerIngredientsType } from '../../../utils/types/burger-ingredients';
-import { LoadingType } from '../../../utils/types/loading';
+import { ingredientsAPI } from '../../../../api/ingredients-api';
+import { BurgerIngredientsType } from '../../../../utils/types/burger-ingredients';
+import { LoadingType } from '../../../../utils/types/loading';
 export interface BurgerIngredientsStateType extends BurgerIngredientsType, LoadingType {
   currentTab: 'buns' | 'sauces' | 'toppings';
 }
 
-const initialIngredientsState = {
+export const initialIngredientsState = {
   loading: 'idle',
   currentTab: 'buns',
   ingredients: [],
@@ -34,6 +34,7 @@ const burgerIngredientsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchIngredients.pending, (state) => {
       state.loading = 'pending';
+      state.error = undefined;
     });
     builder.addCase(fetchIngredients.fulfilled, (state, action) => {
       state.ingredients = action.payload;

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { getOrdersState } from '../services/redux/selectors/orders';
-import { setViewOrder } from '../services/redux/slices/orders';
+import { setViewOrder } from '../services/redux/slices/orders/orders';
 import { useAppDispatch } from './use-app-dispatch';
 import { useAppSelector } from './use-app-selector';
 

@@ -7,7 +7,7 @@ import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useAppSelector } from '../../hooks/use-app-selector';
 import { useViewOrder } from '../../hooks/use-view-order';
 import { getOrdersState } from '../../services/redux/selectors/orders';
-import { wsClose, wsInit } from '../../services/redux/slices/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders/orders';
 import { feedRegExp, profileRegExp } from '../../utils/regexp';
 import orderPage from './order-page.module.css';
 import { formatOrderNumber } from '../../utils/functions/format-order-number';

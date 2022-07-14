@@ -5,7 +5,7 @@ import { Orders } from '../../components/orders/orders';
 import { Title } from '../../components/title/title';
 import { useAppDispatch } from '../../hooks/use-app-dispatch';
 import { useNavHeader } from '../../hooks/use-nav-header';
-import { wsClose, wsInit } from '../../services/redux/slices/orders';
+import { wsClose, wsInit } from '../../services/redux/slices/orders/orders';
 import { ALL_ORDERS, SOCKET } from '../../utils/api-constants/ws';
 import ordersPage from '../main-page/main-page.module.css';
 

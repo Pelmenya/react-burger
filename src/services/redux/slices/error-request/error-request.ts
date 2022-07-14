@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export interface ErrorRequestStateType {
   isError: boolean;
-	message: string;
+  message: string;
 }
 
-const initialErrorRequestState = {
+export const initialErrorRequestState = {
   isError: false,
-	message: '',
+  message: '',
 } as ErrorRequestStateType;
 
 const errorRequestSlice = createSlice({
@@ -16,14 +16,14 @@ const errorRequestSlice = createSlice({
   reducers: {
     setError: (state, action) => {
       state.message = action.payload;
-			state.isError = true;
+      state.isError = true;
     },
-		clearError: (state) => {
+    clearError: (state) => {
       state.message = '';
-			state.isError = false;
+      state.isError = false;
     },
   },
 });
 
-export const { setError, clearError} = errorRequestSlice.actions;
+export const { setError, clearError } = errorRequestSlice.actions;
 export const errorRequestReducer = errorRequestSlice.reducer;
