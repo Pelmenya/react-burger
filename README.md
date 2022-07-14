@@ -1,6 +1,9 @@
 # react-burger
 Graduation project for Yandex.Praktikum React-developer course
 
+«[Stellar Burgers on Heroku](https://stellar-burgers-app.herokuapp.com/)»
+
+«[Stellar Burgers on GH-Pages](https://pelmenya.github.io/react-burger/)»
 ## Available Scripts
 
 In the project directory, you can run:
